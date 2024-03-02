@@ -1,5 +1,6 @@
 import Header from "./Components/Header/Header"
-import Footer from "./Footer/Footer"
+import Footer from "./Components/Footer/Footer"
+import HomepageContent from "./Components/Content/HomepageContent"
 
 function App() {
 
@@ -7,7 +8,7 @@ function App() {
     <>
 
       <Header />
-
+      <HomepageContent />
       <Footer />
 
     </>

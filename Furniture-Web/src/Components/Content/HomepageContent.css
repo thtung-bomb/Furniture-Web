@@ -1,0 +1,95 @@
+@charset "UTF-8";
+@import url("../../BaseCss/base.css");
+/* --body-- */
+.main {
+  display: block;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--white-color);
+  height: 600px;
+  width: 100%;
+  height: 100% !important;
+}
+
+.grid {
+  height: 100%;
+}
+
+/* Trong CSS của bạn */
+.hero-carousel .single-carousel img {
+  width: 100%;
+  height: 80vh;
+  -o-object-fit: cover;
+  object-fit: cover;
+  -o-object-position: 50% 50%;
+  object-position: 50% 50%;
+  transition: opacity 0.5s ease;
+  z-index: 1;
+}
+
+.slick-prev {
+  position: absolute;
+  z-index: 1;
+  left: 3%;
+  top: 50%;
+}
+
+.slick-next {
+  z-index: 1;
+  top: 50%;
+  right: 3%;
+  position: absolute;
+}
+
+.slick-prev,
+.slick-next {
+  font-size: 2rem;
+  padding: 6px 12px;
+  background-color: transparent;
+  color: var(--text-color);
+  font-weight: 500;
+  outline: none;
+  text-decoration: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.slick-prev:hover,
+.slick-next:hover {
+  background-color: var(--primary-color);
+  opacity: 0.5;
+}
+
+.fa-angle-left,
+.fa-angle-right {
+  background-color: transparent;
+  text-decoration: none;
+  color: var(--white-color);
+}
+
+.overlay {
+  position: absolute;
+  top: 82px;
+  left: 0;
+  width: 100%;
+  height: 95%;
+  background: rgba(0, 0, 0, 0.05); /* Màu sắc và độ đậm của lớp phủ */
+  pointer-events: none; /* Cho phép sự kiện đi qua lớp phủ */
+  transition: background-color 0.5s ease; /* Hiệu ứng chuyển đổi màu sắc */
+}
+
+.item {
+  display: none;
+}
+
+.body-picture {
+  width: 100%;
+  height: auto;
+}
+
+.item {
+  /* IE 9 */ /* Safari 3-8 */
+  transform: scale(1);
+  transition: transform 20s; /* Không áp dụng hiệu ứng trong trường hợp hover */
+  overflow: hidden;
+} /*# sourceMappingURL=homePage.css.map */

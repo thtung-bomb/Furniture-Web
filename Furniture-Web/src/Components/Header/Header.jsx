@@ -3,99 +3,99 @@ import './Header.css';
 
 function Header() {
     return (
-        <header class="header">
-            <div class="grid">
-                <div class="header__navbar">
-                    <div class="header__navbar-logo">
-                        <a class="logo-link" href="/homePage.html">
+        <header className="header">
+            <div className="grid">
+                <div className="header__navbar">
+                    <div className="header__navbar-logo">
+                        <a className="logo-link" href="/homePage.html">
                             <img
-                                class="header__navbar-logo--img"
-                                src="/assets/img/Clip path group.svg"
+                                className="header__navbar-logo--img"
+                                src="../../../src/assets/image/Clip path group.svg"
                                 alt="Furniture logo"
                             />
-                            <span class="header__navbar-logo--name">Furniture</span>
+                            <span className="header__navbar-logo--name">Furniture</span>
                         </a>
                     </div>
-                    <nav class="header__navbar-navPage">
+                    <nav className="header__navbar-navPage">
                         <ul>
-                            <li class="dropdown-container">
-                                <a href="/WebPage/AboutUsPage/AboutUsPage.html" class="header__navbar-navPage--button">About Us</a>
+                            <li className="dropdown-container">
+                                <a href="#" className="header__navbar-navPage--button">About Us</a>
                             </li>
-                            <li class="dropdown-container">
-                                <a href="WebPage/Services/ServicePage.html" class="header__navbar-navPage--button">
+                            <li className="dropdown-container">
+                                <a href="WebPage/Services/ServicePage.html" className="header__navbar-navPage--button">
                                     Services
-                                    <span class="fa-solid fa-angle-down icon-down"></span>
+                                    <span className="fa-solid fa-angle-down icon-down"></span>
                                 </a>
-                                <ul class="dropdown-menu">
-                                    <li class="details-menu">
+                                <ul className="dropdown-menu">
+                                    <li className="details-menu">
                                         <a href="/Details/LivingRoomDetails.html">Living Room</a>
                                     </li>
-                                    <li class="details-menu">
+                                    <li className="details-menu">
                                         <a href="/Details/BedRoomDetails.html">Bed Room</a>
                                     </li>
-                                    <li class="details-menu">
+                                    <li className="details-menu">
                                         <a href="/Details/DiningRoomDetails.html">Dining Room</a>
                                     </li>
-                                    <li class="details-menu">
+                                    <li className="details-menu">
                                         <a href="/Details/RestRoomDetails.html">Rest Room</a>
                                     </li>
-                                    <li class="details-menu">
+                                    <li className="details-menu">
                                         <a href="/Details/FamilyRoomDetails.html">Family Room</a>
                                     </li>
-                                    <li class="details-menu">
+                                    <li className="details-menu">
                                         <a href="/Details/WorkRoomDetails.html">Work Room</a>
                                     </li>
                                 </ul>
                             </li>
-                            <li class="dropdown-container">
-                                <a href="/WebPage/WebBlog/Blog.html" class="header__navbar-navPage--button">Blog</a>
+                            <li className="dropdown-container">
+                                <a href="/WebPage/WebBlog/Blog.html" className="header__navbar-navPage--button">Blog</a>
                             </li>
                         </ul>
                     </nav>
 
-                    <div class="header__search">
-                        <div class="header__search-input-wrap">
+                    <div className="header__search">
+                        <div className="header__search-input-wrap">
                             <input
                                 type="text"
-                                class="header__search-input"
+                                className="header__search-input"
                                 placeholder="Search..."
                             />
-                            <button class="header__search-btn">
-                                <i class="fas fa-search header__search-btn-icon"></i>
+                            <button className="header__search-btn">
+                                <i className="fas fa-search header__search-btn-icon"></i>
                             </button>
                         </div>
                     </div>
-                    <div class="header__quote">
-                        <button class="header__quote-button" id="quoteButton">Quote</button>
-                        <div class="login-card" id="loginCard" >
-                            <button class="close" id='close'>close</button>
-                            <form class="login-form" action="">
-                                <label for="username">Username</label>
+                    <div className="header__quote">
+                        <button className="header__quote-button" id="quoteButton">Quote</button>
+                        <div className="login-card" id="loginCard" >
+                            <button className="close" id='close'>close</button>
+                            <form className="login-form" action="">
+                                <label htmlFor="username">Username</label>
                                 <input type="text" id="username" />
-                                <label for="telephone">Telephone contact</label>
+                                <label htmlFor="telephone">Telephone contact</label>
                                 <input type="text" id="telephone" />
-                                <label for="fullName">Full Name</label>
+                                <label htmlFor="fullName">Full Name</label>
                                 <input type="text" id="fullName" />
-                                <button class="regis-button" id="registerButton">Register For Quote</button>
+                                <button className="regis-button" id="registerButton">Register For Quote</button>
                             </form>
                         </div>
                     </div>
 
-                    <div class="header__mobile-menu">
-                        <nav class="header__mobile-menu--menu-list">
-                            <i class="fa-solid fa-bars header__mobile-menu--menu-icon"></i>
-                            <a class="b" href="/WebPage/AboutUsPage/AboutUsPage.html">About us</a>
-                            <a class="b" href="WebPage/Services/ServicePage.html">Services</a>
-                            <a class="b" >Blogs</a>
-                            <div class="menu__search-box">
-                                <div class="menu__search-wrap">
+                    <div className="header__mobile-menu">
+                        <nav className="header__mobile-menu--menu-list">
+                            <i className="fa-solid fa-bars header__mobile-menu--menu-icon"></i>
+                            <a className="b" href="/WebPage/AboutUsPage/AboutUsPage.html">About us</a>
+                            <a className="b" href="WebPage/Services/ServicePage.html">Services</a>
+                            <a className="b" >Blogs</a>
+                            <div className="menu__search-box">
+                                <div className="menu__search-wrap">
                                     <input
                                         type="text"
-                                        class="menu__search-input"
+                                        className="menu__search-input"
                                         placeholder="Search..."
                                     />
-                                    <button class="menu__search-btn">
-                                        <i class="fas fa-search menu__search-btn-icon"></i>
+                                    <button className="menu__search-btn">
+                                        <i className="fas fa-search menu__search-btn-icon"></i>
                                     </button>
                                 </div>
                             </div>
