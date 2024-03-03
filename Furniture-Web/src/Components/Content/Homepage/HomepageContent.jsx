@@ -12,6 +12,7 @@ import "./HomepageContent.css";
 
 function HomepageContent() {
 
+    // Slider settings
     const settings = {
         infinite: true,
         speed: 500,
@@ -22,8 +23,10 @@ function HomepageContent() {
     };
 
     return (
+        // Page Introduce
         <div className='h-3/4 flex justify-center items-center bg-white'>
             <div className='h-full w-3/4'>
+                {/* Slider */}
                 <Slider {...settings} className=''>
                     <div className='item'>
                         <img src={main_home} className='body-picture' />
@@ -44,8 +47,10 @@ function HomepageContent() {
                         <img src={a5} className='body-picture' />
                     </div>
                 </Slider>
+                {/* End Slider */}
             </div>
         </div>
+        // End Page Introduce
     )
 }
 

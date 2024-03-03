@@ -5,14 +5,19 @@ function Header() {
 
     const [isLoginOpen, setLoginOpen] = useState(false);
 
+    // Open and Close Quotation Form
     const toggleLogin = () => {
         setLoginOpen(!isLoginOpen);
     };
 
     return (
+
+        // Header
         <header className="header">
+            {/* Navogate */}
             <div className="grid">
                 <div className="header__navbar">
+                    {/* Logo Web */}
                     <div className="header__navbar-logo">
                         <a className="logo-link" href="">
                             <img
@@ -23,12 +28,17 @@ function Header() {
                             <span className="header__navbar-logo--name">Furniture</span>
                         </a>
                     </div>
+                    {/* End Logo Web */}
 
                     <nav className="header__navbar-navPage">
                         <ul>
+                            {/* About Us */}
                             <li className="dropdown-container">
-                                <a href="" className="header__navbar-navPage--button">About Us</a>
+                                <a href="#" className="header__navbar-navPage--button">About Us</a>
                             </li>
+                            {/* End About Us */}
+
+                            {/* Services */}
                             <li className="dropdown-container">
                                 <a href="WebPage/Services/ServicePage.html" className="header__navbar-navPage--button">
                                     Services
@@ -55,12 +65,17 @@ function Header() {
                                     </li>
                                 </ul>
                             </li>
+                            {/* End Services */}
+
+                            {/* Blog */}
                             <li className="dropdown-container">
                                 <a href="/WebPage/WebBlog/Blog.html" className="header__navbar-navPage--button">Blog</a>
                             </li>
+                            {/* End Blog */}
                         </ul>
                     </nav>
 
+                    {/* Search */}
                     <div className="header__search">
                         <div className="header__search-input-wrap">
                             <input
@@ -73,10 +88,14 @@ function Header() {
                             </button>
                         </div>
                     </div>
+                    {/* End Search */}
 
+
+                    {/* Quote Button */}
                     <div className="header__quote">
                         <button className="header__quote-button" id="quoteButton" onClick={toggleLogin}>Quote</button>
-                        {/* some logic here. using useState to open and close login form */}
+
+                        {/* Login Form */}
                         {isLoginOpen && <div className="login-card">
                             <button className="close" id='close' onClick={toggleLogin}>close</button>
                             <form className="login-form" action="">
@@ -89,14 +108,33 @@ function Header() {
                                 <button className="regis-button" id="registerButton">Register For Quote</button>
                             </form>
                         </div>}
-                    </div>
+                        {/* End Login Form */}
 
+                    </div>
+                    {/* End Quote Button */}
+
+
+                    {/* Header mobile screen */}
                     <div className="header__mobile-menu">
                         <nav className="header__mobile-menu--menu-list">
+
+                            {/* Hambugur Menu */}
                             <i className="fa-solid fa-bars header__mobile-menu--menu-icon"></i>
+                            {/* End Hambugur Menu */}
+
+                            {/* About Us */}
                             <a className="b" href="/WebPage/AboutUsPage/AboutUsPage.html">About us</a>
+                            {/* End About Us */}
+
+                            {/* Services */}
                             <a className="b" href="WebPage/Services/ServicePage.html">Services</a>
+                            {/* End Services */}
+
+                            {/* Blog */}
                             <a className="b" >Blogs</a>
+                            {/* End Blog */}
+
+                            {/* Search */}
                             <div className="menu__search-box">
                                 <div className="menu__search-wrap">
                                     <input
@@ -109,11 +147,15 @@ function Header() {
                                     </button>
                                 </div>
                             </div>
+                            {/* End Search */}
                         </nav>
                     </div>
+                    {/* End Header mobile screen */}
                 </div>
             </div>
-        </header >
+            {/* End Navogate */}
+        </header>
+        // End Header
     )
 }
 
