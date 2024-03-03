@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Header.css';
 
 function Header() {
+
     return (
         <header className="header">
             <div className="grid">
@@ -16,6 +17,7 @@ function Header() {
                             <span className="header__navbar-logo--name">Furniture</span>
                         </a>
                     </div>
+
                     <nav className="header__navbar-navPage">
                         <ul>
                             <li className="dropdown-container">
@@ -65,9 +67,10 @@ function Header() {
                             </button>
                         </div>
                     </div>
+
                     <div className="header__quote">
                         <button className="header__quote-button" id="quoteButton">Quote</button>
-                        <div className="login-card" id="loginCard" >
+                        <div className="login-card" id="loginCard">
                             <button className="close" id='close'>close</button>
                             <form className="login-form" action="">
                                 <label htmlFor="username">Username</label>
@@ -103,7 +106,7 @@ function Header() {
                     </div>
                 </div>
             </div>
-        </header>
+        </header >
     )
 }
 

@@ -1,6 +1,6 @@
-import Header from "./Components/Header/Header"
-import Footer from "./Components/Footer/Footer"
-import HomepageContent from "./Components/Content/HomepageContent"
+import Header from "./Components/Header/Header.jsx";
+import Footer from "./Components/Footer/Footer.jsx";
+import HomepageContent from "./Components/Content/Homepage/HomepageContent.jsx";
 
 function App() {
 
@@ -8,7 +8,9 @@ function App() {
     <>
 
       <Header />
+
       <HomepageContent />
+
       <Footer />
 
     </>
