@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Header.css';
+import { Link } from 'react-router-dom';
 
 function Header() {
 
@@ -19,14 +20,14 @@ function Header() {
                 <div className="header__navbar">
                     {/* Logo Web */}
                     <div className="header__navbar-logo">
-                        <a className="logo-link" href="">
+                        <Link className="logo-link" to="/">
                             <img
                                 className="header__navbar-logo--img"
                                 src="../../../src/assets/image/Clip path group.svg"
                                 alt="Furniture logo"
                             />
                             <span className="header__navbar-logo--name">Furniture</span>
-                        </a>
+                        </Link>
                     </div>
                     {/* End Logo Web */}
 
@@ -34,42 +35,56 @@ function Header() {
                         <ul>
                             {/* About Us */}
                             <li className="dropdown-container">
-                                <a href="#" className="header__navbar-navPage--button">About Us</a>
+                                <Link to='/about-us' className="header__navbar-navPage--button">About Us</Link>
                             </li>
                             {/* End About Us */}
 
                             {/* Services */}
                             <li className="dropdown-container">
-                                <a href="WebPage/Services/ServicePage.html" className="header__navbar-navPage--button">
+                                <a to="service" className="header__navbar-navPage--button">
                                     Services
                                     <span className="fa-solid fa-angle-down icon-down"></span>
                                 </a>
                                 <ul className="dropdown-menu">
+                                    {/* Living room */}
                                     <li className="details-menu">
-                                        <a href="/Details/LivingRoomDetails.html">Living Room</a>
+                                        <Link to="/living-room">Living Room</Link>
                                     </li>
+                                    {/* End living room */}
+
+                                    {/* Bed Room */}
                                     <li className="details-menu">
-                                        <a href="/Details/BedRoomDetails.html">Bed Room</a>
+                                        <Link to="/bed-room">Bed Room</Link>
                                     </li>
+                                    {/* End Bed Room */}
                                     <li className="details-menu">
-                                        <a href="/Details/DiningRoomDetails.html">Dining Room</a>
+                                        <a to="/dining-room">Dining Room</a>
                                     </li>
+
+                                    {/* Rest Room */}
                                     <li className="details-menu">
-                                        <a href="/Details/RestRoomDetails.html">Rest Room</a>
+                                        <a to="/rest-room">Rest Room</a>
                                     </li>
+                                    {/* End Rest Room */}
+
+                                    {/* Family Room */}
                                     <li className="details-menu">
-                                        <a href="/Details/FamilyRoomDetails.html">Family Room</a>
+                                        <a to="/Details/FamilyRoomDetails.html">Family Room</a>
                                     </li>
+                                    {/* End Family Room */}
+
+                                    {/* Work Room */}
                                     <li className="details-menu">
-                                        <a href="/Details/WorkRoomDetails.html">Work Room</a>
+                                        <a to="/Details/WorkRoomDetails.html">Work Room</a>
                                     </li>
+                                    {/* End Work Room */}
                                 </ul>
                             </li>
                             {/* End Services */}
 
                             {/* Blog */}
                             <li className="dropdown-container">
-                                <a href="/WebPage/WebBlog/Blog.html" className="header__navbar-navPage--button">Blog</a>
+                                <a to="/WebPage/WebBlog/Blog.html" className="header__navbar-navPage--button">Blog</a>
                             </li>
                             {/* End Blog */}
                         </ul>
@@ -123,11 +138,11 @@ function Header() {
                             {/* End Hambugur Menu */}
 
                             {/* About Us */}
-                            <a className="b" href="/WebPage/AboutUsPage/AboutUsPage.html">About us</a>
+                            <a className="b" to="/WebPage/AboutUsPage/AboutUsPage.html">About us</a>
                             {/* End About Us */}
 
                             {/* Services */}
-                            <a className="b" href="WebPage/Services/ServicePage.html">Services</a>
+                            <a className="b" to="WebPage/Services/ServicePage.html">Services</a>
                             {/* End Services */}
 
                             {/* Blog */}
@@ -154,7 +169,7 @@ function Header() {
                 </div>
             </div>
             {/* End Navogate */}
-        </header>
+        </header >
         // End Header
     )
 }
