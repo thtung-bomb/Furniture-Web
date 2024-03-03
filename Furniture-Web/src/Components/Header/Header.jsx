@@ -3,12 +3,18 @@ import './Header.css';
 
 function Header() {
 
+    const [isLoginOpen, setLoginOpen] = useState(false);
+
+    const toggleLogin = () => {
+        setLoginOpen(!isLoginOpen);
+    };
+
     return (
         <header className="header">
             <div className="grid">
                 <div className="header__navbar">
                     <div className="header__navbar-logo">
-                        <a className="logo-link" href="/homePage.html">
+                        <a className="logo-link" href="">
                             <img
                                 className="header__navbar-logo--img"
                                 src="../../../src/assets/image/Clip path group.svg"
@@ -21,7 +27,7 @@ function Header() {
                     <nav className="header__navbar-navPage">
                         <ul>
                             <li className="dropdown-container">
-                                <a href="#" className="header__navbar-navPage--button">About Us</a>
+                                <a href="" className="header__navbar-navPage--button">About Us</a>
                             </li>
                             <li className="dropdown-container">
                                 <a href="WebPage/Services/ServicePage.html" className="header__navbar-navPage--button">
@@ -69,9 +75,10 @@ function Header() {
                     </div>
 
                     <div className="header__quote">
-                        <button className="header__quote-button" id="quoteButton">Quote</button>
-                        <div className="login-card" id="loginCard">
-                            <button className="close" id='close'>close</button>
+                        <button className="header__quote-button" id="quoteButton" onClick={toggleLogin}>Quote</button>
+                        {/* some logic here. using useState to open and close login form */}
+                        {isLoginOpen && <div className="login-card">
+                            <button className="close" id='close' onClick={toggleLogin}>close</button>
                             <form className="login-form" action="">
                                 <label htmlFor="username">Username</label>
                                 <input type="text" id="username" />
@@ -81,7 +88,7 @@ function Header() {
                                 <input type="text" id="fullName" />
                                 <button className="regis-button" id="registerButton">Register For Quote</button>
                             </form>
-                        </div>
+                        </div>}
                     </div>
 
                     <div className="header__mobile-menu">

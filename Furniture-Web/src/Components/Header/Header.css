@@ -436,6 +436,7 @@ input {
 .header__quote #close:after {
   transform: rotate(-45deg);
 }
+
 .header__quote .login-card {
   background-color: rgba(255, 255, 255, 0.8);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -443,16 +444,17 @@ input {
   border-radius: 8px;
   width: 350px;
   position: fixed;
-  display: none;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 999;
 }
+
 .header__quote .login-card form {
   display: flex;
   flex-direction: column;
 }
+
 .header__quote .login-card form label {
   display: flex;
   margin-bottom: 8px;
