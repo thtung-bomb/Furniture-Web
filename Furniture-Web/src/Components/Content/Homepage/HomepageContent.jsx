@@ -24,7 +24,7 @@ function HomepageContent() {
     return (
         <div className='h-3/4 flex justify-center items-center bg-white'>
             <div className='h-full w-3/4'>
-                <Slider {...settings} className='py-6'>
+                <Slider {...settings} className=''>
                     <div className='item'>
                         <img src={main_home} className='body-picture' />
                     </div>
