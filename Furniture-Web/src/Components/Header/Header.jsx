@@ -138,7 +138,7 @@ function Header() {
                             {/* End Hambugur Menu */}
 
                             {/* About Us */}
-                            <a className="b" to="/WebPage/AboutUsPage/AboutUsPage.html">About us</a>
+                            <Link className="b" to="/about-us">About us</Link>
                             {/* End About Us */}
 
                             {/* Services */}
