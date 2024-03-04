@@ -1,39 +1,32 @@
-import React from 'react';
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-import './AboutUsPage';
-import './AboutUsPage.css';
-import './AboutUsPage.js'
-import bedroom from "../../../assets/image/bedroom.jpg";
-import workroom from "../../../assets/image/workroom2.jpg";
-import familyroom from "../../../assets/image/a3.jpg";
-import diningroom from "../../../assets/image/a2.jpg";
-import livingroom from "../../../assets/image/Slice 1 1 .png";
-import restroom from "../../../assets/image/a6.jpg";
+import React, { useRef } from 'react';
+import { HiChevronRight, HiChevronLeft } from "react-icons/hi";
+import bedRoom from '../../../assets/image/bedroom.jpg';
+import a6 from '../../../assets/image/a6.jpg';
+import slice from '../../../assets/image/Slice 1 1 .png';
+import a2 from '../../../assets/image/a2.jpg';
+import a3 from '../../../assets/image/a3.jpg';
+import workRoom from '../../../assets/image/workroom2.jpg';
 
-function DesignByUs() {
+const screenWidth = window.innerWidth;
 
-    // Slider settings
+function BlogCarousel() {
+    const elementRef = useRef();
 
-    const settings = {
-        dots: false,
-        infinite: true,
-        arrows: false,
-        speed: 500,
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 2000,
-    };
+    const sliderRight = () => {
+        elementRef.current.scrollLeft += screenWidth - 110;
+    }
 
+    const sliderLeft = () => {
+        elementRef.current.scrollLeft -= screenWidth - 110;
+    }
 
     return (
-        <div className="single-carousel" id="single-carousel">
-            <Slider {...settings}>
-                {/* Bed Room */}
+        <div className='relative'>
+            <HiChevronLeft className='ntt-arrow z-10' onClick={sliderLeft} />
+            <HiChevronRight className='ntt-arrow right-0 z-10' onClick={sliderRight} />
+            <div ref={elementRef} className="single-carousel flex overflow-x-scroll h-[250px] w-full scroll-bar-none">
                 <div className="item">
-                    <img className="body-pictures" src={bedroom} alt="" />
+                    <img className="body-pictures" src={bedRoom} alt="" />
                     <div className="description">
                         <a href="#" className="description-title">
                             Bedroom
@@ -44,11 +37,8 @@ function DesignByUs() {
                         <a href="/Details/BedroomDetails.html" className="description-detail-more">See more</a>
                     </div>
                 </div>
-                {/* End Bed Room */}
-
-                {/* Rest Room */}
                 <div className="item">
-                    <img className="body-pictures" src={restroom} alt="" />
+                    <img className="body-pictures" src={a6} alt="" />
                     <div className="description">
                         <a href="#" className="description-title">
                             Rest Room
@@ -59,11 +49,8 @@ function DesignByUs() {
                         <a href="/Details/RestRoomDetails.html" className="description-detail-more">See more</a>
                     </div>
                 </div>
-                {/* End Rest Room */}
-
-                {/* Living Room */}
                 <div className="item">
-                    <img className="body-pictures" src={livingroom} alt="" />
+                    <img className="body-pictures" src={slice} alt="" />
                     <div className="description">
                         <a href="#" className="description-title">
                             Living Room
@@ -74,11 +61,8 @@ function DesignByUs() {
                         <a href="/Details/LivingRoomDetails.html" className="description-detail-more">See more</a>
                     </div>
                 </div>
-                {/* End Living Room */}
-
-                {/* Dining Room */}
                 <div className="item">
-                    <img className="body-pictures" src={diningroom} alt="" />
+                    <img className="body-pictures" src={a2} alt="" />
                     <div className="description">
                         <a href="#" className="description-title">
                             Dining Room
@@ -89,11 +73,8 @@ function DesignByUs() {
                         <a href="/Details/DiningRoomDetails.htm" className="description-detail-more">See more</a>
                     </div>
                 </div>
-                {/* End Dining Room */}
-
-                {/* Family Room */}
                 <div className="item">
-                    <img className="body-pictures" src={familyroom} alt="" />
+                    <img className="body-pictures" src={a3} alt="" />
                     <div className="description">
                         <a href="#" className="description-title">
                             Family Room
@@ -104,11 +85,8 @@ function DesignByUs() {
                         <a href="/Details/FamilyRoomDetails.html" className="description-detail-more">See more</a>
                     </div>
                 </div>
-                {/* End Family Room */}
-
-                {/* Workroom */}
                 <div className="item">
-                    <img className="body-pictures" src={workroom} alt="" />
+                    <img className="body-pictures" src={workRoom} alt="" />
                     <div className="description">
                         <a href="#" className="description-title">
                             Work Room
@@ -119,10 +97,9 @@ function DesignByUs() {
                         <a href="/Details/WorkRoomDetails.html" className="description-detail-more">See more</a>
                     </div>
                 </div>
-                {/* End Workroom */}
-            </Slider>
+            </div>
         </div>
     )
 }
 
-export default DesignByUs
+export default BlogCarousel;

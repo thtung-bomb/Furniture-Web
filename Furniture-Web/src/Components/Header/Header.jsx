@@ -48,7 +48,7 @@ function Header() {
                                 <ul className="dropdown-menu">
                                     {/* Living room */}
                                     <li className="details-menu">
-                                        <Link to="/living-room">Living Room</Link>
+                                        <Link to="/services/livingroom">Living Room</Link>
                                     </li>
                                     {/* End living room */}
 
@@ -58,24 +58,24 @@ function Header() {
                                     </li>
                                     {/* End Bed Room */}
                                     <li className="details-menu">
-                                        <a to="/dining-room">Dining Room</a>
+                                        <Link to="/dining-room">Dining Room</Link>
                                     </li>
 
                                     {/* Rest Room */}
                                     <li className="details-menu">
-                                        <a to="/rest-room">Rest Room</a>
+                                        <Link to="/rest-room">Rest Room</Link>
                                     </li>
                                     {/* End Rest Room */}
 
                                     {/* Family Room */}
                                     <li className="details-menu">
-                                        <a to="/Details/FamilyRoomDetails.html">Family Room</a>
+                                        <Link to="/Details/FamilyRoomDetails.html">Family Room</Link>
                                     </li>
                                     {/* End Family Room */}
 
                                     {/* Work Room */}
                                     <li className="details-menu">
-                                        <a to="/Details/WorkRoomDetails.html">Work Room</a>
+                                        <Link to="/Details/WorkRoomDetails.html">Work Room</Link>
                                     </li>
                                     {/* End Work Room */}
                                 </ul>
@@ -84,11 +84,12 @@ function Header() {
 
                             {/* Blog */}
                             <li className="dropdown-container">
-                                <a to="/WebPage/WebBlog/Blog.html" className="header__navbar-navPage--button">Blog</a>
+                                <Link to={'/blog'} className="header__navbar-navPage--button">Blog</Link>
                             </li>
                             {/* End Blog */}
                         </ul>
                     </nav>
+
 
                     {/* Search */}
                     <div className="header__search">
@@ -142,11 +143,11 @@ function Header() {
                             {/* End About Us */}
 
                             {/* Services */}
-                            <a className="b" to="WebPage/Services/ServicePage.html">Services</a>
+                            <Link className="b" to="WebPage/Services/ServicePage.html">Services</Link>
                             {/* End Services */}
 
                             {/* Blog */}
-                            <a className="b" >Blogs</a>
+                            <Link to='/blog' className="b" >Blogs</Link>
                             {/* End Blog */}
 
                             {/* Search */}
@@ -169,7 +170,7 @@ function Header() {
                 </div>
             </div>
             {/* End Navogate */}
-        </header >
+        </header>
         // End Header
     )
 }
