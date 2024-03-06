@@ -3,7 +3,6 @@ import Footer from "./Components/Footer/Footer.jsx";
 import HomepageContent from "./Components/Content/Homepage/HomepageContent.jsx";
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import AboutUsPage from "./Components/Content/AboutUs/AboutUsPage.jsx";
-import DisplayData from "./DisplayData.jsx";
 import Blog from "./Components/Content/Blog/Blog.jsx";
 import LivingRoom from "./Components/Content/Services/Livingroom/LivingRoom.jsx";
 import Service from "./Components/Content/Services/Service.jsx";

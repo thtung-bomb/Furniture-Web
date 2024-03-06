@@ -1,18 +1,7 @@
 import React from 'react';
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-// import './AboutUsPage';
 import './AboutUsPage.css';
-// import './AboutUsPage.js'
 import a1 from "../../../assets/image/a1.jpg";
 import a2 from "../../../assets/image/a2.jpg";
-import bedroom from "../../../assets/image/bedroom.jpg";
-import workroom from "../../../assets/image/workroom2.jpg";
-import familyroom from "../../../assets/image/a3.jpg";
-import diningroom from "../../../assets/image/a2.jpg";
-import livingroom from "../../../assets/image/Slice 1 1 .png";
-import restroom from "../../../assets/image/a6.jpg";
 import DesignByUs from './DesignByUs';
 import StaffIntroduce from './StaffIntroduce';
 
