@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './Header.css';
 import { Link } from 'react-router-dom';
+import Register from '../../Register/Register';
 
 function Header() {
 
@@ -111,20 +112,9 @@ function Header() {
                     <div className="header__quote">
                         <button className="header__quote-button" id="quoteButton" onClick={toggleLogin}>Quote</button>
 
-                        {/* Login Form */}
-                        {isLoginOpen && <div className="login-card">
-                            <button className="close" id='close' onClick={toggleLogin}>close</button>
-                            <form className="login-form" action="">
-                                <label htmlFor="username">Username</label>
-                                <input type="text" id="username" />
-                                <label htmlFor="telephone">Telephone contact</label>
-                                <input type="text" id="telephone" />
-                                <label htmlFor="fullName">Full Name</label>
-                                <input type="text" id="fullName" />
-                                <button className="regis-button" id="registerButton">Register For Quote</button>
-                            </form>
-                        </div>}
-                        {/* End Login Form */}
+                        {/* Register Form */}
+                        {isLoginOpen && <Register onClick={toggleLogin} />}
+                        {/* End Register Form */}
 
                     </div>
                     {/* End Quote Button */}
