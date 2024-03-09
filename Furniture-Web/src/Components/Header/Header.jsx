@@ -16,7 +16,7 @@ function Header() {
 
         // Header
         <header className="header">
-            {/* Navogate */}
+            {/* Navigate */}
             <div className="grid">
                 <div className="header__navbar">
                     {/* Logo Web */}

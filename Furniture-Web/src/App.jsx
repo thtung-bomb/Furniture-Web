@@ -6,6 +6,7 @@ import AboutUsPage from "./Components/Content/AboutUs/AboutUsPage.jsx";
 import Blog from "./Components/Content/Blog/Blog.jsx";
 import LivingRoom from "./Components/Content/Services/Livingroom/LivingRoom.jsx";
 import Service from "./Components/Content/Services/Service.jsx";
+import Customer from "./Components/Customer/Customer.jsx";
 
 function App() {
 
@@ -21,6 +22,8 @@ function App() {
         <Route path="/services" element={<Service />} />
         <Route path="/services/livingroom" element={<LivingRoom />} />
         <Route path="/blog" element={<Blog />} />
+        <Route path="/customer" element={<Customer />} />
+        <Route path="/customer/tung" element={<Header />} />
 
       </Routes>
 
