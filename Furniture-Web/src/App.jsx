@@ -7,6 +7,11 @@ import Blog from "./Components/Content/Blog/Blog.jsx";
 import LivingRoom from "./Components/Content/Services/Livingroom/LivingRoom.jsx";
 import Service from "./Components/Content/Services/Service.jsx";
 import Customer from "./Components/Customer/Customer.jsx";
+import Manager from "./Components/Customer/Manager.jsx";
+import MainContent from "./Components/Customer/MainContent.jsx";
+import Project from "./Components/Customer/Project.jsx";
+import Quotation from "./Components/Customer/Quotation.jsx";
+import History from "./Components/Customer/History.jsx";
 
 function App() {
 
@@ -18,13 +23,17 @@ function App() {
       <Routes>
 
         <Route path="/" element={<HomepageContent />} />
-        <Route path="/about-us" element={<AboutUsPage />} />
-        <Route path="/services" element={<Service />} />
-        <Route path="/services/livingroom" element={<LivingRoom />} />
-        <Route path="/blog" element={<Blog />} />
-        <Route path="/customer" element={<Customer />} />
-        <Route path="/customer/tung" element={<Header />} />
+        <Route path="about-us" element={<AboutUsPage />} />
+        <Route path="services" element={<Service />} />
+        <Route path="services/livingroom" element={<LivingRoom />} />
+        <Route path="blog" element={<Blog />} />
 
+        <Route path="customer/*" element={<Customer />}>
+          <Route path="" element={<MainContent />} />
+          <Route path="manager/*" element={<Manager />}>
+            <Route path="project" element={<Project />} />
+          </Route>
+        </Route>
       </Routes>
 
       <Footer />
@@ -32,5 +41,4 @@ function App() {
     </BrowserRouter>
   )
 }
-
 export default App
