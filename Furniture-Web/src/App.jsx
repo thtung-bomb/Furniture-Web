@@ -10,15 +10,32 @@ import Customer from "./Components/Customer/Customer.jsx";
 import Manager from "./Components/Customer/Manager.jsx";
 import MainContent from "./Components/Customer/MainContent.jsx";
 import Project from "./Components/Customer/Project.jsx";
-import Quotation from "./Components/Customer/Quotation.jsx";
-import History from "./Components/Customer/History.jsx";
+import { useState } from "react";
+import Login from "./Register/Login.jsx";
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userName, setUserName] = useState(null);
+
+  const handleLogout = (navigate) => {
+    localStorage.removeItem('customer');
+    setIsLoggedIn(false);
+    setUserName('');
+    localStorage.removeItem('customer');
+    setIsLoggedIn(false);
+    navigate('/');
+  };
+
+  const handleLogin = (user) => {
+    localStorage.setItem('customer', JSON.stringify(user));
+    setIsLoggedIn(true);
+    setUserName(user.full_name);
+  };
 
   return (
     <BrowserRouter>
 
-      <Header />
+      <Header isLoggedIn={isLoggedIn} userName={userName} handleLogout={handleLogout} handleLogin={handleLogin} />
 
       <Routes>
 
@@ -27,8 +44,9 @@ function App() {
         <Route path="services" element={<Service />} />
         <Route path="services/livingroom" element={<LivingRoom />} />
         <Route path="blog" element={<Blog />} />
+        <Route path="/login" element={<Login />} />
 
-        <Route path="customer/*" element={<Customer />}>
+        <Route path="customer/*" element={<Customer isLoggedIn={isLoggedIn} />}>
           <Route path="" element={<MainContent />} />
           <Route path="manager/*" element={<Manager />}>
             <Route path="project" element={<Project />} />

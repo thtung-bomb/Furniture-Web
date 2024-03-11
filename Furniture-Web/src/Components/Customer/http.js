@@ -2,6 +2,7 @@ import axios from "axios";
 
 export async function fetchAvailableWorkspace() {
     try {
+        // /workspace get list of workspace
         const response = await axios.get('http://localhost:8080/api/v1/workspace');
         const resData = response.data;
 
@@ -21,6 +22,7 @@ export async function fetchAvailableWorkspace() {
 
 export async function fetchAvailableProducts(workspaceName) {
     // /api/v1/workspace/{workspaceName}/products
+    // get product by workspace
     try {
         const response = await axios.get(`http://localhost:8080/api/v1/workspace/${workspaceName}/products`);
         const resData = response.data;

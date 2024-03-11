@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Header.css';
 import { Link } from 'react-router-dom';
 import Register from '../../Register/Register';
 
-function Header() {
+function Header({ isLoggedIn, userName, handleLogout, handleLogin }) {
 
     const [isLoginOpen, setLoginOpen] = useState(false);
 
@@ -11,6 +11,8 @@ function Header() {
     const toggleLogin = () => {
         setLoginOpen(!isLoginOpen);
     };
+
+    console.log(isLoggedIn);
 
     return (
 
@@ -110,15 +112,22 @@ function Header() {
 
                     {/* Quote Button */}
                     <div className="header__quote">
-                        <button className="header__quote-button" id="quoteButton" onClick={toggleLogin}>Quote</button>
-
-                        {/* Register Form */}
-                        {isLoginOpen && <Register onClick={toggleLogin} />}
+                        {isLoggedIn ? (
+                            <div>
+                                <span className="user-name">{userName}</span>
+                                <button handleLogout={handleLogout}>Log out</button>
+                            </div>
+                        ) : (
+                            <div>
+                                <button className="header__quote-button" onClick={toggleLogin}>Quote</button>
+                                {
+                                    isLoginOpen && <Register onLogin={toggleLogin} handleLogin={handleLogin} />
+                                }
+                            </div>
+                        )}
                         {/* End Register Form */}
-
                     </div>
                     {/* End Quote Button */}
-
 
                     {/* Header mobile screen */}
                     <div className="header__mobile-menu">
