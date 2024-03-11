@@ -7,13 +7,7 @@ import Blog from "./Components/Content/Blog/Blog.jsx";
 import LivingRoom from "./Components/Content/Services/Livingroom/LivingRoom.jsx";
 import Service from "./Components/Content/Services/Service.jsx";
 import Customer from "./Components/Customer/Customer.jsx";
-import Manager from "./Components/Customer/Manager.jsx";
-import MainContent from "./Components/Customer/MainContent.jsx";
-import Project from "./Components/Customer/Project.jsx";
-import { useState } from "react";
-import Login from "./Register/Login.jsx";
-
-import Staff from "./Components/Staff/Staff.jsx";
+import ManagerHome from "./Components/Manager/ManagerHome.jsx";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -47,6 +41,13 @@ function App() {
         <Route path="services/livingroom" element={<LivingRoom />} />
         <Route path="blog" element={<Blog />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/about-us" element={<AboutUsPage />} />
+        <Route path="/services" element={<Service />} />
+        <Route path="/services/livingroom" element={<LivingRoom />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/customer" element={<Customer />} />
+        <Route path="/customer/tung" element={<Header />} />
+        <Route path="/manager" element={<ManagerHome />} />
 
         <Route path="customer/*" element={<Customer isLoggedIn={isLoggedIn} />}>
           <Route path="" element={<MainContent />} />
@@ -55,10 +56,6 @@ function App() {
           </Route>
         </Route>
         <Route path="staff/*" element={<Staff />}>
-          {/* <Route path="" element={<MainContent />} />
-          <Route path="manager/*" element={<Manager />}>
-            <Route path="project" element={<Project />} />
-          </Route> */}
         </Route>
       </Routes>
 
