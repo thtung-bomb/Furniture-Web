@@ -55,10 +55,6 @@ function App() {
           </Route>
         </Route>
         <Route path="staff/*" element={<Staff />}>
-          {/* <Route path="" element={<MainContent />} />
-          <Route path="manager/*" element={<Manager />}>
-            <Route path="project" element={<Project />} />
-          </Route> */}
         </Route>
       </Routes>
 
