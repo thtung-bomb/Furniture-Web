@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
-
+import { useEffect } from 'react';
 function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -25,6 +25,25 @@ function Login() {
             setError('Đăng nhập không thành công. Vui lòng kiểm tra lại tên đăng nhập và mật khẩu.');
         }
     };
+
+    const getUserProfile = async () => {
+        try {
+            const token = Cookies.get('token')
+            const response = await axios.get('http://localhost:8080/api/v1/user/auth/userProfile', {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                }
+            });
+            const customer = localStorage.setItem('customer', JSON.stringify(response.data));
+            console.log(customer);
+        } catch (error) {
+            setError('');
+        }
+    }
+
+    useEffect(() => {
+        getUserProfile();
+    }, []);
 
     return (
         <div>

@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import { fetchAvailableWorkspace, fetchAvailableProducts } from './http';
-import Product from './Request/Product.jsx';
 import Cookies from 'js-cookie';
 import axios from 'axios';
 
@@ -20,7 +19,7 @@ function Project() {
     const userData = JSON.parse(customer);
 
     const userRequest = {
-        fullName: userData.full_name,
+        fullName: userData.fullName,
         email: userData.email,
         phone: userData.phone
     }
@@ -64,7 +63,7 @@ function Project() {
         const productQuantity = event.target.elements.productQuantity.value;
         const description = event.target.elements.description.value;
 
-        if (!productName || !productQuantity || !description) {
+        if (!productName || !productQuantity) {
             return;
         }
 
@@ -78,9 +77,9 @@ function Project() {
         setRequestDetails(prevDetails => [...prevDetails, newRequestDetail]);
 
         // Xóa nội dung của các trường input sau khi thêm sản phẩm
-        event.target.elements.productName.value = '';
-        event.target.elements.productQuantity.value = '';
-        event.target.elements.description.value = '';
+        event.target.elements.productName.value = ''; // Xóa giá trị của trường nhập liệu "Product"
+        event.target.elements.productQuantity.value = ''; // Xóa giá trị của trường nhập liệu "Product Quantity"
+        event.target.elements.description.value = ''; // Xóa giá trị của trường nhập liệu "Description"
     };
 
     // useEffect(() => {
@@ -89,7 +88,6 @@ function Project() {
 
     // Hàm để gửi yêu cầu lên server
     const handleSubmitRequest = () => {
-
 
         const requestData = {
             customer: userRequest,
@@ -103,6 +101,8 @@ function Project() {
                 'Authorization': `Bearer ${token}`, // Thêm token vào header Authorization
                 'Content-Type': 'application/json' // Đảm bảo loại nội dung là JSON
             }
+        }).catch(err => {
+            console.log(err);
         });
 
         // Gửi requestDetails lên server
@@ -124,7 +124,7 @@ function Project() {
                 label="Your Name"
                 variant="outlined"
                 sx={{ width: 300 }}
-                defaultValue={userData ? userData.full_name : ''}
+                defaultValue={userData ? userData.fullName : ''}
                 fullWidth
             />
             <TextField
@@ -158,9 +158,13 @@ function Project() {
                     <Autocomplete
                         disablePortal
                         id="combo-box-demo"
-                        options={availableProducts.map(product => product.name)}
+                        options={availableProducts}
+                        getOptionLabel={(option) => option.name}
+                        getOptionSelected={(option, value) => option.id === value.id} // Specify how to compare the selected option with the options in the list
+                        onChange={(event, newValue) => setSelectedProducts(newValue)}
                         renderInput={(params) => <TextField {...params} name="productName" label="Product" variant="outlined" sx={{ width: 300 }} />}
                     />
+
                     <TextField
                         id="number"
                         label="Product Quantity"
