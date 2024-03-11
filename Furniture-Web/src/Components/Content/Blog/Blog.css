@@ -76,7 +76,6 @@
 .grid .row-2 {
   width: 100% !important;
   margin: 20px 0;
-  display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 3%;
@@ -432,3 +431,12 @@
 .grid .quote-form .form-regis .regis-button:hover {
   background-color: var(--highlight-color);
 } /*# sourceMappingURL=Blog.css.map */
+.css-uym98a-MuiImageList-root {
+  margin: 10px;
+  width: 100% !important;
+}
+.new-part{
+  display: flex;
+  flex-direction: column;
+  
+}

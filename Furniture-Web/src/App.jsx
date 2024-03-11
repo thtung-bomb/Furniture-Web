@@ -13,6 +13,8 @@ import Project from "./Components/Customer/Project.jsx";
 import { useState } from "react";
 import Login from "./Register/Login.jsx";
 
+import Staff from "./Components/Staff/Staff.jsx";
+
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userName, setUserName] = useState(null);
@@ -51,6 +53,12 @@ function App() {
           <Route path="manager/*" element={<Manager />}>
             <Route path="project" element={<Project />} />
           </Route>
+        </Route>
+        <Route path="staff/*" element={<Staff />}>
+          {/* <Route path="" element={<MainContent />} />
+          <Route path="manager/*" element={<Manager />}>
+            <Route path="project" element={<Project />} />
+          </Route> */}
         </Route>
       </Routes>
 
