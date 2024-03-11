@@ -67,8 +67,10 @@ function Project() {
             return;
         }
 
+        const selectedProductId = selectedProducts ? selectedProducts.id : null;
+
         const newRequestDetail = {
-            product: productName, // Sử dụng id của sản phẩm thay vì tên sản phẩm
+            product: selectedProductId, // Sử dụng id của sản phẩm thay vì tên sản phẩm
             quantity: productQuantity,
             workspaceName: selectedWorkspace ? selectedWorkspace.workspace_name : '', // Lấy tên workspace
             description: description
@@ -202,41 +204,6 @@ function Project() {
                     )}
                     <button className='px-4 py-2 border-[2px] bg-cyan-700 hover:bg-cyan-900 text-white' onClick={handleSubmitRequest}>Send Request</button>
                 </div>
-
-                {/* <Product>
-                        {availableProducts.map((product) => (
-                            <li key={product.id} className='flex justify-between items-center gap-9'>
-                                <div>{product.name}</div>
-                                <button className='border-[2px] mx-4 px-4 py-2'>Add</button>
-                                <TextField
-                                    id="outlined-basic"
-                                    label="Description"
-                                    variant="outlined"
-                                    multiline
-                                    size='medium'
-                                    sx={{ width: 300 }}
-                                />
-                            </li>
-                        ))}
-                    </Product> */}
-
-
-                {/* <Product>
-                        {availableProducts.map((product) => (
-                            <li key={product.id} className='flex justify-between items-center gap-9'>
-                                <div className=''>{product.name}</div>
-                                <button className='border-[2px] mx-4 px-4 py-2' onClick={() => addItemToCart(product.id)}>Add</button>
-                                <TextField
-                                    id="outlined-basic"
-                                    label="Description"
-                                    variant="outlined"
-                                    multiline
-                                    size='small'
-                                    sx={{ width: 300 }}
-                                />
-                            </li>
-                        ))}
-                    </Product> */}
             </div>
         </div>
 
