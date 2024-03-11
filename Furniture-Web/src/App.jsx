@@ -13,6 +13,8 @@ import Project from "./Components/Customer/Project.jsx";
 import Quotation from "./Components/Customer/Quotation.jsx";
 import History from "./Components/Customer/History.jsx";
 
+import Staff from "./Components/Staff/Staff.jsx";
+
 function App() {
 
   return (
@@ -33,6 +35,12 @@ function App() {
           <Route path="manager/*" element={<Manager />}>
             <Route path="project" element={<Project />} />
           </Route>
+        </Route>
+        <Route path="staff/*" element={<Staff />}>
+          {/* <Route path="" element={<MainContent />} />
+          <Route path="manager/*" element={<Manager />}>
+            <Route path="project" element={<Project />} />
+          </Route> */}
         </Route>
       </Routes>
 
