@@ -8,6 +8,12 @@ import LivingRoom from "./Components/Content/Services/Livingroom/LivingRoom.jsx"
 import Service from "./Components/Content/Services/Service.jsx";
 import Customer from "./Components/Customer/Customer.jsx";
 import ManagerHome from "./Components/Manager/ManagerHome.jsx";
+import Login from './Register/Login.jsx';
+import MainContent from "./Components/Customer/MainContent.jsx";
+import Manager from "./Components/Customer/Manager.jsx";
+import Project from "./Components/Customer/Project.jsx";
+import { useState } from "react";
+import Staff from './Components/Staff/Staff.jsx';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -61,7 +67,7 @@ function App() {
 
       <Footer />
 
-    </BrowserRouter>
+    </BrowserRouter >
   )
 }
 export default App

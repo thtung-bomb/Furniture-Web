@@ -35,7 +35,7 @@ function Box1() {
     useEffect(() => {
         const fetchEmployeeSalesData = async () => {
             try {
-                const response = await fetch('http://localhost:8080/api/v1/dashboard/staffRequests');
+                const response = await fetch('http://localhost:8080/api/v1/dashboard/employee-revenue-by-month');
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
