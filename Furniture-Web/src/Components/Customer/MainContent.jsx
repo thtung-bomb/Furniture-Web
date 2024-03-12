@@ -9,7 +9,7 @@ function MainContent() {
 
     const [requests, setRequests] = useState([]);
     const [selectedRequest, setSelectedRequest] = useState(null); // Lưu trữ request được chọn
-
+    const [isPopupOpen, setIsPopupOpen] = useState(false); // State để điều khiển việc hiển thị popup
 
     const token = Cookies.get('token');
 
@@ -17,20 +17,22 @@ function MainContent() {
         const fetchRequests = async () => {
             try {
                 const response = await getRequestByCustomer(1, 6, token);
-                // Kiểm tra response trước khi truy cập thuộc tính data
                 setRequests(response);
-                console.log(requests);
             } catch (error) {
                 console.error('Error fetching requests:', error);
             }
         };
 
-        fetchRequests(); // Gọi hàm fetchRequests
+        fetchRequests();
     }, []);
 
     const handleRequestClick = (request) => {
-        setSelectedRequest(request); // Lưu trữ request được chọn vào state
-        // history.push(`/request/${request.id}`); // Chuyển đến route RequestDetails và truyền ID của request
+        setSelectedRequest(request);
+        setIsPopupOpen(true); // Mở popup khi request được chọn
+    };
+
+    const handleClosePopup = () => {
+        setIsPopupOpen(false); // Đóng popup khi click nút đóng hoặc nút overlay
     };
 
     return (
@@ -44,6 +46,15 @@ function MainContent() {
                     </li>
                 ))}
             </ul>
+            {/* Hiển thị popup nếu selectedRequest và isPopupOpen là true */}
+            {selectedRequest && isPopupOpen && (
+                <div className="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 flex items-center justify-center">
+                    <div className="bg-white p-10 rounded-lg">
+                        <RequestDetail request={selectedRequest} className='bg-transparent' />
+                        <button onClick={handleClosePopup} className='p-4 bg-cyan-600 text-white'>Close</button>
+                    </div>
+                </div>
+            )}
             <div className="h-[700px]">
                 <div className="p-20 border-gray-800">
                     <div className="grid grid-cols-2 gap-4 mb-4 rounded-full">
@@ -59,12 +70,8 @@ function MainContent() {
                     </div>
                 </div>
             </div>
-
-            {selectedRequest && <RequestDetail request={selectedRequest} />} {/* Sử dụng RequestDetail và truyền đối tượng request */}
-
             <Pagination count={10} color="secondary" size="large" className='text-8xl' />
-
-        </div >
+        </div>
     )
 }
 
