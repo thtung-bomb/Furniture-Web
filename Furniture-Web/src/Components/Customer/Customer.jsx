@@ -7,6 +7,7 @@ import Project from "./Project";
 import Quotation from "./Quotation";
 
 function Customer() {
+
     return (
         <div className="flex">
             <Sidebar />

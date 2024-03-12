@@ -1,13 +1,49 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Pagination } from '@mui/material';
 import { Link } from 'react-router-dom';
-
-
+import { getRequestByCustomer } from './http';
+import Cookies from 'js-cookie';
+import RequestDetail from './RequestDetail';
 
 function MainContent() {
 
+    const [requests, setRequests] = useState([]);
+    const [selectedRequest, setSelectedRequest] = useState(null); // Lưu trữ request được chọn
+
+
+    const token = Cookies.get('token');
+
+    useEffect(() => {
+        const fetchRequests = async () => {
+            try {
+                const response = await getRequestByCustomer(1, 6, token);
+                // Kiểm tra response trước khi truy cập thuộc tính data
+                setRequests(response);
+                console.log(requests);
+            } catch (error) {
+                console.error('Error fetching requests:', error);
+            }
+        };
+
+        fetchRequests(); // Gọi hàm fetchRequests
+    }, []);
+
+    const handleRequestClick = (request) => {
+        setSelectedRequest(request); // Lưu trữ request được chọn vào state
+        // history.push(`/request/${request.id}`); // Chuyển đến route RequestDetails và truyền ID của request
+    };
+
     return (
-        <div>
+        <div className='flex flex-col gap-5'>
+            <ul className='mt-10'>
+                {requests.map(request => (
+                    <li key={request.id} className='border-[2px] px-10 py-6 border-cyan-800 
+                    hover:cursor-pointer hover:bg-slate-200' onClick={() => handleRequestClick(request)}>
+                        <p>{request.id}</p>
+                        <p className='text-rose-700'>{request.customerRequestStatus}</p>
+                    </li>
+                ))}
+            </ul>
             <div className="h-[700px]">
                 <div className="p-20 border-gray-800">
                     <div className="grid grid-cols-2 gap-4 mb-4 rounded-full">
@@ -24,9 +60,11 @@ function MainContent() {
                 </div>
             </div>
 
+            {selectedRequest && <RequestDetail request={selectedRequest} />} {/* Sử dụng RequestDetail và truyền đối tượng request */}
+
             <Pagination count={10} color="secondary" size="large" className='text-8xl' />
 
-        </div>
+        </div >
     )
 }
 

@@ -31,7 +31,7 @@ function App() {
   const handleLogin = (user) => {
     localStorage.setItem('customer', JSON.stringify(user));
     setIsLoggedIn(true);
-    setUserName(user.full_name);
+    // setUserName(user.full_name);
   };
 
   return (
@@ -53,7 +53,7 @@ function App() {
         <Route path="/blog" element={<Blog />} />
         <Route path="/customer" element={<Customer />} />
         <Route path="/customer/tung" element={<Header />} />
-        <Route path="/manager" element={<ManagerHome />} />
+        <Route path="/managerhome" element={<ManagerHome />} />
 
         <Route path="customer/*" element={<Customer isLoggedIn={isLoggedIn} />}>
           <Route path="" element={<MainContent />} />
@@ -67,7 +67,8 @@ function App() {
 
       <Footer />
 
-    </BrowserRouter >
+    </BrowserRouter>
   )
 }
+
 export default App

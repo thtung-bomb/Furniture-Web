@@ -16,7 +16,6 @@ function Box2() {
                 const data = await response.json();
                 setMonthlyData(data);
             } catch (error) {
-                console.error('Error fetching monthly data:', error);
             }
         };
 
