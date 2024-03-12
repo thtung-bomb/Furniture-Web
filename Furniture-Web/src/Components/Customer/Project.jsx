@@ -4,6 +4,8 @@ import Autocomplete from '@mui/material/Autocomplete';
 import { fetchAvailableWorkspace, fetchAvailableProducts } from './http';
 import Cookies from 'js-cookie';
 import axios from 'axios';
+import { Toaster } from 'react-hot-toast';
+import { ToastContainer, toast } from 'react-toastify';
 
 function Project() {
 
@@ -110,10 +112,12 @@ function Project() {
         // Gửi requestDetails lên server
         if (requestDetails.length == 0) {
             console.log("Nothings to request");
+            toast.error("Nothings to request");
             return;
         }
         console.log('Request Details:', requestDetails);
         console.log('Request Details sent successfully');
+        toast.success('Request Details sent successfully')
         // Reset requestDetails sau khi gửi thành công
         setRequestDetails([]);
     };
@@ -121,6 +125,9 @@ function Project() {
     return (
 
         <div className='flex flex-col gap-6'>
+
+            <ToastContainer position='top-right' />
+
             <TextField
                 id="outlined-basic"
                 label="Your Name"

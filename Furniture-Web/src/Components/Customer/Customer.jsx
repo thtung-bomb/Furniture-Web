@@ -5,8 +5,10 @@ import MainContent from "./MainContent";
 import { Routes, Route } from "react-router-dom"
 import Project from "./Project";
 import Quotation from "./Quotation";
+import { useEffect } from "react";
 
 function Customer() {
+
     return (
         <div className="flex">
             <Sidebar />

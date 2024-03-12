@@ -3,6 +3,10 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import { toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -20,11 +24,14 @@ function Login() {
             Cookies.set('token', token, { expires: 1 });
             // Điều hướng tới trang chính hoặc trang sau khi đăng nhập thành công
             // history.push('/home');
+            toast.success('Login Susscessfully')
+            getUserProfileAndRedirect();
             navigate("/customer");
         } catch (error) {
-            setError("Login unsuccessful. Please check your username and password again.");
+            toast.error('Login unsuccessful. Please check your username and password again.');
         }
     };
+
 
     const getUserProfile = async () => {
         try {
@@ -34,16 +41,17 @@ function Login() {
                     Authorization: `Bearer ${token}`,
                 }
             });
-            const customer = localStorage.setItem('customer', JSON.stringify(response.data));
-            console.log(customer);
+            localStorage.setItem('customer', JSON.stringify(response.data));
+            console.log(localStorage.getItem('customer'));
         } catch (error) {
-            setError('');
+            // toast.info('Infor was load');
         }
     }
 
-    useEffect(() => {
-        getUserProfile();
-    }, []);
+    const getUserProfileAndRedirect = async () => {
+        await getUserProfile(); // Đợi cho localStorage được cập nhật
+        navigate("/customer"); // Sau khi localStorage đã được cập nhật, chuyển hướng
+    }
 
     return (
         <div className='h-[540px] flex items-center justify-center'>
@@ -58,8 +66,11 @@ function Login() {
                     <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className='w-full px-3 py-2 rounded-md bg-white text-gray-800 focus:outline-none focus:ring focus:ring-blue-300' />
                 </div>
                 <button className='bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors' onClick={handleLogin}>Login</button>
-                {error && <div className='text-red-500 mt-4'>{error}</div>}
             </div>
+            {/* {error && <ToastContainer />} */}
+            <ToastContainer position='bottom-center' />
+
+
         </div>
     );
 
