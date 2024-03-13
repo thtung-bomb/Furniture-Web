@@ -25,9 +25,9 @@ function HomepageContent() {
     return (
         // Page Introduce
         <div className='h-3/4 flex justify-center items-center bg-white'>
-            <div className='h-full w-3/4'>
+            <div className='h-full w-3/4 hero-carousel'>
                 {/* Slider */}
-                <Slider {...settings} className=''>
+                <Slider {...settings} className='single-carousel'>
                     <div className='item'>
                         <img src={main_home} className='body-picture' />
                     </div>
