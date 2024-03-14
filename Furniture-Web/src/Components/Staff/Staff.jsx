@@ -14,7 +14,7 @@ function Staff() {
                 <Route path="/" element={<MainContent />} />
                 <Route path="requestDetails/:id" element={<RequestDetails />} />
                 <Route path="requestList" element={<RequestList />} />
-                <Route path="proposalList" element={<ProposalList />} />
+                <Route path="proposalList/:id" element={<ProposalList />} />
                 </Routes>
 
         </div>

@@ -106,41 +106,42 @@ export default function RequestDetails() {
             type="number"
             value=""
             onChange={(e) => {
-              const newDetails = [{ quantity: parseInt(e.target.value), workspaceName: '', description: '', productName: '' }];
+              const newDetails = [{ quantity: parseInt(e.target.value), workspaceName: '', description: null, product: null }];
               setSelectedRowData(prevData => ({ ...prevData, requestDetails: newDetails }));
             }}
           />
           <label>Workspace:</label>
-          <select
-            onChange={(e) => {
-              const selectedValue = e.target.value; 
-              setSelectedWorkspace(selectedValue); 
-            }}
-          >
-            {workspaceOptions.map((workspace) => (
-              <option key={workspace.id} value={workspace.workspace_name}>{workspace.workspace_name}</option>
-            ))}
-          </select>
+        <Select
+          onChange={(e) => {
+            const selectedValue = e.target.value; 
+            setSelectedWorkspace(selectedValue); 
+          }}
+          value={selectedWorkspace || ''}
+        >
+          {workspaceOptions.map((workspace) => (
+            <MenuItem key={workspace.id} value={workspace.workspace_name}>{workspace.workspace_name}</MenuItem>
+          ))}
+        </Select>
           <label>Product 1 Description:</label>
           <input
             type="text"
             value=""
             onChange={(e) => {
-              const newDetails = [{ quantity: 0, workspaceName: '', description: e.target.value, productName: '' }];
+              const newDetails = [{ quantity: 0, workspaceName: '', description: e.target.value, product: null }];
               setSelectedRowData(prevData => ({ ...prevData, requestDetails: newDetails }));
             }}
           />
           <label>Product 1:</label>
+          
           <Select
-            value=""
+            value={null}
             onChange={(e) => {
-              const newDetails = [{ quantity: 0, workspaceName: '', description: '', productName: e.target.value }];
+              const newDetails = [{ quantity: 0, workspaceName: '', description: null, product: e.target.value }];
               setSelectedRowData(prevData => ({ ...prevData, requestDetails: newDetails }));
-              setSelectedWorkspace(e.target.value); 
             }}
           >
-            {workspaceOptions.map((workspace, index) => (
-              <MenuItem key={index} value={workspace.workspace_name}>{workspace.workspace_name}</MenuItem>
+            {workspaceProducts['']?.map((product, index) => (
+              <MenuItem key={index} value={product.id}>{product.name}</MenuItem>
             ))}
           </Select>
         </div>
@@ -148,10 +149,11 @@ export default function RequestDetails() {
     } else {
       return selectedRowData.requestDetails.map((detail, index) => (
         <div key={index}>
+          {/* Các trường khác */}
           <label>Product {index + 1} Quantity:</label>
           <input
             type="number"
-            value={detail.quantity >= 0 ? detail.quantity : ''}
+            value={detail.quantity || ''}
             onChange={(e) => {
               const newDetails = [...selectedRowData.requestDetails];
               newDetails[index].quantity = parseInt(e.target.value);
@@ -159,14 +161,14 @@ export default function RequestDetails() {
             }}
           />
           <label>Product {index + 1} Workspace:</label>
-          <Select
+          <select
             value={detail.workspaceName || ''}
             onChange={(e) => handleChangeWorkspace(index, e.target.value)}
           >
             {workspaceOptions.map((workspace, index) => (
-              <MenuItem key={index} value={workspace.workspace_name}>{workspace.workspace_name}</MenuItem>
+              <option key={index} value={workspace.workspace_name}>{workspace.workspace_name}</option>
             ))}
-          </Select>
+          </select>
           <label>Product {index + 1} Description:</label>
           <input
             type="text"
@@ -179,21 +181,23 @@ export default function RequestDetails() {
           />
           <label>Product {index + 1}:</label>
           <Select
-            value={detail.productName || ''}
+            value={detail.product || ''}
             onChange={(e) => {
               const newDetails = [...selectedRowData.requestDetails];
-              newDetails[index].productName = e.target.value;
+              newDetails[index].product = e.target.value;
               setSelectedRowData(prevData => ({ ...prevData, requestDetails: newDetails }));
             }}
           >
             {workspaceProducts[detail.workspaceName]?.map((product, index) => (
-                <MenuItem key={index} value={product.name}>{product.name}</MenuItem>
+              <MenuItem key={index} value={product.id}>{product.name}</MenuItem>
             ))}
           </Select>
         </div>
       ));
     }
   };
+  
+
 
   const handleConfirm = async () => {
     console.log(selectedRowData);
@@ -211,7 +215,7 @@ export default function RequestDetails() {
       const response = await fetch(apiUrl, requestOptions);
       const data = await response.json();
       console.log(data); // Log response từ API để kiểm tra
-      navigate('/staff/requestList');
+      
       // Cập nhật lại trạng thái của yêu cầu hoặc thực hiện các hành động phù hợp khác
       // Ví dụ: Hiển thị thông báo xác nhận thành công, cập nhật UI, vv.
     } catch (error) {

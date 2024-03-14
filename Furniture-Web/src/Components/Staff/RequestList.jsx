@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -37,9 +38,7 @@ export default function RequestList() {
     }
   };
 
-  const handleViewRequestDetails = (rowId) => {
-    window.location.href = `/staff/requestDetails/${rowId}`;
-  };
+  
 
   return (
     <TableContainer component={Paper}>
@@ -50,7 +49,10 @@ export default function RequestList() {
             <TableCell align="right">Estimated Price</TableCell>
             <TableCell align="right">Customer Name</TableCell>
             <TableCell align="right">Request Status</TableCell>
-            <TableCell align="right">Actions</TableCell>
+            <TableCell align="right">View Details</TableCell>
+            <TableCell align="right">Proposal Pdf File</TableCell>
+            
+
           </TableRow>
         </TableHead>
         <TableBody>
@@ -65,8 +67,16 @@ export default function RequestList() {
               <TableCell align="right">{row.estimatedPrice}</TableCell>
               <TableCell align="right">{row.customer?.full_name}</TableCell>
               <TableCell align="right">{row.customerRequestStatus}</TableCell>
+              
               <TableCell align="right">
-                <button onClick={() => handleViewRequestDetails(row.id)}>View</button>
+                <button>
+                  <Link to={`/staff/requestDetails/${row.id}`}>View</Link>
+              </button>
+              </TableCell>
+              <TableCell align="right">
+                <button>
+                  <Link to={`/staff/proposalList/${row.id}`}>Upload Proposal</Link>
+              </button>
               </TableCell>
             </TableRow>
           ))}
