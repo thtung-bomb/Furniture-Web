@@ -11,7 +11,7 @@ function MainContent() {
             <div className="h-[700px]">
                 <div className="p-20 border-gray-800">
                     <div className="grid grid-cols-2 gap-4 mb-4 rounded-full">
-                        <Link to='manager'>
+                        <Link to='manage'>
                             <div className="flex items-center justify-center bg-gray-200 h-28 dark:bg-gray-800 cursor-pointer rounded-2xl hover:bg-gray-300">
                                 <p className="text-2xl text-gray-400 dark:text-gray-500">
                                     <svg className="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">

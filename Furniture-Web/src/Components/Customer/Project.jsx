@@ -6,7 +6,7 @@ import Cookies from 'js-cookie';
 import axios from 'axios';
 
 function Project() {
-
+    
     const [availableWorkspace, setAvailableWorkspace] = useState([]);
     const [availableProducts, setAvailableProducts] = useState([]);
     // set selected workspace to add at link /{workspaceName}/products to get products of that space

@@ -12,7 +12,7 @@ function Customer() {
             <Sidebar />
             <Routes>
                 <Route path="" element={<MainContent />} />
-                <Route path="manager/*" element={<Manager />}>
+                <Route path="manage/*" element={<Manager />}>
                     <Route path="project" element={<Project />} />
                     <Route path="quotation" element={<Quotation />} />
                     <Route path="history" element={<History />} />
