@@ -14,7 +14,7 @@ import MainContent from "./Components/Customer/MainContent.jsx";
 import Manager from "./Components/Customer/Manager.jsx";
 import Project from "./Components/Customer/Project.jsx";
 import Staff from "./Components/Staff/Staff.jsx"
-import AdminHome from "./Components/Admin/AdminHome.jsx";
+import AdminHome from "./Components/Admin/AdminHomePage.jsx";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
