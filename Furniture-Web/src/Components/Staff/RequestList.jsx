@@ -6,17 +6,21 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import Cookies from 'js-cookie';
 
-export default function BasicTable() {
+export default function RequestList() {
   const [rows, setRows] = useState([]);
+  const [selectedRowData, setSelectedRowData] = useState(null);
+  const [token, setToken] = useState('');
 
   useEffect(() => {
-    fetchAPI();
+    const token = Cookies.get('token');
+    setToken(token);
+    fetchRequestList(token);
   }, []);
 
-  const fetchAPI = async () => {
+  const fetchRequestList = async (token) => {
     try {
-      const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUcm9uZ0hhb0BnbWFpbC5jb20iLCJpYXQiOjE3MTAxNDU4NDUsImV4cCI6MTcxMDE0NzY0NX0.Y-VrsjgbA06STTT8wagyLSK6lhHldZb5X-Wqdg_o9og';
       const requestOptions = {
         method: 'GET',
         headers: {
@@ -29,8 +33,12 @@ export default function BasicTable() {
       console.log(data);
       setRows(data);
     } catch (error) {
-      console.error('Error fetching data:', error);
+      console.error('Error fetching data of Request List:', error);
     }
+  };
+
+  const handleViewRequestDetails = (rowId) => {
+    window.location.href = `/staff/requestDetails/${rowId}`;
   };
 
   return (
@@ -41,7 +49,8 @@ export default function BasicTable() {
             <TableCell>ID</TableCell>
             <TableCell align="right">Estimated Price</TableCell>
             <TableCell align="right">Customer Name</TableCell>
-            <TableCell align="right">Status</TableCell>
+            <TableCell align="right">Request Status</TableCell>
+            <TableCell align="right">Actions</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -54,8 +63,11 @@ export default function BasicTable() {
                 {row.id}
               </TableCell>
               <TableCell align="right">{row.estimatedPrice}</TableCell>
-              <TableCell align="right">{row.customer.full_name}</TableCell>
+              <TableCell align="right">{row.customer?.full_name}</TableCell>
               <TableCell align="right">{row.customerRequestStatus}</TableCell>
+              <TableCell align="right">
+                <button onClick={() => handleViewRequestDetails(row.id)}>View</button>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
