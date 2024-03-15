@@ -45,7 +45,10 @@ export default function RequestDetails() {
       console.error('Error fetching request details:', error);
     }
   };
-
+  const handleRemoveProduct = (indexToRemove) => {
+    const newDetails = selectedRowData.requestDetails.filter((_, index) => index !== indexToRemove);
+    setSelectedRowData(prevData => ({ ...prevData, requestDetails: newDetails }));
+  };
   const fetchWorkspaceOptions = async () => {
     try {
       const requestOptions = {
@@ -68,7 +71,19 @@ export default function RequestDetails() {
       console.error('Error fetching workspace options:', error);
     }
   };
-
+  const handleAddProduct = () => {
+    const newDetails = {
+      quantity: 0,
+      workspaceName: '',
+      description: '',
+      product: null
+    };
+    setSelectedRowData(prevData => ({
+      ...prevData,
+      requestDetails: [...prevData.requestDetails, newDetails]
+    }));
+  };
+  
   const handleChangeWorkspace = (index, workspaceName) => {
     const newDetails = [...selectedRowData.requestDetails];
     newDetails[index].workspaceName = workspaceName;
@@ -111,17 +126,17 @@ export default function RequestDetails() {
             }}
           />
           <label>Workspace:</label>
-        <Select
-          onChange={(e) => {
-            const selectedValue = e.target.value; 
-            setSelectedWorkspace(selectedValue); 
-          }}
-          value={selectedWorkspace || ''}
-        >
-          {workspaceOptions.map((workspace) => (
-            <MenuItem key={workspace.id} value={workspace.workspace_name}>{workspace.workspace_name}</MenuItem>
-          ))}
-        </Select>
+          <Select
+            onChange={(e) => {
+              const selectedValue = e.target.value; 
+              setSelectedWorkspace(selectedValue); 
+            }}
+            value={selectedWorkspace || ''}
+          >
+            {workspaceOptions.map((workspace) => (
+              <MenuItem key={workspace.id} value={workspace.workspace_name}>{workspace.workspace_name}</MenuItem>
+            ))}
+          </Select>
           <label>Product 1 Description:</label>
           <input
             type="text"
@@ -144,6 +159,7 @@ export default function RequestDetails() {
               <MenuItem key={index} value={product.id}>{product.name}</MenuItem>
             ))}
           </Select>
+          
         </div>
       );
     } else {
@@ -161,14 +177,14 @@ export default function RequestDetails() {
             }}
           />
           <label>Product {index + 1} Workspace:</label>
-          <select
+          <Select
             value={detail.workspaceName || ''}
             onChange={(e) => handleChangeWorkspace(index, e.target.value)}
           >
             {workspaceOptions.map((workspace, index) => (
-              <option key={index} value={workspace.workspace_name}>{workspace.workspace_name}</option>
+              <MenuItem key={index} value={workspace.workspace_name}>{workspace.workspace_name}</MenuItem>
             ))}
-          </select>
+          </Select>
           <label>Product {index + 1} Description:</label>
           <input
             type="text"
@@ -192,10 +208,17 @@ export default function RequestDetails() {
               <MenuItem key={index} value={product.id}>{product.name}</MenuItem>
             ))}
           </Select>
+          <button onClick={() => handleRemoveProduct(index)}>Remove Product</button>
         </div>
-      ));
+        
+      )).concat(
+        <div key="add-product">
+          <button onClick={handleAddProduct}>Add Product</button>
+        </div>
+      );
     }
   };
+  
   
 
 
@@ -215,6 +238,7 @@ export default function RequestDetails() {
       const response = await fetch(apiUrl, requestOptions);
       const data = await response.json();
       console.log(data); // Log response từ API để kiểm tra
+      handleBackToList();
       
       // Cập nhật lại trạng thái của yêu cầu hoặc thực hiện các hành động phù hợp khác
       // Ví dụ: Hiển thị thông báo xác nhận thành công, cập nhật UI, vv.
@@ -225,9 +249,20 @@ export default function RequestDetails() {
 
   const navigate = useNavigate();
 
-  const handleBackToList = () => {
-    setShowForm(false);
-    navigate('/staff/requestList'); // Thực hiện chuyển hướng tới trang requestList
+  const handleBackToList = async () => {
+    try {
+      await fetch(`http://localhost:8080/api/v1/request/auth/${selectedRowData.id}/lock`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+      setShowForm(false);
+      navigate('/staff/requestList'); // Thực hiện chuyển hướng tới trang requestList
+    } catch (error) {
+      console.error('Error locking request:', error);
+    }
   };
 
 
@@ -239,7 +274,7 @@ export default function RequestDetails() {
         <div>
           <div>
             <p>ID: {selectedRowData.id}</p>
-            <p>Estimated Price: {selectedRowData.estimatedPrice}</p>
+            <p>Estimated Price: {selectedRowData.price}</p>
             <label>Email:</label>
             <input
               type="text"
