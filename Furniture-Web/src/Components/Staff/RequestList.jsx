@@ -64,7 +64,7 @@ export default function RequestList() {
               <TableCell component="th" scope="row">
                 {row.id}
               </TableCell>
-              <TableCell align="right">{row.estimatedPrice}</TableCell>
+              <TableCell align="right">{row.price}</TableCell>
               <TableCell align="right">{row.customer?.full_name}</TableCell>
               <TableCell align="right">{row.customerRequestStatus}</TableCell>
               

@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import Cookies from 'js-cookie';
+import Button from '@mui/material/Button';
+import './RequestDetails.css';
 
 export default function RequestDetails() {
   const { id } = useParams();
@@ -113,108 +110,87 @@ export default function RequestDetails() {
   };
 
   const renderDetailInputs = () => {
-    if (!selectedRowData || selectedRowData.requestDetails.length === 0) {
-      return (
-        <div>
-          <label>Product 1 Quantity:</label>
-          <input
-            type="number"
-            value=""
-            onChange={(e) => {
-              const newDetails = [{ quantity: parseInt(e.target.value), workspaceName: '', description: null, product: null }];
-              setSelectedRowData(prevData => ({ ...prevData, requestDetails: newDetails }));
-            }}
-          />
-          <label>Workspace:</label>
-          <Select
-            onChange={(e) => {
-              const selectedValue = e.target.value; 
-              setSelectedWorkspace(selectedValue); 
-            }}
-            value={selectedWorkspace || ''}
-          >
-            {workspaceOptions.map((workspace) => (
-              <MenuItem key={workspace.id} value={workspace.workspace_name}>{workspace.workspace_name}</MenuItem>
-            ))}
-          </Select>
-          <label>Product 1 Description:</label>
-          <input
-            type="text"
-            value=""
-            onChange={(e) => {
-              const newDetails = [{ quantity: 0, workspaceName: '', description: e.target.value, product: null }];
-              setSelectedRowData(prevData => ({ ...prevData, requestDetails: newDetails }));
-            }}
-          />
-          <label>Product 1:</label>
-          
-          <Select
-            value={null}
-            onChange={(e) => {
-              const newDetails = [{ quantity: 0, workspaceName: '', description: null, product: e.target.value }];
-              setSelectedRowData(prevData => ({ ...prevData, requestDetails: newDetails }));
-            }}
-          >
-            {workspaceProducts['']?.map((product, index) => (
-              <MenuItem key={index} value={product.id}>{product.name}</MenuItem>
-            ))}
-          </Select>
-          
-        </div>
-      );
-    } else {
+    {
       return selectedRowData.requestDetails.map((detail, index) => (
-        <div key={index}>
+        
+        <div class='request-details' key={index}>
           {/* Các trường khác */}
-          <label>Product {index + 1} Quantity:</label>
+          <label className='Req-Component'>Product {index + 1} Quantity:</label>
           <input
             type="number"
+            placeholder="Input number of product"
             value={detail.quantity || ''}
             onChange={(e) => {
               const newDetails = [...selectedRowData.requestDetails];
               newDetails[index].quantity = parseInt(e.target.value);
-              setSelectedRowData(prevData => ({ ...prevData, requestDetails: newDetails }));
+              setSelectedRowData(prevData => 
+                ({ ...prevData, requestDetails: newDetails }));
             }}
           />
-          <label>Product {index + 1} Workspace:</label>
+          <label className='Req-Component'>
+            Product {index + 1} - Workspace:
+          </label>
           <Select
+            className="detail-select"
             value={detail.workspaceName || ''}
             onChange={(e) => handleChangeWorkspace(index, e.target.value)}
           >
+            <MenuItem value="" disabled hidden>
+              Select project's workspace
+            </MenuItem>
             {workspaceOptions.map((workspace, index) => (
-              <MenuItem key={index} value={workspace.workspace_name}>{workspace.workspace_name}</MenuItem>
+              <MenuItem key={index} value={workspace.workspace_name}>
+                {workspace.workspace_name}
+              </MenuItem>
             ))}
           </Select>
-          <label>Product {index + 1} Description:</label>
+          <label className='Req-Component'>
+            Product {index + 1} Description:
+          </label>
           <input
             type="text"
+            placeholder="Customer expectation about this product"
             value={detail.description || ''}
             onChange={(e) => {
               const newDetails = [...selectedRowData.requestDetails];
               newDetails[index].description = e.target.value;
-              setSelectedRowData(prevData => ({ ...prevData, requestDetails: newDetails }));
+              setSelectedRowData(prevData => 
+                ({ ...prevData, requestDetails: newDetails }));
             }}
           />
-          <label>Product {index + 1}:</label>
+          <label className='Req-Component'>
+            Product {index + 1}:
+          </label>
           <Select
+            className="detail-select"
             value={detail.product || ''}
             onChange={(e) => {
               const newDetails = [...selectedRowData.requestDetails];
               newDetails[index].product = e.target.value;
-              setSelectedRowData(prevData => ({ ...prevData, requestDetails: newDetails }));
+              setSelectedRowData(prevData => 
+                ({ ...prevData, requestDetails: newDetails }));
             }}
           >
+            <MenuItem value="" disabled hidden>
+              Select product
+            </MenuItem>
             {workspaceProducts[detail.workspaceName]?.map((product, index) => (
-              <MenuItem key={index} value={product.id}>{product.name}</MenuItem>
+              <MenuItem key={index} value={product.id}>
+                {product.name}
+              </MenuItem>
             ))}
           </Select>
-          <button onClick={() => handleRemoveProduct(index)}>Remove Product</button>
+          <div className="Req-Component">
+            <button className='remove-button'
+              onClick={() => handleRemoveProduct(index)}>
+                Remove Product
+            </button>
+
+          </div>
         </div>
         
-      )).concat(
-        <div key="add-product">
-          <button onClick={handleAddProduct}>Add Product</button>
-        </div>
+      )
+        
       );
     }
   };
@@ -271,77 +247,93 @@ export default function RequestDetails() {
   return (
     <TableContainer component={Paper}>
       {showForm && selectedRowData ? (
-        <div>
+        <div class='CusInfo'>
           <div>
-            <p>ID: {selectedRowData.id}</p>
-            <p>Estimated Price: {selectedRowData.price}</p>
-            <label>Email:</label>
-            <input
-              type="text"
-              value={selectedRowData.customer?.email || ''}
-              onChange={(e) => setSelectedRowData(prevData => ({ ...prevData, customer: { ...prevData.customer, email: e.target.value } }))}
-            />
-            <label>Phone:</label>
-            <input
-              type="text"
-              value={selectedRowData.customer?.phone || ''}
-              onChange={(e) => setSelectedRowData(prevData => ({ ...prevData, customer: { ...prevData.customer, phone: e.target.value } }))}
-            />
-            <label>ID Card:</label>
-            <input
-              type="text"
-              value={selectedRowData.customer?.id_card || ''}
-              onChange={(e) => setSelectedRowData(prevData => ({ ...prevData, customer: { ...prevData.customer, id_card: e.target.value } }))}
-            />
-            <label>Note:</label>
-            <input
-              type="text"
-              value={selectedRowData.customer?.note || ''}
-              onChange={(e) => setSelectedRowData(prevData => ({ ...prevData, customer: { ...prevData.customer, note: e.target.value } }))}
-            />
-            <label>Address:</label>
-            <input
-              type="text"
-              value={selectedRowData.customer?.address || ''}
-              onChange={(e) => setSelectedRowData(prevData => ({ ...prevData, customer: { ...prevData.customer, address: e.target.value } }))}
-            />
-            <label>Full Name:</label>
-            <input
-              type="text"
-              value={selectedRowData.customer?.full_name || ''}
-              onChange={(e) => setSelectedRowData(prevData => ({ ...prevData, customer: { ...prevData.customer, full_name: e.target.value } }))}
-            />
-            {renderDetailInputs()}
+            <div class='cusInfo-mainInformation'>
+
+              <p class='CusInfo-Detail ID'>ID: {selectedRowData.id}</p>
+              <p class='CusInfo-Detail Es'>Estimated Price: {selectedRowData.price}</p>
+              <h3 class='CusInfo-Detail Info'>CUSTOMER'S INFORMATION</h3>
+              <p class='CusInfo-Detail'>
+                <label>Full Name:</label>
+                <input
+                  type="text"
+                  placeholder="Input cutomer fullname"
+                  value={selectedRowData.customer?.full_name || ''}
+                  onChange={(e) => setSelectedRowData(prevData => 
+                    ({ ...prevData, customer: { ...prevData.customer, full_name: e.target.value } }))}
+                />
+              </p>
+              <p class='CusInfo-Detail'>
+                <label>Phone:</label>
+                <input
+                  type="text"
+                  placeholder="Input customer phone number"
+                  value={selectedRowData.customer?.phone || ''}
+                  onChange={(e) => setSelectedRowData(prevData => 
+                    ({ ...prevData, customer: { ...prevData.customer, phone: e.target.value } }))}
+                />
+              </p>
+              <p class='CusInfo-Detail'>
+                <label>Email:</label>
+                <input
+                  type="text"
+                  placeholder="Input customer email"
+                  value={selectedRowData.customer?.email || ''}
+                  onChange={(e) => setSelectedRowData(prevData =>
+                    ({ ...prevData, customer: { ...prevData.customer, email: e.target.value } }))}
+                />
+              </p>
+              <p class='CusInfo-Detail'>
+                <label>ID Card:</label>
+                <input
+                  type="text"
+                  placeholder="Input customer ID card number"
+                  value={selectedRowData.customer?.id_card || ''}
+                  onChange={(e) => setSelectedRowData(prevData => 
+                    ({ ...prevData, customer: { ...prevData.customer, id_card: e.target.value } }))}
+                />
+              </p>  
+              <p class='CusInfo-Detail'>
+                <label>Note:</label>
+                <input
+                  type="text"
+                  placeholder="Input notes for the project"
+                  value={selectedRowData.customer?.note || ''}
+                  onChange={(e) => setSelectedRowData(prevData => 
+                    ({ ...prevData, customer: { ...prevData.customer, note: e.target.value } }))}
+                />
+              </p>
+              <p class='CusInfo-Detail'>
+                <label>Address:</label>
+                <input
+                  type="text"
+                  placeholder="Input this project's address"
+                  value={selectedRowData.customer?.address || ''}
+                  onChange={(e) => setSelectedRowData(prevData => 
+                    ({ ...prevData, customer: { ...prevData.customer, address: e.target.value } }))}
+                />
+              </p>
+            </div>
+            <h2 className='request-box'>Request details</h2>
+            <div className="details-Box">
+              {renderDetailInputs()}
+
+            </div>
           </div>
-          <button onClick={handleConfirm}>Confirm</button>
-          <button onClick={handleBackToList}>Back to List</button>
+          <div className="button">
+            <div key="add-product">
+              <button className='add-product-button' onClick={handleAddProduct}>Add Product</button>
+            </div>
+            <div className="Main-button">
+              <button className='confirm-button' onClick={handleConfirm}>Confirm</button>
+              <button className='back-button' onClick={handleBackToList}>Back to List</button>
+
+            </div>
+          </div>
         </div>
       ) : (
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell>ID</TableCell>
-              <TableCell align="right">Estimated Price</TableCell>
-              <TableCell align="right">Customer Name</TableCell>
-              <TableCell align="right">Request Status</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {selectedRowData && selectedRowData.requestDetails.map((row) => (
-              <TableRow
-                key={row.id}
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-              >
-                <TableCell component="th" scope="row">
-                  {row.id}
-                </TableCell>
-                <TableCell align="right">{row.estimatedPrice}</TableCell>
-                <TableCell align="right">{row.customer?.full_name}</TableCell>
-                <TableCell align="right">{row.customerRequestStatus}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+        <p> There are no request Detail to Display</p>
       )}
     </TableContainer>
   );
