@@ -7,7 +7,10 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import Button from '@mui/material/Button';
+
 import Cookies from 'js-cookie';
+import './RequestList.css';
 
 export default function RequestList() {
   const [rows, setRows] = useState([]);
@@ -71,7 +74,7 @@ export default function RequestList() {
               <TableCell align="right">
                 <button>
                   <Link to={`/staff/requestDetails/${row.id}`}>View</Link>
-              </button>
+                </button>
               </TableCell>
               <TableCell align="right">
                 <button>
@@ -82,6 +85,8 @@ export default function RequestList() {
           ))}
         </TableBody>
       </Table>
+      <Button component={Link} to="/staff">Back to StaffPage</Button> 
+
     </TableContainer>
   );
 }

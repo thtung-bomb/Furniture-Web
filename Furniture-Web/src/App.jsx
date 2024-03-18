@@ -56,6 +56,7 @@ function App() {
         </Route>
         <Route path="/staff/*" element={<Staff isLoggedIn={isLoggedIn} />}>
           <Route index element={<RequestList />} />
+          <Route path="propasalList" element={<ProposalList />} />
           
           
           <Route path="*" element={<NoPage />} />

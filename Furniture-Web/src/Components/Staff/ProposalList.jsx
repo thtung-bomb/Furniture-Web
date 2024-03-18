@@ -1,52 +1,87 @@
-import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
-import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import Cookies from 'js-cookie';
+import { Link } from 'react-router-dom';
+import './ProposalList.css';
+// import React, { useEffect, useState } from 'react';
+// import Cookies from 'js-cookie';
+// import { Link } from 'react-router-dom';
+// import './ProposalList.css';
+import TableContainer from '@mui/material/TableContainer';
+import Table from '@mui/material/Table';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import TableCell from '@mui/material/TableCell';
+import TableBody from '@mui/material/TableBody';
+import Paper from '@mui/material/Paper';
+import Button from '@mui/material/Button';
+
+
 
 export default function ProposalList() {
-  const [selectedFile, setSelectedFile] = useState(null);
-  const [pdfUrl, setPdfUrl] = useState(null);
-  const { requestId } = useParams();
+  const [rows, setRows] = useState([]);
 
-  const handleFileChange = (event) => {
-    setSelectedFile(event.target.files[0]);
-  };
+  useEffect(() => {
+    fetchRequestDetails();
+  }, []);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
+  const fetchRequestDetails = async () => {
     try {
-      const formData = new FormData();
-      formData.append('file', selectedFile);
-
-      const response = await axios.post(`http://localhost:5174/staff/proposalList/${requestId}`, formData, {
+      const token = Cookies.get('token'); // Lấy token từ cookie
+      const requestOptions = {
+        method: 'GET',
         headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      };
 
-      setPdfUrl(response.data.pdfUrl);
+      const apiUrl = `http://localhost:8080/api/v1/request/auth/status/WAITING_FOR_PLANNING?page=1&pageSize=9`;
+      const response = await fetch(apiUrl, requestOptions);
+      const data = await response.json();
+      console.log(data);
+      setRows(data);
     } catch (error) {
-      console.error('Error uploading PDF:', error);
+      console.error('Error fetching request details:', error);
     }
   };
 
   return (
-    <div>
-      <h1>Proposal List</h1>
-      <p>Request ID: {requestId}</p>
-      <form onSubmit={handleSubmit}>
-        <input type="file" onChange={handleFileChange} accept="application/pdf" />
-        <button type="submit">Upload PDF</button>
-      </form>
-      
-      {/* Hiển thị file PDF nếu có URL */}
-      {pdfUrl && (
-        <iframe
-          title="PDF Viewer"
-          src={pdfUrl}
-          style={{ width: '100%', height: '600px', border: 'none' }}
-        />
-      )}
-    </div>
-  );
+    <TableContainer component={Paper}>
+      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell>ID</TableCell>
+            <TableCell align="right">Estimated Price</TableCell>
+            <TableCell align="right">Customer Name</TableCell>
+            <TableCell align="right">Request Status</TableCell>
+            <TableCell align="right">View Details</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {rows.map((row) => (
+            <TableRow
+              key={row.id}
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            >
+              <TableCell component="th" scope="row">
+                {row.id}
+              </TableCell>
+              <TableCell align="right">{row.price}</TableCell>
+              <TableCell align="right">{row.customer?.full_name}</TableCell>
+              <TableCell align="right">{row.customerRequestStatus}</TableCell>
+              
+              <TableCell align="right">
+                <button>
+                  <Link to={`/staff/proposalDetails/${row.id}`}>View</Link>
+              </button>
+              </TableCell>
+              
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+      <Button component={Link} to="/staff">Back to StaffPage</Button> 
+    </TableContainer>
+ 
+  )
 }

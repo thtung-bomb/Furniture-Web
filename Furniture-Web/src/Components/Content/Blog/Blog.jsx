@@ -348,37 +348,7 @@ function Blog() {
 
                         </p>
                     </div>
-                    <div className="form-regis">
-                        <div className="input-group name">
-                            <label htmlFor="name">Name</label>
-                            <input type="text" id="name" name="name" placeholder="Enter your name" />
-                        </div>
-                        <div className="input-group email">
-                            <label htmlFor="email">Email</label>
-                            <input type="email" id="email" name="email" placeholder="Enter your email" required />
-                        </div>
-                        <div className="input-group phone">
-                            <label htmlFor="phone">Phone</label>
-                            <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required />
-                        </div>
-                        <div className="input-group">
-                            <label htmlFor="workspace">Workspace:</label>
-                            <select id="workspace" name="workspace" required>
-                                <option value="" selected disabled>Select workspace</option>
-                                <option value="Living Room">Living Room</option>
-                                <option value="Bed Room">Bed Room</option>
-                                <option value="Dining Room">Dining Room</option>
-                                <option value="Rest Room">Rest Room</option>
-                                <option value="Family Room">Family Room</option>
-                                <option value="Work Room">Work Room</option>
-                            </select>
-                        </div>
-                        <div className="input-group main-content">
-                            <label for="main-content">Main Content</label>
-                            <textarea id="main-content" name="main-content" placeholder="Enter your main content"></textarea>
-                        </div>
-                        <button className="regis-button">Register for Quote</button>
-                    </div>
+                    
                 </div>
             </div>
         </main>
