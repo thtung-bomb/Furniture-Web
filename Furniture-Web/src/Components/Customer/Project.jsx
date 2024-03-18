@@ -62,35 +62,39 @@ function Project() {
     const handleAddProduct = (event) => {
         event.preventDefault(); // prevent page load
         const productName = event.target.elements.productName.value;
-        const productQuantity = event.target.elements.productQuantity.value;
+        const productQuantity = parseInt(event.target.elements.productQuantity.value, 10);
         const description = event.target.elements.description.value;
 
-        if (!productName || !productQuantity) {
+        if (!productName || !productQuantity || isNaN(productQuantity) || productQuantity <= 0) {
             return;
         }
 
         const selectedProductId = selectedProducts ? selectedProducts.id : null;
+        const existingProductIndex = requestDetails.findIndex(detail => detail.product === selectedProductId);
 
-        const newRequestDetail = {
-            product: selectedProductId, // Sử dụng id của sản phẩm thay vì tên sản phẩm
-            quantity: productQuantity,
-            workspaceName: selectedWorkspace ? selectedWorkspace.workspace_name : '', // Lấy tên workspace
-            description: description
-        };
-
-        setRequestDetails(prevDetails => [...prevDetails, newRequestDetail]);
+        if (existingProductIndex !== -1) {
+            // Nếu sản phẩm đã tồn tại trong danh sách, thì cập nhật số lượng
+            const updatedRequestDetails = [...requestDetails];
+            updatedRequestDetails[existingProductIndex].quantity += productQuantity;
+            setRequestDetails(updatedRequestDetails);
+        } else {
+            const newRequestDetail = {
+                product: selectedProductId, // Sử dụng id của sản phẩm thay vì tên sản phẩm
+                quantity: productQuantity,
+                workspaceName: selectedWorkspace ? selectedWorkspace.workspace_name : '', // Lấy tên workspace
+                description: description
+            };
+            setRequestDetails(prevDetails => [...prevDetails, newRequestDetail]);
+        }
 
         // Xóa nội dung của các trường input sau khi thêm sản phẩm
+        event.target.elements.workspaceName.value = '';
         event.target.elements.productName.value = ''; // Xóa giá trị của trường nhập liệu "Product"
         event.target.elements.productQuantity.value = ''; // Xóa giá trị của trường nhập liệu "Product Quantity"
         event.target.elements.description.value = ''; // Xóa giá trị của trường nhập liệu "Description"
+        setSelectedProducts(null);
     };
 
-    // useEffect(() => {
-    //     console.log(requestDetails);
-    // }, [requestDetails]);
-
-    // Hàm để gửi yêu cầu lên server
     const handleSubmitRequest = () => {
 
         const requestData = {
@@ -126,13 +130,14 @@ function Project() {
 
         <div className='flex flex-col gap-6'>
 
-            <ToastContainer position='top-right' />
+            <ToastContainer position='top-center' />
 
             <TextField
                 id="outlined-basic"
                 label="Your Name"
                 variant="outlined"
                 sx={{ width: 300 }}
+                InputProps={{ readOnly: true }}
                 defaultValue={userData ? userData.fullName : ''}
                 fullWidth
             />
@@ -141,6 +146,7 @@ function Project() {
                 label="Email"
                 variant="outlined"
                 sx={{ width: 300 }}
+                InputProps={{ readOnly: true }}
                 defaultValue={customer ? userData.email : ''}
                 fullWidth
             />
@@ -149,21 +155,22 @@ function Project() {
                 label="Phone"
                 variant="outlined"
                 sx={{ width: 300 }}
+                InputProps={{ readOnly: true }}
                 defaultValue={customer ? userData.phone : ''}
                 fullWidth
             />
             <div className='flex flex-col gap-5'>
-                <Autocomplete
-                    disablePortal
-                    id="combo-box-demo"
-                    options={availableWorkspace}
-                    getOptionLabel={(option) => option.workspace_name}
-                    onChange={(event, newValue) => setSelectedWorkspace(newValue)}
-                    renderInput={(params) => <TextField {...params} key={availableWorkspace.id} label="Room" variant="outlined" sx={{ width: 300 }} />}
-                    fullWidth
-                />
-
                 <form className='flex flex-col gap-4' onSubmit={handleAddProduct}>
+                    <Autocomplete
+                        disablePortal
+                        id="combo-box-demo"
+                        options={availableWorkspace}
+                        getOptionLabel={(option) => option.workspace_name}
+                        onChange={(event, newValue) => setSelectedWorkspace(newValue)}
+                        renderInput={(params) => <TextField {...params} key={availableWorkspace.id} name="workspaceName" label="Room" variant="outlined" sx={{ width: 300 }} />}
+                        fullWidth
+                    />
+
                     <Autocomplete
                         disablePortal
                         id="combo-box-demo"
@@ -181,6 +188,7 @@ function Project() {
                         name="productQuantity"
                         variant="outlined"
                         sx={{ width: 150 }}
+                        inputProps={{ min: 0 }}
                     />
                     <TextField
                         id="outlined-basic"
@@ -197,7 +205,7 @@ function Project() {
                 <div className='flex gap-6'>
                     {selectedWorkspace && (
                         <div className='flex flex-col gap-4'>
-                            <div className='flex flex-col gap-4 w-[500px] overflow-y-scroll'>
+                            <div className='flex flex-col gap-4 w-[500px]'>
                                 {requestDetails.map((detail, index) => (
                                     <div key={index} className='flex justify-between items-center gap-2'>
                                         <div>{detail.product}</div>
@@ -209,8 +217,8 @@ function Project() {
                             </div>
                         </div>
                     )}
-                    <button className='px-4 py-2 border-[2px] bg-cyan-700 hover:bg-cyan-900 text-white' onClick={handleSubmitRequest}>Send Request</button>
                 </div>
+                <button className='px-4 py-2 border-[2px] bg-cyan-700 hover:bg-cyan-900 text-white rounded-full' onClick={handleSubmitRequest}>Send Request</button>
             </div>
         </div>
 

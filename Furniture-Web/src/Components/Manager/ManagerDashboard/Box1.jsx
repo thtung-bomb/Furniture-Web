@@ -1,32 +1,3 @@
-// import React from 'react';
-
-// // Dữ liệu cứng về doanh số của từng nhân viên
-// const employeeSalesData = [
-//     { id: 1, name: 'John Doe', sales: 15000 },
-//     { id: 2, name: 'Jane Smith', sales: 20000 },
-//     { id: 3, name: 'Alice Johnson', sales: 18000 },
-//     // Thêm dữ liệu cho các nhân viên khác nếu cần
-// ];
-
-// function Box1() {
-//     return (
-//         <div className="home box bg-white h-full w-full rounded-lg shadow-md p-4">
-//             <h2 className="text-4xl font-bold my-8">Employee Sales Data</h2>
-//             <div className="flex flex-col">
-//                 {employeeSalesData.map((employee, index) => (
-//                     <div key={employee.id} className={`flex justify-between items-center border-b border-gray-300 py-2 ${index !== employeeSalesData.length - 1 ? 'mb-4' : ''}`}>
-//                         <span className="text-2xl text-gray-900">{employee.name}</span> {/* Tên nhân viên to hơn với text-lg và màu text-gray-900 */}
-//                         <span className="text-xl text-green-500">${employee.sales}</span> {/* Doanh số to hơn với text-lg và màu text-green-500 */}
-//                     </div>
-//                 ))}
-//             </div>
-//         </div>
-//     );
-// }
-
-// export default Box1;
-
-
 import React, { useEffect, useState } from 'react';
 
 function Box1() {

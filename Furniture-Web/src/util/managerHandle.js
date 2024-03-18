@@ -1,6 +1,27 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
+export async function getProductDetail(productID) {
+
+    try {
+        const response = await axios.get(`http://localhost:8080/api/v1/product/${productID}`, {
+            headers: {
+                'Authorization': 'Bearer ' + Cookies.get('token'),
+                'Content-Type': 'application/json'
+            }
+        })
+        if (response.status === 200) {
+            return response.data;
+        } else {
+            // Nếu status không phải là 200, xử lý lỗi hoặc trả về một giá trị phù hợp
+            console.error('Error fetching requests. Status:', response.status);
+            return null; // hoặc trả về một giá trị khác phù hợp
+        }
+    } catch (error) {
+        console.log(error);
+    }
+
+}
 
 export async function getRequestOfCustomer(pageNumber, pageSize, status) {
     try {

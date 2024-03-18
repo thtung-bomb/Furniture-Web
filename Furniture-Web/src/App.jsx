@@ -15,6 +15,7 @@ import Project from "./Components/Customer/Project.jsx";
 import { useState } from "react";
 import Staff from './Components/Staff/Staff.jsx';
 import ManagerHd from "./Components/Manager/Manager/ManagerHd.jsx";
+import AdminHome from './Components/Admin/AdminHome.jsx';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -56,6 +57,7 @@ function App() {
         <Route path="/customer/tung" element={<Header />} />
         <Route path="/managerhome" element={<ManagerHome />} />
         <Route path="/manager" element={<ManagerHd />} />
+        <Route path="/admin" element={<AdminHome />} />
         {/* <Route path "/manager" element={<ManagerHd />} /> */}
 
         <Route path="customer/*" element={<Customer isLoggedIn={isLoggedIn} />}>

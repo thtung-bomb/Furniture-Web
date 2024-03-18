@@ -7,10 +7,11 @@ import Button from '@mui/material/Button';
 import { Box } from '@mui/material';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import Sidebar from './SidebarAdmin';
+import Sidebar from './Sidebar';
+import Cookies from 'js-cookie';
 
 function getToken() {
-    return localStorage.getItem('jwtToken');
+    return Cookies.get('token');
 }
 
 function AdminHome() {

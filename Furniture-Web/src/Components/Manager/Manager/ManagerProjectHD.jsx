@@ -1,19 +1,12 @@
 import { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import Box from '@mui/material/Box';
-import Collapse from '@mui/material/Collapse';
-import IconButton from '@mui/material/IconButton';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Typography from '@mui/material/Typography';
 import { Pagination } from '@mui/material';
 import Paper from '@mui/material/Paper';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { getRequestOfCustomer, unlockRequest } from '../../../util/managerHandle';
 import RequestDetail from './RequestDetail';
 
@@ -24,11 +17,11 @@ function ManagerProjectHD() {
     const [currentPage, setCurrentPage] = useState(1); // Thêm state để lưu trữ số trang hiện tại
     const [selectedProject, setSelectedProjects] = useState(null); // Thêm state
 
-
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await getRequestOfCustomer(currentPage, 6, 'PROPOSAL_AWAITING_APPROVAL');
+                //PROPOSAL_AWAITING_APPROVAL
+                const response = await getRequestOfCustomer(currentPage, 4, 'PROPOSAL_AWAITING_APPROVAL');
                 setProjects(response); // Lưu kết quả từ API vào state
                 console.log(response);
             } catch (error) {
@@ -43,8 +36,6 @@ function ManagerProjectHD() {
         setCurrentPage(page); // Cập nhật state currentPage khi chuyển trang
     };
 
-
-
     console.log("Projectssss", projects);
 
     const handleRowClick = (project) => {
@@ -53,20 +44,13 @@ function ManagerProjectHD() {
 
     const handleClose = async (requestId) => {
         try {
-            await unlockRequest(requestId); // Wait for the unlockRequest function to finish
-            setSelectedProjects(null); // Close the popup after unlocking
+            await unlockRequest(requestId);
+            setSelectedProjects(null);
+            setCurrentPage(1); // Reset current page to reload the project list
         } catch (error) {
             console.log(error);
         }
-    }
-
-    // const unlockRequestDetail = async (requestId) => {
-    //     try {
-    //         unlockRequest(requestId)
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // }
+    };
 
     return (
         <div className='flex flex-col w-5/6'>
@@ -74,17 +58,25 @@ function ManagerProjectHD() {
                 <Table aria-label="collapsible table">
                     <TableHead>
                         <TableRow>
-                            <TableCell>Project ID</TableCell>
-                            <TableCell>Status</TableCell>
-                            <TableCell>Price</TableCell>
+                            <TableCell style={{ fontSize: '16px', fontWeight: 'bold', color: '#000080' }}>Project ID</TableCell>
+                            <TableCell style={{ fontSize: '16px', fontWeight: 'bold', color: '#000080' }}>Status</TableCell>
+                            <TableCell style={{ fontSize: '16px', fontWeight: 'bold', color: '#000080' }}>Price</TableCell>
+                            <TableCell style={{ fontSize: '16px', fontWeight: 'bold', color: '#000080' }}>Detail</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {projects.map((project) => (
-                            <TableRow key={project.id} onClick={() => handleRowClick(project)}>
-                                <TableCell>{project.id}</TableCell>
-                                <TableCell>{project.employeeRequestStatus}</TableCell>
-                                <TableCell>{project.price}</TableCell>
+                            <TableRow
+                                key={project.id}>
+                                <TableCell style={{ fontSize: '10px', fontWeight: '500' }}> {project.id}</TableCell>
+                                <TableCell style={{ fontSize: '10px', fontWeight: '500', color: '#B8860B' }}>
+                                    {project.employeeRequestStatus === 'PROPOSAL_AWAITING_APPROVAL' ? 'WAITING APPROVAL' : ''}
+                                </TableCell>
+                                <TableCell style={{ fontSize: '10px', fontWeight: '500' }}>{project.price}</TableCell>
+                                <TableCell style={{ fontSize: '10px', fontWeight: '600', cursor: 'pointer', color: '#483D8B', transition: 'color 0.3s' }}
+                                    onMouseEnter={(e) => e.target.style.color = '#FF0000'} // Change color on hover
+                                    onMouseLeave={(e) => e.target.style.color = '#483D8B'} // Revert color when not hovered
+                                    onClick={() => handleRowClick(project)}>View</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
