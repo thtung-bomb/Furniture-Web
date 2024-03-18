@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'; // Đảm bảo bạn đã import Link từ react-router-dom
 
+<<<<<<< HEAD
 const Dropdown = () => {
+=======
+const Dropdown = ({ workspaceOptions }) => {
+>>>>>>> master
     const [apiData, setApiData] = useState([]); // Khởi tạo state để lưu trữ dữ liệu từ API
 
     useEffect(() => {
