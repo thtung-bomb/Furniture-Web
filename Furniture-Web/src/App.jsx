@@ -18,6 +18,8 @@ import RequestDetails from './Components/Staff/RequestDetails.jsx';
 import ProposalList from './Components/Staff/ProposalList.jsx';
 import NoPage from './Components/Staff/NoPage.jsx';
 import Staff from './Components/Staff/Staff.jsx';
+import ManagerHd from "./Components/Manager/Manager/ManagerHd.jsx";
+import AdminHome from './Components/Admin/AdminHome.jsx';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -37,6 +39,44 @@ function App() {
   };
 
   return (
+    
+    // <BrowserRouter>
+    //   <Header isLoggedIn={isLoggedIn} userName={userName} handleLogout={handleLogout} handleLogin={handleLogin} />
+    //   <Routes>
+    //     <Route path="/" element={<HomepageContent />} />
+    //     <Route path="/about-us" element={<AboutUsPage />} />
+    //     <Route path="/services" element={<Service />}>
+    //       <Route path="livingroom" element={<LivingRoom />} />
+    //     </Route>
+    //     <Route path="/blog" element={<Blog />} />
+    //     <Route path="/login" element={<Login />} />
+    //     <Route path="/managerhome" element={<ManagerHome />} />
+    //     <Route path="/customer" element={<Customer isLoggedIn={isLoggedIn} />}>
+    //       <Route index element={<MainContent />} />
+    //       <Route path="manager" element={<Manager />}>
+    //     <Route path="/manager" element={<ManagerHd />} />
+    //     <Route path="/admin" element={<AdminHome />} />
+    //     {/* <Route path "/manager" element={<ManagerHd />} /> */}
+
+    //     <Route path="customer/*" element={<Customer isLoggedIn={isLoggedIn} />}>
+    //       <Route path="" element={<MainContent />} />
+    //       <Route path="manager/*" element={<Manager />}>
+    //         <Route path="project" element={<Project />} />
+    //       </Route>
+    //     </Route>
+
+    //     <Route path="/staff/*" element={<Staff isLoggedIn={isLoggedIn} />}>
+    //       <Route index element={<RequestList />} />
+    //       <Route path="propasalList" element={<ProposalList />} />
+          
+          
+    //       <Route path="*" element={<NoPage />} />
+    //     </Route>
+
+    //   </Routes>
+    //   <Footer />
+    // </BrowserRouter>
+
     <BrowserRouter>
       <Header isLoggedIn={isLoggedIn} userName={userName} handleLogout={handleLogout} handleLogin={handleLogin} />
       <Routes>
@@ -51,21 +91,21 @@ function App() {
         <Route path="/customer" element={<Customer isLoggedIn={isLoggedIn} />}>
           <Route index element={<MainContent />} />
           <Route path="manager" element={<Manager />}>
-            <Route path="project" element={<Project />} />
+            <Route path="/" element={<ManagerHd />} />
+            <Route path="/admin" element={<AdminHome />} />
           </Route>
+          <Route path="*" element={<MainContent />} />
         </Route>
         <Route path="/staff/*" element={<Staff isLoggedIn={isLoggedIn} />}>
           <Route index element={<RequestList />} />
-          <Route path="propasalList" element={<ProposalList />} />
-          
-          
+          <Route path="proposalList" element={<ProposalList />} />
           <Route path="*" element={<NoPage />} />
         </Route>
-
       </Routes>
       <Footer />
     </BrowserRouter>
+    
   );
 }
-
 export default App;
+

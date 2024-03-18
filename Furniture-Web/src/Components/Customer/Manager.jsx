@@ -5,6 +5,7 @@ import Project from './Project';
 import Quotation from './Quotation';
 import History from './History';
 
+
 function Manager() {
     return (
         <div className='flex flex-col w-full'>
