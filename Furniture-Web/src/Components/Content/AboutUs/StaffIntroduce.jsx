@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import Truong from '../../../assets/image/Truong.jpg';
 
 function StaffIntroduce() {
     return (
@@ -9,7 +10,7 @@ function StaffIntroduce() {
             <div className="staff-carousel">
                 <a href="#" className="staff-container">
 
-                    <img className="staff-avt" src="/assets/img/318971186_854205345859664_2596456881343714570_n.jpg" alt="" />
+                    <img className="staff-avt" src="Truong" alt="" />
 
                     <div className="staff-name">
                         <h1>Nguyen Nhat Truong</h1>

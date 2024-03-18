@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './Header.css';
 import { Link } from 'react-router-dom';
 import Register from '../../Register/Register';
+import Dropdown from './Dropdown';
 
-function Header({ isLoggedIn, userName, handleLogout, handleLogin }) {
+function Header() {
 
     const [isLoginOpen, setLoginOpen] = useState(false);
 
@@ -12,13 +13,11 @@ function Header({ isLoggedIn, userName, handleLogout, handleLogin }) {
         setLoginOpen(!isLoginOpen);
     };
 
-    console.log(isLoggedIn);
-
     return (
 
         // Header
         <header className="header">
-            {/* Navigate */}
+            {/* Navogate */}
             <div className="grid">
                 <div className="header__navbar">
                     {/* Logo Web */}
@@ -48,40 +47,7 @@ function Header({ isLoggedIn, userName, handleLogout, handleLogin }) {
                                     Services
                                     <span className="fa-solid fa-angle-down icon-down"></span>
                                 </a>
-                                <ul className="dropdown-menu">
-                                    {/* Living room */}
-                                    <li className="details-menu">
-                                        <Link to="/services/livingroom">Living Room</Link>
-                                    </li>
-                                    {/* End living room */}
-
-                                    {/* Bed Room */}
-                                    <li className="details-menu">
-                                        <Link to="/bed-room">Bed Room</Link>
-                                    </li>
-                                    {/* End Bed Room */}
-                                    <li className="details-menu">
-                                        <Link to="/dining-room">Dining Room</Link>
-                                    </li>
-
-                                    {/* Rest Room */}
-                                    <li className="details-menu">
-                                        <Link to="/rest-room">Rest Room</Link>
-                                    </li>
-                                    {/* End Rest Room */}
-
-                                    {/* Family Room */}
-                                    <li className="details-menu">
-                                        <Link to="/Details/FamilyRoomDetails.html">Family Room</Link>
-                                    </li>
-                                    {/* End Family Room */}
-
-                                    {/* Work Room */}
-                                    <li className="details-menu">
-                                        <Link to="/Details/WorkRoomDetails.html">Work Room</Link>
-                                    </li>
-                                    {/* End Work Room */}
-                                </ul>
+                                <Dropdown/>
                             </li>
                             {/* End Services */}
 
@@ -112,22 +78,15 @@ function Header({ isLoggedIn, userName, handleLogout, handleLogin }) {
 
                     {/* Quote Button */}
                     <div className="header__quote">
-                        {isLoggedIn ? (
-                            <div>
-                                <span className="user-name">{userName}</span>
-                                <button handleLogout={handleLogout}>Log out</button>
-                            </div>
-                        ) : (
-                            <div>
-                                <button className="header__quote-button" onClick={toggleLogin}>Quote</button>
-                                {
-                                    isLoginOpen && <Register onLogin={toggleLogin} handleLogin={handleLogin} />
-                                }
-                            </div>
-                        )}
+                        <button className="header__quote-button" id="quoteButton" onClick={toggleLogin}>Quote</button>
+
+                        {/* Register Form */}
+                        {isLoginOpen && <Register onClick={toggleLogin} />}
                         {/* End Register Form */}
+
                     </div>
                     {/* End Quote Button */}
+
 
                     {/* Header mobile screen */}
                     <div className="header__mobile-menu">

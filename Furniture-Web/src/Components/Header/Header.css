@@ -183,6 +183,7 @@
   }
 }
 /* Phần CSS chung */
+
 .header {
   height: var(--header-height);
   width: 100%;
@@ -333,8 +334,8 @@ ul {
 
 .header__search-input-wrap {
   display: flex;
-  padding: 10px;
-  font-size: 1.6rem;
+  padding: 0 10px;
+  font-size: 1.4rem;
   border: 1px solid var(--border-color);
   border-radius: 50px;
   position: relative;
@@ -344,6 +345,7 @@ ul {
 .header__search-input {
   width: 85%;
   border: none;
+  border-radius: 20px;
 }
 
 input {
