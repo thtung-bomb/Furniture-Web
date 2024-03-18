@@ -89,13 +89,12 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/managerhome" element={<ManagerHome />} />
         <Route path="/admin" element={<AdminHome />} />
+        <Route path="manager" element={<ManagerHd />} />
 
         <Route path="/customer" element={<Customer isLoggedIn={isLoggedIn} />}>
           <Route path='' element={<MainContent />} />
-          <Route path="manager" element={<Manager />}>
-            <Route path="" element={<ManagerHd />} />
-          </Route>
           <Route path="*" element={<MainContent />} />
+          <Route path="manager" element={<Manager />} />
         </Route>
         <Route path="/staff/*" element={<Staff isLoggedIn={isLoggedIn} />}>
           <Route index element={<RequestList />} />

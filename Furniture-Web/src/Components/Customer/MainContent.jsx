@@ -6,6 +6,7 @@ import Cookies from 'js-cookie';
 import RequestDetail from './RequestDetail';
 
 function MainContent() {
+
     const [requests, setRequests] = useState([]);
     const [selectedRequest, setSelectedRequest] = useState(null);
     const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -15,7 +16,7 @@ function MainContent() {
     useEffect(() => {
         const fetchRequests = async () => {
             try {
-                const response = await getRequestByCustomer(currentPage, 3, token);
+                const response = await getRequestByCustomer(currentPage, 9, token);
                 setRequests(response);
             } catch (error) {
                 console.error('Error fetching requests:', error);
@@ -39,15 +40,15 @@ function MainContent() {
     };
 
     return (
-        <div className='flex flex-col gap-5'>
+        <div className='flex flex-col gap-5 border-[2px] ml-7 mb-6'>
             <div className="p-20 border-gray-800">
                 <div className="grid grid-cols-2 gap-4 mb-4 rounded-full">
-                    <Link to='manager'>
-                        <button className='bg-cyan-600 px-6 py-4 text-xl text-white rounded-3xl font-medium text-center hover:bg-cyan-700 hover:shadow-2xl'>Add New Request</button>
+                    <Link to='manager' className='w-[135px]'>
+                        <button className='bg-cyan-600 px-6 py-4 text-xl text-white rounded-3xl font-medium text-center hover:bg-cyan-700 hover:shadow-2xl w-fit'>Add New Request</button>
                     </Link>
                 </div>
             </div>
-            <ul className='mt-10'>
+            <ul className='mt-10 grid grid-cols-1 md:grid-cols-3 gap-4'>
                 {requests.map(request => (
                     <li key={request.id} className='px-10 py-6 border-cyan-800 hover:cursor-pointer hover:bg-sky-50 gap-4' onClick={() => handleRequestClick(request)}>
                         <Card sx={{ maxWidth: 345 }} className='bg-gray-900'>
@@ -63,6 +64,7 @@ function MainContent() {
                     </li>
                 ))}
             </ul>
+
 
             {selectedRequest && isPopupOpen && (
                 <div className="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 flex items-center justify-center">

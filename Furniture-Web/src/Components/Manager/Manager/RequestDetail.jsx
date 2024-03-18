@@ -6,7 +6,7 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import { confirmProposal } from '../../../util/managerHandle.js';
+import { confirmProposal, rejectProposal } from '../../../util/managerHandle.js';
 import { toast } from 'react-toastify';
 import { ToastContainer } from 'react-toastify';
 import { getProductDetail } from '../../../util/managerHandle.js';
@@ -62,6 +62,17 @@ function RequestDetail({ project, close }) {
             // Handle error if needed
         }
         // console.log("Clicked");
+    };
+
+    const handleReject = async (proposalId) => {
+        try {
+            console.log(proposalId);
+            await rejectProposal(proposalId);
+            toast.success('Proposal with Id: ' + proposalId + ' was Rejected !');
+            close(proposalId);
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     return (
@@ -120,7 +131,9 @@ function RequestDetail({ project, close }) {
                         <div className='mt-8 mx-8'>
                             <h1 className='text-2xl text-cyan-800 font-bold'>Proposal</h1>
                             <p className='text-2xl text-cyan-800'><span className='font-semibold'>Code: </span>{proposal.id}</p>
-                            <p><span className='text-cyan-800'><span className='font-bold'>Status:</span> </span> <span className='text-xl text-yellow-700'>{proposal.employeeStatus}</span></p>
+                            <p><span className='text-cyan-800'><span className='font-bold'>Status:</span> </span> <span className='text-xl text-yellow-700'>
+                                {proposal.employeeStatus}
+                            </span></p>
                             {/* <h2 className='text-cyan-800'><span className='font-bold'>Data:</span> {proposal.file_path}</h2> */}
                             <iframe
                                 src={proposal.file_path}
@@ -135,6 +148,9 @@ function RequestDetail({ project, close }) {
                             <div className='text-center mb-8'>
                                 <button onClick={() => handleConfirm(proposal.id)} className='w-1/3 px-5 py-3 bg-cyan-700 text-white font-semibold text-2xl hover:bg-cyan-800 rounded-full'>
                                     <span>Confirm Proposal</span>
+                                </button>
+                                <button onClick={() => handleReject(proposal.id)} className='w-1/3 px-5 py-3 bg-cyan-700 text-white font-semibold text-2xl hover:bg-cyan-800 rounded-full'>
+                                    <span>Reject Request</span>
                                 </button>
                             </div>
                         </div>

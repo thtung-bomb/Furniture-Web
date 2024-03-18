@@ -91,3 +91,16 @@ export function unlockRequest(requestId) {
 
 }
 
+export function rejectProposal(proposalId) {
+    try {
+        // /api/v1/request/auth/rejectProposal/{proposalId}
+        axios.patch(`http://localhost:8080/api/v1/request/auth/rejectProposal/${proposalId}`, {
+            headers: {
+                'Authorization': 'Bearer ' + Cookies.get('token'),
+                'Content-Type': 'application/json'
+            }
+        })
+    } catch (error) {
+        console.log(error);
+    }
+}
