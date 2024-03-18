@@ -39,7 +39,7 @@ function App() {
   };
 
   return (
-    
+
     // <BrowserRouter>
     //   <Header isLoggedIn={isLoggedIn} userName={userName} handleLogout={handleLogout} handleLogin={handleLogin} />
     //   <Routes>
@@ -68,8 +68,8 @@ function App() {
     //     <Route path="/staff/*" element={<Staff isLoggedIn={isLoggedIn} />}>
     //       <Route index element={<RequestList />} />
     //       <Route path="propasalList" element={<ProposalList />} />
-          
-          
+
+
     //       <Route path="*" element={<NoPage />} />
     //     </Route>
 
@@ -88,11 +88,12 @@ function App() {
         <Route path="/blog" element={<Blog />} />
         <Route path="/login" element={<Login />} />
         <Route path="/managerhome" element={<ManagerHome />} />
+        <Route path="/admin" element={<AdminHome />} />
+
         <Route path="/customer" element={<Customer isLoggedIn={isLoggedIn} />}>
-          <Route index element={<MainContent />} />
+          <Route path='' element={<MainContent />} />
           <Route path="manager" element={<Manager />}>
-            <Route path="/" element={<ManagerHd />} />
-            <Route path="/admin" element={<AdminHome />} />
+            <Route path="" element={<ManagerHd />} />
           </Route>
           <Route path="*" element={<MainContent />} />
         </Route>
@@ -104,7 +105,7 @@ function App() {
       </Routes>
       <Footer />
     </BrowserRouter>
-    
+
   );
 }
 export default App;

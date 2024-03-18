@@ -20,31 +20,19 @@
     "axios": "^1.6.7",
     "chart.js": "^4.4.2",
     "cros": "^1.0.1",
-<<<<<<< HEAD
     "firebase": "^10.9.0",
     "js-cookie": "^3.0.5",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.4",
-=======
-    "js-cookie": "^3.0.5",
->>>>>>> master
     "pdfjs-dist": "^4.0.379",
     "react": "^18.2.0",
     "react-carousel": "^4.3.0",
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.1",
     "react-icons": "^5.0.1",
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
     "react-modal": "^3.16.1",
->>>>>>> fd9913407ad02532fd38f3c0e4b541def2ccb2cf
-    "react-pdf": "^7.7.1",
-    "react-router-dom": "^6.22.3",
-=======
     "react-pdf": "^7.7.1",
     "react-router-dom": "^6.22.2",
->>>>>>> master
     "react-slick": "^0.30.2",
     "react-toastify": "^10.0.4",
     "recharts": "^2.12.2",
@@ -63,6 +51,6 @@
     "eslint-plugin-react-refresh": "^0.4.5",
     "postcss": "^8.4.35",
     "tailwindcss": "^3.4.1",
-    "vite": "^5.1.4"
+    "vite": "^5.1.6"
   }
 }
