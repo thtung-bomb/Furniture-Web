@@ -6,6 +6,7 @@ import RequestList from "./RequestList";
 import RequestDetails from "./RequestDetails";
 import ProposalList from "./ProposalList";
 import ProposalDetails from "./ProposalDetails";
+import ProposalPdf from "./ProposalPdf";
 
 function Staff() {
     return (
@@ -17,7 +18,8 @@ function Staff() {
                 <Route path="requestList" element={<RequestList />} />
                 <Route path="proposalList" element={<ProposalList />} />
                 <Route path="proposalDetails/:id" element={<ProposalDetails/>} />
-                </Routes>
+                <Route path="proposalPdf/:id" element={<ProposalPdf/>} />
+            </Routes>
 
         </div>
     )

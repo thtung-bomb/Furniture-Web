@@ -76,11 +76,7 @@ export default function RequestList() {
                   <Link to={`/staff/requestDetails/${row.id}`}>View</Link>
                 </button>
               </TableCell>
-              <TableCell align="right">
-                <button>
-                  <Link to={`/staff/proposalList/${row.id}`}>Upload Proposal</Link>
-              </button>
-              </TableCell>
+              
             </TableRow>
           ))}
         </TableBody>

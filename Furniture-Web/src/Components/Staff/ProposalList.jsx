@@ -55,6 +55,8 @@ export default function ProposalList() {
             <TableCell align="right">Customer Name</TableCell>
             <TableCell align="right">Request Status</TableCell>
             <TableCell align="right">View Details</TableCell>
+            <TableCell align="right">Upload PDF </TableCell>
+
           </TableRow>
         </TableHead>
         <TableBody>
@@ -73,6 +75,11 @@ export default function ProposalList() {
               <TableCell align="right">
                 <button>
                   <Link to={`/staff/proposalDetails/${row.id}`}>View</Link>
+              </button>
+              </TableCell>
+              <TableCell align="right">
+                <button>
+                  <Link to={`/staff/proposalPdf/${row.id}`}>Upload Proposal</Link>
               </button>
               </TableCell>
               
