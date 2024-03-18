@@ -121,9 +121,16 @@ function RequestDetail({ project, close }) {
                             <h1 className='text-2xl text-cyan-800 font-bold'>Proposal</h1>
                             <p className='text-2xl text-cyan-800'><span className='font-semibold'>Code: </span>{proposal.id}</p>
                             <p><span className='text-cyan-800'><span className='font-bold'>Status:</span> </span> <span className='text-xl text-yellow-700'>{proposal.employeeStatus}</span></p>
-                            <h2 className='text-cyan-800'><span className='font-bold'>Data:</span> {proposal.fileData}</h2>
-                            <p className='text-cyan-800'><span className='font-bold'>File Name</span> {proposal.fileName}</p>
+                            {/* <h2 className='text-cyan-800'><span className='font-bold'>Data:</span> {proposal.file_path}</h2> */}
+                            <iframe
+                                src={proposal.file_path}
+                                title="Proposal File"
+                                width="100%"
+                                height="500px"
+                                frameBorder="0"
+                            />
                             <p className='text-cyan-800'><span className='font-bold'>File Type:</span> {proposal.fileType}</p>
+                            <p className='text-cyan-800'><span className='font-bold'>File Name</span> {proposal.fileName}</p>
                             <h1 className='font-bold text-6xl text-cyan-800'><span>Total: </span> {project.price}</h1>
                             <div className='text-center mb-8'>
                                 <button onClick={() => handleConfirm(proposal.id)} className='w-1/3 px-5 py-3 bg-cyan-700 text-white font-semibold text-2xl hover:bg-cyan-800 rounded-full'>
