@@ -84,7 +84,9 @@ function ManagerProjectHD() {
             </TableContainer>
             <Pagination count={10} onChange={handlePageChange} color='secondary' />
             {selectedProject && (
+
                 <RequestDetail project={selectedProject} close={() => handleClose(selectedProject.id)} />
+
             )}
         </div>
     );

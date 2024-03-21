@@ -3,10 +3,9 @@ import { Popper, Fade, Box } from '@mui/material';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import { confirmProposal } from '../../../util/managerHandle.js';
+import { confirmProposal, rejectProposal } from '../../../util/managerHandle.js';
 import { toast } from 'react-toastify';
 import { ToastContainer } from 'react-toastify';
 import { getProductDetail } from '../../../util/managerHandle.js';
@@ -18,8 +17,6 @@ function RequestDetail({ project, close }) {
     const proposal = project.proposal;
 
     const [productDetails, setProductDetails] = useState({}); // State to store product details
-
-    const [productNames, setProductNames] = useState({});
 
     console.log(requestDetail);
 
@@ -64,12 +61,23 @@ function RequestDetail({ project, close }) {
         // console.log("Clicked");
     };
 
+    const handleReject = async (proposalId) => {
+        try {
+            await rejectProposal(proposalId);
+            toast.success(`Proposal with Id: ${proposalId} was rejected successfully`);
+            close(proposalId);
+        } catch (error) {
+            console.error('Error handling reject proposal:', error);
+            toast.error('Failed to reject proposal. Please try again later.');
+        }
+    };
+
     return (
 
         <Popper open={true} transition>
             {({ TransitionProps }) => (
                 <Fade {...TransitionProps} timeout={350}>
-                    <Box className='my-10 mx-96 border-[2px] w-4/5 bg-white rounded-lg shadow-lg z-auto'>
+                    <Box className='my-10 border-[2px] w-[100%] h-[30%] bg-white rounded-lg shadow-lg z-50 overflow-y-scroll'>
                         <button onClick={close} className='absolute text-6xl ml-72 top-1 right-4 px-5 py-3 text-cyan-800 font-semibold hover:text-sky-600'>&times;</button>
                         <div className='flex flex-col w-2/3 justify-center p-8'>
                             <h1 className='font-bold text-4xl text-cyan-800'>Customer Information</h1>
@@ -120,21 +128,22 @@ function RequestDetail({ project, close }) {
                         <div className='mt-8 mx-8'>
                             <h1 className='text-2xl text-cyan-800 font-bold'>Proposal</h1>
                             <p className='text-2xl text-cyan-800'><span className='font-semibold'>Code: </span>{proposal.id}</p>
-                            <p><span className='text-cyan-800'><span className='font-bold'>Status:</span> </span> <span className='text-xl text-yellow-700'>{proposal.employeeStatus}</span></p>
-                            {/* <h2 className='text-cyan-800'><span className='font-bold'>Data:</span> {proposal.file_path}</h2> */}
+                            <p><span className='text-cyan-800'><span className='font-bold'>Status:</span> </span> <span className='text-xl text-yellow-700'>
+                                {proposal.employeeStatus}
+                            </span></p>
                             <iframe
                                 src={proposal.file_path}
                                 title="Proposal File"
-                                width="100%"
-                                height="500px"
-                                frameBorder="0"
+                                width="50%"
+                                height="100px"
                             />
-                            <p className='text-cyan-800'><span className='font-bold'>File Type:</span> {proposal.fileType}</p>
-                            <p className='text-cyan-800'><span className='font-bold'>File Name</span> {proposal.fileName}</p>
                             <h1 className='font-bold text-6xl text-cyan-800'><span>Total: </span> {project.price}</h1>
                             <div className='text-center mb-8'>
                                 <button onClick={() => handleConfirm(proposal.id)} className='w-1/3 px-5 py-3 bg-cyan-700 text-white font-semibold text-2xl hover:bg-cyan-800 rounded-full'>
                                     <span>Confirm Proposal</span>
+                                </button>
+                                <button onClick={() => handleReject(proposal.id)} className='w-1/3 px-5 py-3 bg-cyan-700 text-white font-semibold text-2xl hover:bg-cyan-800 rounded-full'>
+                                    <span>Reject Request</span>
                                 </button>
                             </div>
                         </div>

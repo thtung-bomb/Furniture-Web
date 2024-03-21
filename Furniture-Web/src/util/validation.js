@@ -11,6 +11,10 @@ export function hasMinLength(value, minLength) {
     return value.length >= minLength;
 }
 
+export function hasMaxLength(value, maxLength) {
+    return value.length <= maxLength;
+}
+
 export function isEqualsToOtherValue(value, otherValue) {
     return value === otherValue;
 }

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Register from '../../Register/Register';
 import Dropdown from './Dropdown';
 
-function Header() {
+function Header({ handleLogin }) {
 
     const [isLoginOpen, setLoginOpen] = useState(false);
 
@@ -47,7 +47,7 @@ function Header() {
                                     Services
                                     <span className="fa-solid fa-angle-down icon-down"></span>
                                 </a>
-                                <Dropdown/>
+                                <Dropdown />
                             </li>
                             {/* End Services */}
 
@@ -60,33 +60,22 @@ function Header() {
                     </nav>
 
 
-                    {/* Search */}
-                    <div className="header__search">
-                        <div className="header__search-input-wrap">
-                            <input
-                                type="text"
-                                className="header__search-input"
-                                placeholder="Search..."
-                            />
-                            <button className="header__search-btn">
-                                <i className="fas fa-search header__search-btn-icon"></i>
-                            </button>
-                        </div>
-                    </div>
-                    {/* End Search */}
-
-
                     {/* Quote Button */}
                     <div className="header__quote">
                         <button className="header__quote-button" id="quoteButton" onClick={toggleLogin}>Quote</button>
 
                         {/* Register Form */}
-                        {isLoginOpen && <Register onClick={toggleLogin} />}
+                        {isLoginOpen && <Register handleLogin={handleLogin} toggleLogin={toggleLogin} />}
                         {/* End Register Form */}
 
                     </div>
-                    {/* End Quote Button */}
 
+                    {/* End Quote Button */}
+                    <Link to='login'>
+                        <button className='bg-[#054c73] px-8 py-4 text-white rounded-full'>
+                            Login
+                        </button>
+                    </Link>
 
                     {/* Header mobile screen */}
                     <div className="header__mobile-menu">
