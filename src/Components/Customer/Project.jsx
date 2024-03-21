@@ -1,12 +1,17 @@
 import React, { useState, useEffect, useContext } from 'react';
 import TextField from '@mui/material/TextField';
-import { fetchAvailableWorkspace, fetchAvailableProducts, fetchProductName } from './http';
+import { fetchAvailableWorkspace, fetchAvailableProducts } from './http';
 import Cookies from 'js-cookie';
 import axios from 'axios';
 import SendIcon from '@mui/icons-material/Send';
 import { Toaster } from 'react-hot-toast';
 import { ToastContainer, toast } from 'react-toastify';
-import { Autocomplete, Box, Button, Checkbox, FormControlLabel, Modal, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
+import {
+    Autocomplete, Box, Button, Checkbox,
+    FormControlLabel, Modal, Paper,
+    Table, TableBody, TableCell,
+    TableContainer, TableHead, TableRow, Typography
+} from '@mui/material';
 
 const style = {
     position: 'absolute',
@@ -19,6 +24,7 @@ const style = {
     boxShadow: 24,
     p: 4,
 };
+
 function Project() {
 
     const [availableWorkspace, setAvailableWorkspace] = useState([]);
@@ -34,13 +40,10 @@ function Project() {
     const [requestDetails, setRequestDetails] = useState([]);
     const [productNames, setProductNames] = useState({});
 
-
     // Close and Open modal display Request
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-
-
 
     const handleProductQuantityChange = (event, productId) => {
         const { name, value } = event.target;
@@ -200,14 +203,22 @@ function Project() {
 
     // Simulated function to fetch product name based on product ID
     const fetchProductName = async (productId) => {
+        try {
+            // Gửi yêu cầu GET đến endpoint với productId
+            const response = await axios.get(`http://localhost:8080/api/v1/product/${productId}`);
 
-        const response = await fetch(`http://localhost:8080/product/${productId}`);
-        if (!response.ok) {
-            throw new Error('Failed to fetch product name');
+            // Trích xuất tên sản phẩm từ phản hồi
+            const productName = response.data.name;
+
+            // Trả về tên sản phẩm
+            return productName;
+        } catch (error) {
+            console.error("Error fetching product name:", error);
+            // Trả về null hoặc một giá trị mặc định khác nếu có lỗi xảy ra
+            return null;
         }
-        const data = await response.json();
-        return data.name; // Assuming the response contains a 'name' property for the product
     };
+
 
     useEffect(() => {
         const fetchProductNames = async () => {
@@ -426,7 +437,9 @@ function Project() {
                                                             {detail.products.map((product, idx) => (
                                                                 <TableRow key={idx}>
                                                                     {/* Call fetchProductName to get the product name */}
-                                                                    <TableCell align='right'>{product.productId}</TableCell>
+                                                                    <TableCell align='right'>
+                                                                        {product.productId}
+                                                                    </TableCell>
                                                                 </TableRow>
                                                             ))}
                                                         </TableBody>
@@ -450,7 +463,9 @@ function Project() {
                                         ))}
                                     </TableBody>
                                 </Table>
-                            </TableContainer>) : <h1 className='text-2xl font-semibold text-red-700'>Bạn chưa tạo bất cứ yêu cầu nào !</h1>}
+                            </TableContainer>) : <h1 className='text-2xl font-semibold text-red-700'>
+                                Bạn chưa tạo bất cứ yêu cầu nào !
+                            </h1>}
                         </Typography>
                     </Box>
                 </Modal>

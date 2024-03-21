@@ -60,7 +60,7 @@ function ProposalPdf() {
           'Content-Type': 'application/json'
         }
       });
-    //   setShowForm(false);
+      //   setShowForm(false);
       navigate('/staff/proposalList'); // Redirect to proposalList
     } catch (error) {
       console.error('Error locking request:', error);
@@ -91,10 +91,10 @@ function ProposalPdf() {
     }
 
     const requestBody = {
-        filename: fileName, // Use fileName state for file name
-        filePath: pdfUrl,
-        price: price
-      };
+      filename: fileName, // Use fileName state for file name
+      filePath: pdfUrl,
+      price: price
+    };
 
     fetch(`http://localhost:8080/api/v1/request/auth/${id}/uploadProposal`, {
       method: 'PATCH',
@@ -104,49 +104,49 @@ function ProposalPdf() {
       },
       body: JSON.stringify(requestBody)
     })
-    .then(response => {
-      if (response.ok) {
-        alert("Proposal adjusted successfully");
-        navigate('/staff/proposalList'); 
-      } else {
-        throw new Error('Failed to adjust proposal');
-      }
-    })
-    .catch(error => {
-      console.error('Error adjusting proposal:', error);
-    });
+      .then(response => {
+        if (response.ok) {
+          alert("Proposal adjusted successfully");
+          navigate('/staff/proposalList');
+        } else {
+          throw new Error('Failed to adjust proposal');
+        }
+      })
+      .catch(error => {
+        console.error('Error adjusting proposal:', error);
+      });
   };
 
   return (
     <div className='proposalBox'>
-        <div className="fileUploadBox">
-            <input type="file" onChange={(event) => { setFileUpload(event.target.files[0]) }} />
-            <button className='buttonUpload' onClick={uploadFile}>Upload File</button>
+      <div className="fileUploadBox">
+        <input type="file" onChange={(event) => { setFileUpload(event.target.files[0]) }} />
+        <button className='buttonUpload' onClick={uploadFile}>Upload File</button>
 
-        </div>
-        <div className="mainConttentBox">
+      </div>
+      <div className="mainConttentBox">
         <label htmlFor="fileNameInput">File Name:</label>
-            <input id="fileNameInput" className='fileNameInput'
-                type="text"
-                value={fileName}
-                onChange={(event) => setFileName(event.target.value)}
-                placeholder="Enter File Name"
-            />
-            <label htmlFor="priceInput">Standard Price:</label>
-            <input id="priceInput" className='priceInput'
-                type="number"
-                value={price}
-                onChange={(event) => setPrice(event.target.value)}
-                placeholder="Enter Price"
-            />
+        <input id="fileNameInput" className='fileNameInput'
+          type="text"
+          value={fileName}
+          onChange={(event) => setFileName(event.target.value)}
+          placeholder="Enter File Name"
+        />
+        <label htmlFor="priceInput">Standard Price:</label>
+        <input id="priceInput" className='priceInput'
+          type="number"
+          value={price}
+          onChange={(event) => setPrice(event.target.value)}
+          placeholder="Enter Price"
+        />
 
-        </div>
-    
+      </div>
+
       <button className='buttonAdjust' onClick={adjustProposal}>Save</button>
-      
+
       <button className='back-button' onClick={handleBackToList}>Back to List</button>
-    
-      
+
+
       {pdfUrl && (
         <iframe className='pdfBox' src={pdfUrl} title="PDF Viewer" width="80%" height="500px" />
       )}

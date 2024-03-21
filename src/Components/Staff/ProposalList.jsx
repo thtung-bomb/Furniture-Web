@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
-import { Link } from 'react-router-dom';
 import './ProposalList.css';
 // import React, { useEffect, useState } from 'react';
 // import Cookies from 'js-cookie';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 // import './ProposalList.css';
 import TableContainer from '@mui/material/TableContainer';
 import Table from '@mui/material/Table';
@@ -71,24 +70,24 @@ export default function ProposalList() {
               <TableCell align="right">{row.price}</TableCell>
               <TableCell align="right">{row.customer?.full_name}</TableCell>
               <TableCell align="right">{row.customerRequestStatus}</TableCell>
-              
+
               <TableCell align="right">
                 <button>
                   <Link to={`/staff/proposalDetails/${row.id}`}>View</Link>
-              </button>
+                </button>
               </TableCell>
               <TableCell align="right">
                 <button>
                   <Link to={`/staff/proposalPdf/${row.id}`}>Upload Proposal</Link>
-              </button>
+                </button>
               </TableCell>
-              
+
             </TableRow>
           ))}
         </TableBody>
       </Table>
-      <Button component={Link} to="/staff">Back to StaffPage</Button> 
+
     </TableContainer>
- 
+
   )
 }
