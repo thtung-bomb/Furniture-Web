@@ -20,6 +20,7 @@ import NoPage from './Components/Staff/NoPage.jsx';
 import Staff from './Components/Staff/Staff.jsx';
 import ManagerHd from "./Components/Manager/Manager/ManagerHd.jsx";
 import AdminHome from './Components/Admin/AdminHome.jsx';
+import CreateRequest from './Components/Customer/CreateRequest.jsx';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -91,18 +92,19 @@ function App() {
         <Route path="/admin" element={<AdminHome />} />
         <Route path="manager" element={<ManagerHd />} />
 
-        <Route path="/customer" element={<Customer isLoggedIn={isLoggedIn} />}>
-          <Route path='' element={<MainContent />} />
-          <Route path="*" element={<MainContent />} />
+        <Route path="/customer/*" element={<Customer isLoggedIn={isLoggedIn} />}>
+          <Route index element={<MainContent />} />
+          {/* <Route path="createrequest" element={<CreateRequest />} /> */}
           <Route path="manager" element={<Manager />} />
         </Route>
+
         <Route path="/staff/*" element={<Staff isLoggedIn={isLoggedIn} />}>
           <Route index element={<RequestList />} />
           <Route path="proposalList" element={<ProposalList />} />
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>
-      <Footer />
+      {/* <Footer /> */}
     </BrowserRouter>
 
   );

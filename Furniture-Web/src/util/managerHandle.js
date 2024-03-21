@@ -76,10 +76,10 @@ export async function confirmProposal(proposalID) {
     }
 }
 
-export function unlockRequest(requestId) {
+export async function unlockRequest(requestId) {
 
     try {
-        axios.delete(`http://localhost:8080/api/v1/request/auth/${requestId}/lock`, {
+        await axios.delete(`http://localhost:8080/api/v1/request/auth/${requestId}/lock`, {
             headers: {
                 'Authorization': 'Bearer' + Cookies.get('token'),
                 'Content-Type': 'application/json'
@@ -88,19 +88,23 @@ export function unlockRequest(requestId) {
     } catch (error) {
         console.log(error);
     }
-
 }
 
-export function rejectProposal(proposalId) {
+export async function rejectProposal(proposalId) {
     try {
-        // /api/v1/request/auth/rejectProposal/{proposalId}
-        axios.patch(`http://localhost:8080/api/v1/request/auth/rejectProposal/${proposalId}`, {
-            headers: {
-                'Authorization': 'Bearer ' + Cookies.get('token'),
-                'Content-Type': 'application/json'
+        const response = await axios.patch(
+            `http://localhost:8080/api/v1/request/auth/rejectProposal/${proposalId}`,
+            null,
+            {
+                headers: {
+                    'Authorization': 'Bearer ' + Cookies.get('token'),
+                    'Content-Type': 'application/json'
+                }
             }
-        })
+        );
+        return response.data; // Trả về dữ liệu phản hồi nếu cần
     } catch (error) {
-        console.log(error);
+        console.error('Error rejecting proposal:', error);
+        throw error; // Ném lại lỗi để xử lý tại component gọi hàm này nếu cần
     }
 }

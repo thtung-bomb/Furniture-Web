@@ -3,10 +3,11 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-function Register({ onLogin, handleLogin }) {
+function Register({ handleLogin, toggleLogin }) {
 
     const navigate = useNavigate();
 
+    // Lưu trạng tháii
     const [enteredValue, setEnteredValue] = useState({
         email: '',
         phone: '',
@@ -28,7 +29,7 @@ function Register({ onLogin, handleLogin }) {
         })
             .then(response => {
                 console.log(response.data); // In ra dữ liệu từ backend
-                onLogin(enteredValue);
+                handleLogin(enteredValue);
                 // Xử lý logic khi đăng ký thành công
                 navigate('/login');
                 setEnteredValue({
@@ -53,7 +54,7 @@ function Register({ onLogin, handleLogin }) {
 
     return (
         <div className="login-card">
-            <button className="close" id='close' onClick={onLogin}>close</button>
+            <button className="close" id='close' onClick={toggleLogin}>close</button>
             <form className="login-form" action="" onSubmit={handleSubmit}>
                 <label htmlFor="username">Username</label>
                 <input

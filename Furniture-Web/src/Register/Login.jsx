@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import './Login.css';
 
 function Login() {
     const [username, setUsername] = useState('');
@@ -19,19 +20,59 @@ function Login() {
                 username: username,
                 password: password
             });
+
             const token = response.data.token;
+
             // Lưu token vào cookie với tên là 'token' và thời gian sống là 1 ngày
             Cookies.set('token', token, { expires: 1 });
             // Điều hướng tới trang chính hoặc trang sau khi đăng nhập thành công
             // history.push('/home');
             toast.success('Login Susscessfully')
             getUserProfileAndRedirect();
-            navigate("/customer");
+            // navigate("/customer");
         } catch (error) {
             toast.error('Login unsuccessful. Please check your username and password again.');
         }
     };
 
+    const getUserProfileAndRedirect = async () => {
+        await getUserProfile(); // Đợi cho localStorage được cập nhật
+        const user = JSON.parse(localStorage.getItem('customer'));
+        console.log("user info: ", user);
+        const roles = user.roles;
+
+        // Tạo một biến để lưu trữ vai trò cao nhất
+        let highestRole = "";
+
+        // Lặp qua mảng roles để tìm vai trò cao nhất
+        roles.forEach(element => {
+            if (element.includes("ROLE_ADMIN")) {
+                highestRole = "ROLE_ADMIN";
+            } else if (element === "ROLE_MANAGER" && highestRole !== "ROLE_ADMIN") {
+                highestRole = "ROLE_MANAGER";
+            } else if (element === "ROLE_STAFF" && highestRole !== "ROLE_ADMIN" && highestRole !== "ROLE_MANAGER") {
+                highestRole = "ROLE_STAFF";
+            } else if (element === "ROLE_CUSTOMER" && highestRole !== "ROLE_ADMIN" && highestRole !== "ROLE_MANAGER" && highestRole !== "ROLE_STAFF") {
+                highestRole = "ROLE_CUSTOMER";
+            }
+        });
+
+        // Dựa vào vai trò cao nhất, chuyển hướng người dùng đến trang tương ứng
+        switch (highestRole) {
+            case "ROLE_ADMIN":
+                navigate("/admin");
+                break;
+            case "ROLE_MANAGER":
+                navigate("/manager");
+                break;
+            case "ROLE_STAFF":
+                navigate("/staff");
+                break;
+            case "ROLE_CUSTOMER":
+                navigate("/customer");
+                break;
+        }
+    }
 
     const getUserProfile = async () => {
         try {
@@ -42,19 +83,14 @@ function Login() {
                 }
             });
             localStorage.setItem('customer', JSON.stringify(response.data));
-            console.log(localStorage.getItem('customer'));
+            // console.log(localStorage.getItem('customer'));
         } catch (error) {
             // toast.info('Infor was load');
         }
     }
 
-    const getUserProfileAndRedirect = async () => {
-        await getUserProfile(); // Đợi cho localStorage được cập nhật
-        navigate("/customer"); // Sau khi localStorage đã được cập nhật, chuyển hướng
-    }
-
     return (
-        <div className='h-[540px] flex items-center justify-center'>
+        <div className='h-[540px] flex items-center justify-center formLogin'>
             <div className='bg-sky-950 p-6 rounded-md shadow-md w-80'>
                 <h2 className='text-white text-5xl font-semibold mb-6'>Login</h2>
                 <div className='mb-4'>
@@ -70,7 +106,7 @@ function Login() {
             {/* {error && <ToastContainer />} */}
             <ToastContainer position='bottom-center' />
 
-        
+
         </div>
     );
 
