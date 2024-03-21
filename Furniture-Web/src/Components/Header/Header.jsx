@@ -37,14 +37,14 @@ function Header() {
                         <ul>
                             {/* About Us */}
                             <li className="dropdown-container">
-                                <Link to='/about-us' className="header__navbar-navPage--button">About Us</Link>
+                                <Link to='/about-us' className="header__navbar-navPage--button">Giới thiệu</Link>
                             </li>
                             {/* End About Us */}
 
                             {/* Services */}
                             <li className="dropdown-container">
                                 <a to="service" className="header__navbar-navPage--button">
-                                    Services
+                                    Các dịch vụ
                                     <span className="fa-solid fa-angle-down icon-down"></span>
                                 </a>
                                 <Dropdown/>
@@ -61,7 +61,7 @@ function Header() {
 
 
                     {/* Search */}
-                    <div className="header__search">
+                    {/* <div className="header__search">
                         <div className="header__search-input-wrap">
                             <input
                                 type="text"
@@ -72,13 +72,13 @@ function Header() {
                                 <i className="fas fa-search header__search-btn-icon"></i>
                             </button>
                         </div>
-                    </div>
+                    </div> */}
                     {/* End Search */}
 
 
                     {/* Quote Button */}
                     <div className="header__quote">
-                        <button className="header__quote-button" id="quoteButton" onClick={toggleLogin}>Quote</button>
+                        <button className="header__quote-button" id="quoteButton" onClick={toggleLogin}>Nhận báo giá</button>
 
                         {/* Register Form */}
                         {isLoginOpen && <Register onClick={toggleLogin} />}
@@ -97,19 +97,19 @@ function Header() {
                             {/* End Hambugur Menu */}
 
                             {/* About Us */}
-                            <Link className="b" to="/about-us">About us</Link>
+                            <Link className="b" to="/about-us">Giới thiệu</Link>
                             {/* End About Us */}
 
                             {/* Services */}
-                            <Link className="b" to="WebPage/Services/ServicePage.html">Services</Link>
+                            <Link className="b" to="WebPage/Services/ServicePage.html">Các dịch vụ</Link>
                             {/* End Services */}
 
                             {/* Blog */}
-                            <Link to='/blog' className="b" >Blogs</Link>
+                            <Link to='/blog' className="b" >Blogs nội thất</Link>
                             {/* End Blog */}
 
                             {/* Search */}
-                            <div className="menu__search-box">
+                            {/* <div className="menu__search-box">
                                 <div className="menu__search-wrap">
                                     <input
                                         type="text"
@@ -120,7 +120,7 @@ function Header() {
                                         <i className="fas fa-search menu__search-btn-icon"></i>
                                     </button>
                                 </div>
-                            </div>
+                            </div> */}
                             {/* End Search */}
                         </nav>
                     </div>

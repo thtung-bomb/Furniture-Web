@@ -1,0 +1,29 @@
+@import url('../BaseCss/base.css');
+.bg-sky-950{
+    background-color: var(--primary-color) !important;
+    min-width: 600px;
+    min-height: 400px;
+    color: var(--black-color);
+    
+}
+.bg-sky-950 button{
+    margin: 0 auto;
+    padding: 10px 15px;
+    font-size: 2rem;
+    min-width: 300px;
+    font-weight: 600;
+    color: var(--white-color);
+}
+.buttonBox{
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.mb-6 {
+    margin-bottom: 1.5rem;
+    margin-top: 4rem;
+}
+.bgr-white{
+    background-color: var(--white-color) !important;
+}
