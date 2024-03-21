@@ -1,16 +1,24 @@
 import React, { useState, useEffect, useContext } from 'react';
 import TextField from '@mui/material/TextField';
-import { fetchAvailableWorkspace, fetchAvailableProducts } from './http';
+import { fetchAvailableWorkspace, fetchAvailableProducts, fetchProductName } from './http';
 import Cookies from 'js-cookie';
 import axios from 'axios';
+import SendIcon from '@mui/icons-material/Send';
 import { Toaster } from 'react-hot-toast';
 import { ToastContainer, toast } from 'react-toastify';
-import { Autocomplete, Button, Checkbox, FormControlLabel } from '@mui/material';
-import { CheckBox } from '@mui/icons-material';
+import { Autocomplete, Box, Button, Checkbox, FormControlLabel, Modal, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
 
-
-const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
-
+const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: '80%',
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+};
 function Project() {
 
     const [availableWorkspace, setAvailableWorkspace] = useState([]);
@@ -20,8 +28,19 @@ function Project() {
     const token = Cookies.get('token');
     const userData = JSON.parse(customer);
     const [selectedProducts, setSelectedProducts] = useState([]); // State lưu các sản phẩm được chọn
+    // Thêm state để theo dõi trạng thái của form
+    const [formResetFlag, setFormResetFlag] = useState(false);
 
     const [requestDetails, setRequestDetails] = useState([]);
+    const [productNames, setProductNames] = useState({});
+
+
+    // Close and Open modal display Request
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+
+
 
     const handleProductQuantityChange = (event, productId) => {
         const { name, value } = event.target;
@@ -62,6 +81,7 @@ function Project() {
 
         // Nếu có ít nhất một trường không được điền, không thêm đối tượng rỗng vào mảng requestDetails
         if (!workspaceName || !length || !width || !description) {
+            toast.error("Hãy điền đầy đủ dữ liệu vào các ô");
             return;
         }
 
@@ -87,10 +107,27 @@ function Project() {
         // Thêm chi tiết yêu cầu mới vào mảng requestDetails
         setRequestDetails([...requestDetails, newRequestDetail]);
 
+        // Thông báo thành công
+        toast.success("Đã lưu vào yêu cầu báo giá.");
+
         // Reset form
-        form.reset();
-        setSelectedProducts([]); // Xóa các sản phẩm đã chọn
+        resetFormAndQuantity();
     };
+
+    // Function to reset form and quantity of products
+    const resetFormAndQuantity = () => {
+        setFormResetFlag(true);
+        setSelectedProducts({});
+    };
+
+
+    // Đặt formResetFlag lại thành false sau khi form được render lại thành công
+    useEffect(() => {
+        if (formResetFlag) {
+            setFormResetFlag(false);
+        }
+        console.log("Request Detail sau khi bam luu", requestDetails);
+    }, [formResetFlag]);
 
     // get workspace
     useEffect(() => {
@@ -151,26 +188,60 @@ function Project() {
 
         // Gửi requestDetails lên server
         if (requestDetails.length == 0) {
-            console.log("Nothings to request");
-            toast.error("Nothings to request");
+            toast.error("Không thể gửi yêu cầu trống");
             return;
         }
 
-        console.log('Request Data Sent to server', requestData);
         console.log('Request Details sent successfully');
-        toast.success('Request Details sent successfully')
+        toast.success('Yêu cầu được gửi thành công, chúng tôi sẽ xử lý nhanh nhất có thể !')
         // Reset requestDetails sau khi gửi thành công
         setRequestDetails([]);
     };
 
+    // Simulated function to fetch product name based on product ID
+    const fetchProductName = async (productId) => {
+
+        const response = await fetch(`http://localhost:8080/product/${productId}`);
+        if (!response.ok) {
+            throw new Error('Failed to fetch product name');
+        }
+        const data = await response.json();
+        return data.name; // Assuming the response contains a 'name' property for the product
+    };
+
+    useEffect(() => {
+        const fetchProductNames = async () => {
+            const names = {};
+            for (const detail of requestDetails) {
+                for (const product of detail.products) {
+                    if (!productNames[product.productId]) {
+                        const name = await fetchProductName(product.productId);
+                        names[product.productId] = name;
+                    }
+                }
+            }
+            setProductNames(names);
+        };
+        fetchProductNames();
+    }, [requestDetails]);
+
+
 
     return (
 
-        <div className='flex flex-col gap-6 border-[2px]'>
+        <div className='flex flex-col gap-6 border-[2px] absolute'>
 
             {/* Show message when success or fail to send request */}
-            <ToastContainer position='top-center' />
+            <ToastContainer position='top-right' />
             {/* Show message when success or fail to send request */}
+
+            <div>
+                <div onClick={handleOpen} className='bg-cyan-600 px-4 py-4 w-52 rounded-full 
+                font-semibold cursor-pointer text-centerhover:bg-cyan-950 text-white mr-20 mt-5 
+                ml-auto transition-transform'>
+                    Yêu cầu đã tạo
+                </div>
+            </div>
 
             {/* Tag create request */}
             <div className="isolate bg-white py-24 sm:py-32 lg:px-96 px-12 mr-[10em]">
@@ -214,7 +285,8 @@ function Project() {
 
                     {/* Add workspace and Product */}
                     {/* //'onSubmit=' */}
-                    <form className="mt-16 max-w-xl sm:mt-20 flex flex-row gap-5" onSubmit={handleFormSubmit}>
+                    <form key={formResetFlag ? 'reset' : 'normal'} className="mt-16 max-w-xl sm:mt-20 
+                    flex flex-row gap-5" onSubmit={handleFormSubmit}>
                         {/* Details  */}
                         <div className="sm:col-span-2 bg-[#DFE9F4] px-60 flex flex-col gap-5">
 
@@ -305,25 +377,88 @@ function Project() {
                                     </div>
                                 ))}
                             </div>
+                            <div className='text-center'>
+                                <button type="submit" className="block w-[50%] mx-auto rounded-md bg-indigo-600 px-3.5 py-2.5 
+                                text-center text-2xl font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline 
+                                focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 bottom-0">
+                                    Lưu
+                                </button>
+                            </div>
                             {/* End Product form */}
                         </div>
-                        <button type="submit" className="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                            Lưu
-                        </button>
                     </form>
                     {/* <button type="submit" className='px-4 py-2 border-[2px] bg-cyan-700 hover:bg-cyan-900 text-white'>Add Product</button> */}
                     {/* End Add workspace and Product */}
                 </div>
 
+                <Modal
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                >
+                    <Box sx={style}>
+                        <Typography id="modal-modal-title" variant="h6" component="h2">
+                            <h1 className='text-4xl font-semibold text-cyan-800'>Yêu cầu báo giá</h1>
+                        </Typography>
+                        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                            {requestDetails.length > 0 ? (<TableContainer component={Paper}>
+                                <Table sx={{ minWidth: 800 }} aria-label="simple table">
+                                    <TableHead>
+                                        <TableRow>
+                                            <TableCell>Workspace</TableCell>
+                                            <TableCell align="right">Width</TableCell>
+                                            <TableCell align="right">Length</TableCell>
+                                            <TableCell align="right">Product</TableCell>
+                                            <TableCell align="right">Quantity</TableCell>
+                                            <TableCell align="right">Description</TableCell>
+                                        </TableRow>
+                                    </TableHead>
+                                    <TableBody>
+                                        {requestDetails.map((detail, index) => (
+                                            <TableRow key={index}>
+                                                <TableCell component="th" scope="row">{detail.workspaceName}</TableCell>
+                                                <TableCell align="right">{detail.width}</TableCell>
+                                                <TableCell align="right">{detail.length}</TableCell>
+                                                <TableCell align="right">
+                                                    <Table>
+                                                        <TableBody>
+                                                            {detail.products.map((product, idx) => (
+                                                                <TableRow key={idx}>
+                                                                    {/* Call fetchProductName to get the product name */}
+                                                                    <TableCell align='right'>{product.productId}</TableCell>
+                                                                </TableRow>
+                                                            ))}
+                                                        </TableBody>
+                                                    </Table>
+                                                </TableCell>
+                                                <TableCell align="right">
+                                                    <Table>
+                                                        <TableBody>
+                                                            {detail.products.map((product, idx) => (
+                                                                <TableRow key={idx}>
+                                                                    <TableCell align='right'>{product.quantity}</TableCell>
+                                                                </TableRow>
+                                                            ))}
+                                                        </TableBody>
+                                                    </Table>
+                                                </TableCell>
+                                                <TableCell align="right">
+                                                    {detail.description}
+                                                </TableCell>
+                                            </TableRow>
+                                        ))}
+                                    </TableBody>
+                                </Table>
+                            </TableContainer>) : <h1 className='text-2xl font-semibold text-red-700'>Bạn chưa tạo bất cứ yêu cầu nào !</h1>}
+                        </Typography>
+                    </Box>
+                </Modal>
                 <div className="mt-10">
-                    <button type="submit" className="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm 
-                        hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                        onClick={handleSubmitRequest}
-                    >
-                        Gửi Báo Giá
-                    </button>
+                    <Button variant="contained" size='large' onClick={handleSubmitRequest} endIcon={<SendIcon />}>
+                        <h1 className='text-xl font-semibold'>Gửi Báo Giá </h1>
+                    </Button>
                 </div>
-
             </div>
         </div>
 

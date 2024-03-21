@@ -59,7 +59,12 @@ function MainContent() {
                                     {request.id}
                                 </Typography>
                                 <Typography variant="body2" color="text.secondary">
-                                    <span className='text-black'>STATUS:</span> <span className={`${request.customerRequestStatus === 'QUOTATION_COMPLETED' ? 'text-lime-700' : 'text-yellow-600'} font-semibold text-xl`}>{request.customerRequestStatus}</span>
+                                    <span className='text-black'>STATUS:</span> <span className={`${request.customerRequestStatus === 'QUOTATION_COMPLETED'
+                                        ? 'text-lime-700'
+                                        : request.customerRequestStatus === 'CONSTRUCTION_REJECTED'
+                                            ? 'text-red-600'
+                                            : 'text-yellow-600'
+                                        } font-semibold text-xl`}>{request.customerRequestStatus}</span>
                                 </Typography>
                                 <Typography variant="h6" color="text.secondary">
                                     <span className='text-black'>PRICE:</span> <span>{request.price}</span> <span>VND   </span>

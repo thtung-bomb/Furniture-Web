@@ -86,6 +86,22 @@ export async function customerConfirmation(proposalId) {
 }
 
 
+export async function fetchProductName(productId) {
+    try {
+        // Gửi yêu cầu HTTP GET để lấy thông tin sản phẩm
+        const response = await axios.get(`http://localhost:8080/api/v1/product/${productId}`);
+
+        // Trích xuất tên sản phẩm từ phản hồi
+        const productName = response.data.name;
+
+        return productName;
+    } catch (error) {
+        console.error('Error fetching product name:', error);
+        // Trả về null hoặc một giá trị mặc định nếu có lỗi
+        return null;
+    }
+}
+
 // manager confirmation proposal
 export async function customerRejectProposal(proposalId) {
     try {
