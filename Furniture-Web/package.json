@@ -17,6 +17,7 @@
     "@mui/styled-engine-sc": "^6.0.0-alpha.17",
     "@mui/x-data-grid-generator": "^6.19.6",
     "@mui/x-data-grid-pro": "^6.19.6",
+    "antd": "^5.15.3",
     "axios": "^1.6.7",
     "chart.js": "^4.4.2",
     "cros": "^1.0.1",
@@ -38,7 +39,8 @@
     "recharts": "^2.12.2",
     "slick-carousel": "^1.8.1",
     "sort-by": "^1.2.0",
-    "styled-components": "^6.1.8"
+    "styled-components": "^6.1.8",
+    "toast": "^0.5.4"
   },
   "devDependencies": {
     "@types/react": "^18.2.56",

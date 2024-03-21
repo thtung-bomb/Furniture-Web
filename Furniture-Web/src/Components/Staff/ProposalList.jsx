@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
-import { Link } from 'react-router-dom';
 import './ProposalList.css';
 // import React, { useEffect, useState } from 'react';
 // import Cookies from 'js-cookie';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 // import './ProposalList.css';
 import TableContainer from '@mui/material/TableContainer';
 import Table from '@mui/material/Table';
@@ -87,7 +86,7 @@ export default function ProposalList() {
           ))}
         </TableBody>
       </Table>
-      <Button component={Link} to="/staff">Back to StaffPage</Button> 
+       
     </TableContainer>
  
   )
