@@ -5,7 +5,15 @@ import { customerConfirmation, customerRejectProposal } from './http.js';
 
 function RequestDetail({ request, closePopup }) {
 
+    const [showRequestDetails, setShowRequestDetails] = useState(true);
     const [open, setOpen] = useState(false);
+
+    useEffect(() => {
+        if (request?.proposal?.file_path) {
+            setShowRequestDetails(false);
+        }
+    }, [request?.proposal?.file_path]);
+
 
     const handleClose = () => {
         setOpen(false);
@@ -23,6 +31,7 @@ function RequestDetail({ request, closePopup }) {
 
     const requestDetail = request.requestDetails;
     const customer = request.customer;
+    console.log("customer: ", customer);
     console.log("Request Detail", requestDetail);
 
     useEffect(() => {
@@ -82,58 +91,33 @@ function RequestDetail({ request, closePopup }) {
 
     return (
         <div className="p-6">
-            <Card className="w-full mx-auto">
+            {/* Customer Information */}
+            <Typography variant="h2" className="text-center">Request Detail</Typography>
+            <Card className="w-full mx-auto" >
                 <CardContent>
-                    <Typography variant="h5" className="mb-4">Request Detail</Typography>
-                    <Typography variant="body2 h5" className="mb-2">Customer</Typography>
-                    <Typography variant="body2" className="mb-2">Email: {customer.email}</Typography>
-                    <Typography variant="body2" className="mb-2">Phone: {customer.phone}</Typography>
+                    <Typography variant="h4" className="mb-2 text-center">Thông tin khách hàng</Typography>
+                    <h1 variant="body2" className="mb-2"><span>Họ và tên:</span>
+                        <span className='font-semibold'>{customer.full_name}</span></h1>
+                    <h1 variant="body2" className="mb-2"><span>Email:</span>
+                        <span className='font-semibold'>{customer.email}</span></h1>
+                    <h1 variant="body2" className="mb-2"><span>Số Điện Thoại:</span>
+                        <span className='font-semibold'>{customer.phone}</span></h1>
+                    <h1 variant="body2" className="mb-2"><span>Địa chỉ:</span>
+                        <span className='font-semibold'>{customer.address}</span></h1>
                 </CardContent>
             </Card>
-            <Typography variant="h6" className="mt-6 mb-4">Request Details</Typography>
-            <TableContainer component={Card}>
-                <Table>
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>REQUEST ID</TableCell>
-                            <TableCell align="right">Workspace</TableCell>
-                            <TableCell align="right">Length</TableCell>
-                            <TableCell align="right">Width</TableCell>
-                            <TableCell align="right">Description</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {requestDetail.map((requested) => (
-                            <TableRow key={requested.id}>
-                                <TableCell>{requested.id}</TableCell>
-                                <TableCell align="right">{requested.workspaceName}</TableCell>
-                                <TableCell align="right">{requested.length}</TableCell>
-                                <TableCell align="right">{requested.width}</TableCell>
-                                <TableCell align="right">{requested.description}</TableCell>
-                                {/* Hiển thị danh sách các sản phẩm */}
-                                <ul className='flex flex-col'>
-                                    {requested.products.map((product, index) => (
-                                        <li key={index}>
-                                            Product: {product.productId},
-                                            Quantity: {product.quantity}
-                                        </li>
-                                    ))}
-                                </ul>
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
+            {/* End Customer Information */}
 
+            {/* Start Proposal file PDF */}
             {request.employeeRequestStatus === "MANAGER_APPROVED" && (
                 <div>
+                    <h1 className='text-center text-4xl font-semibold m-9'>Hợp Đồng</h1>
                     <iframe src={request.proposal.file_path} width={700} height={300} />
-                    <Typography variant="h6" className="mt-6 mb-4 text-2xl font-semibold uppercase">Giá:</Typography>
-                    <Typography variant="h3" className="text-black font-semibold">{request.price}</Typography>
-                    <div className='flex gap-6 items-center justify-center'>
-                        <button className='bg-cyan-600 text-white rounded-xl px-4 py-3 font-semibold' onClick={handleOpen}>Chấp Nhận</button>
-                        <button className='bg-cyan-600 text-white rounded-xl px-4 py-3 font-semibold' onClick={handleReject}>Từ Chối</button>
+                    <div className='mt-10'>
+                        <Typography variant="h4" className="mb-4 flex gap-3 text-4xl font-semibold uppercase">Giá: <h1>{request.price}</h1></Typography>
                     </div>
+
+                    {/* Popup xác nhận có chắc chắn không */}
                     <Dialog
                         open={open}
                         onClose={handleClose}
@@ -153,8 +137,68 @@ function RequestDetail({ request, closePopup }) {
                             <Button onClick={handleClose} autoFocus>Hủy</Button>
                         </DialogActions>
                     </Dialog>
+                    {/* Popup xác nhận có chắc chắn không */}
                 </div>
             )}
+            {/* End Proposal file PDF */}
+
+            {/* Request detail table of all infomation about request: Workspace, length, width, product, description*/}
+            {showRequestDetails && (
+                <div className='mt-10'>
+                    <Typography variant="h4" className="mt-10 mb-10 text-center">Chi Tiết</Typography>
+                    <TableContainer component={Card}>
+                        <Table>
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell>REQUEST ID</TableCell>
+                                    <TableCell align="right">Workspace</TableCell>
+                                    <TableCell align="right">Length</TableCell>
+                                    <TableCell align="right">Width</TableCell>
+                                    <TableCell align="justify">Product</TableCell>
+                                    <TableCell align="right">Description</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {requestDetail.map((requested) => (
+                                    <TableRow key={requested.id}>
+                                        <TableCell>{requested.id}</TableCell>
+                                        <TableCell align="right">{requested.workspaceName}</TableCell>
+                                        <TableCell align="right">{requested.length}</TableCell>
+                                        <TableCell align="right">{requested.width}</TableCell>
+                                        <Table>
+                                            <TableCell>
+                                                <Table>
+                                                    <TableBody>
+                                                        {requested.products.map((product, index) => (
+                                                            <TableRow key={index}>
+                                                                <TableCell>{product.productId}</TableCell>
+                                                                <TableCell>{product.quantity}</TableCell>
+                                                            </TableRow>
+                                                        ))}
+                                                    </TableBody>
+                                                </Table>
+                                            </TableCell>
+                                        </Table>
+                                        <TableCell align="right">{requested.description}</TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                    {/* Request detail table of all infomation about request: Workspace, length, width, product, description*/}
+                </div>
+            )}
+
+            {/* Xác nhận từ chối hay đồng ý cái hợp đồng này */}
+            {request.employeeRequestStatus === "MANAGER_APPROVED" && (
+                <div className='flex gap-6 items-center justify-center mt-9'>
+                    <button className='bg-cyan-600 text-white rounded-xl px-4 py-3 font-semibold'
+                        onClick={handleOpen}>Chấp Nhận</button>
+                    <button className='bg-cyan-600 text-white rounded-xl px-4 py-3 font-semibold'
+                        onClick={handleReject}>Từ Chối</button>
+                </div>
+            )}
+
         </div>
     );
 }

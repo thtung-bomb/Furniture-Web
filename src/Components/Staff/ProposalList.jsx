@@ -70,24 +70,24 @@ export default function ProposalList() {
               <TableCell align="right">{row.price}</TableCell>
               <TableCell align="right">{row.customer?.full_name}</TableCell>
               <TableCell align="right">{row.customerRequestStatus}</TableCell>
-
+              
               <TableCell align="right">
                 <button>
                   <Link to={`/staff/proposalDetails/${row.id}`}>View</Link>
-                </button>
+              </button>
               </TableCell>
               <TableCell align="right">
                 <button>
                   <Link to={`/staff/proposalPdf/${row.id}`}>Upload Proposal</Link>
-                </button>
+              </button>
               </TableCell>
-
+              
             </TableRow>
           ))}
         </TableBody>
       </Table>
-
+       
     </TableContainer>
-
+ 
   )
 }

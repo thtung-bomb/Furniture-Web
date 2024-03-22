@@ -102,12 +102,12 @@ const MainStaffPage = () => {
                             )}
                         </div>
                     ) : currentPage === 'RequestList' ? (
-                        <RequestList /> // Pass function to change page to RequestDetails
+                        <RequestList  /> // Pass function to change page to RequestDetails
                     ) : currentPage === 'ProposalList' ? (
                         <ProposalList />
                     ) : currentPage === 'ApprovalQuotationList' ? (
                         <ApprovalList />
-                    ) : (
+                    ): (
                         <div>Content of Proposal List or other pages...</div>
                     )}
                 </Content>

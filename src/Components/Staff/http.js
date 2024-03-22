@@ -38,3 +38,8 @@ export async function fetchAvailableProducts(workspaceName) {
     }
 }
 
+
+/**
+ * get request by customer
+ * customerToken is stored in cookie
+ */

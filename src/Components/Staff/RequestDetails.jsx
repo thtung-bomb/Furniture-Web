@@ -8,15 +8,12 @@ import { ToastContainer, toast } from 'react-toastify';
 import { Autocomplete, Button, Checkbox, FormControlLabel } from '@mui/material';
 import { CheckBox } from '@mui/icons-material';
 import { useParams } from 'react-router-dom';
-
-
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 function RequestDetails() {
     const { id } = useParams();
-    const [data,setData] = useState([]);
+    const [data, setData] = useState([]);
     const [customerData, setCustomerData] = useState([]);
-    
 
     const [availableWorkspace, setAvailableWorkspace] = useState([]);
     const [availableProducts, setAvailableProducts] = useState([]);
@@ -24,9 +21,9 @@ function RequestDetails() {
     const customer = localStorage.getItem('customer');
     const token = Cookies.get('token');
     const userData = JSON.parse(customer);
-    const [selectedProducts, setSelectedProducts] = useState([]); // State lưu các sản phẩm được chọn
-
+    const [selectedProducts, setSelectedProducts] = useState([]);
     const [requestDetails, setRequestDetails] = useState([]);
+
 
     const fetchRequestDetails = async (id) => {
         try {
@@ -75,6 +72,7 @@ function RequestDetails() {
                 setRequestDetails(updatedRequestDetails);
             } else {
                 console.log('No request details found');
+                toast.error('No request details found');
             }
         } catch (error) {
             console.error('Error fetching request details:', error);
@@ -298,76 +296,76 @@ function RequestDetails() {
                     <div className='CusInfo'>
 
 
-                    <label htmlFor="id" className="block text-2xl font-semibold leading-6 text-gray-900 mt-5">Mã báo giá:</label>
-                    <div className="mt-2.5 justify-center">
-                        <input defaultValue={ data ? data.id : ''} type="text" name="id"
-                            className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 
+                        <label htmlFor="id" className="block text-2xl font-semibold leading-6 text-gray-900 mt-5">Mã báo giá:</label>
+                        <div className="mt-2.5 justify-center">
+                            <input defaultValue={data ? data.id : ''} type="text" name="id"
+                                className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 
                                 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" readOnly />
-                    </div>
-                    <label htmlFor="phone" className="block text-2xl font-semibold leading-6 text-gray-900 mt-5">
-                        Giá dự kiến: (vnd)
-                    </label>
-                    <div className="mt-2.5">
-                        <input type="text" defaultValue={data ? data.price : ''} name="price" id="price" autoComplete="0"
-                            className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 
+                        </div>
+                        <label htmlFor="phone" className="block text-2xl font-semibold leading-6 text-gray-900 mt-5">
+                            Giá dự kiến: (vnd)
+                        </label>
+                        <div className="mt-2.5">
+                            <input type="text" defaultValue={data ? data.price : ''} name="price" id="price" autoComplete="0"
+                                className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 
                                 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset 
                                 focus:ring-indigo-600 sm:text-sm sm:leading-6" />
 
-                    </div>
-                    <label htmlFor="email" className="block text-2xl font-semibold leading-6 text-gray-900 mt-5">Email</label>
-                    <div className="mt-2.5 justify-center">
-                        <input defaultValue={customerData ? customerData.email : ''} type="text" name="email" id="last-name" autoComplete="family-name"
-                            className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 
+                        </div>
+                        <label htmlFor="email" className="block text-2xl font-semibold leading-6 text-gray-900 mt-5">Email</label>
+                        <div className="mt-2.5 justify-center">
+                            <input defaultValue={customerData ? customerData.email : ''} type="text" name="email" id="last-name" autoComplete="family-name"
+                                className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 
                                 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
-                    </div>
+                        </div>
 
- 
 
-                    <label htmlFor="fullName" className="block text-2xl font-semibold leading-6 text-gray-900 mt-6">
-                        Họ và Tên
-                    </label>
-                    <div className="mt-2.5">
-                        <input type="text" name="fullName" id="first-name" autoComplete="given-name"
-                            defaultValue={customerData ? customerData.full_name : ''}
-                            className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset 
+
+                        <label htmlFor="fullName" className="block text-2xl font-semibold leading-6 text-gray-900 mt-6">
+                            Họ và Tên
+                        </label>
+                        <div className="mt-2.5">
+                            <input type="text" name="fullName" id="first-name" autoComplete="given-name"
+                                defaultValue={customerData ? customerData.full_name : ''}
+                                className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset 
                                     ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 
                                     sm:text-sm sm:leading-6" />
-                    </div>
+                        </div>
 
 
 
-                    <label htmlFor="phone" className="block text-2xl font-semibold leading-6 text-gray-900 mt-5">
-                        Số điện thoại
-                    </label>
-                    <div className="mt-2.5">
-                        <input type="text" defaultValue={customerData ? customerData.phone : ''} name="phone" id="phone" autoComplete="organization"
-                            className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 
+                        <label htmlFor="phone" className="block text-2xl font-semibold leading-6 text-gray-900 mt-5">
+                            Số điện thoại
+                        </label>
+                        <div className="mt-2.5">
+                            <input type="text" defaultValue={customerData ? customerData.phone : ''} name="phone" id="phone" autoComplete="organization"
+                                className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 
                                 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset 
                                 focus:ring-indigo-600 sm:text-sm sm:leading-6" />
 
-                    </div>
-                    <label htmlFor="ID_Card" className="block text-2xl font-semibold leading-6 text-gray-900 mt-5">
-                        Mã Căn cước công dân
-                    </label>
-                    <div className="mt-2.5">
-                        <input type="text" defaultValue={customerData ? customerData.id_card : ''} name="idCard"
-                            className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 
+                        </div>
+                        <label htmlFor="ID_Card" className="block text-2xl font-semibold leading-6 text-gray-900 mt-5">
+                            Mã Căn cước công dân
+                        </label>
+                        <div className="mt-2.5">
+                            <input type="text" defaultValue={customerData ? customerData.id_card : ''} name="idCard"
+                                className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 
                                 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset 
                                 focus:ring-indigo-600 sm:text-sm sm:leading-6" />
 
-                    </div>
-                    <label htmlFor="fullName" className="block text-2xl font-semibold leading-6 text-gray-900 mt-6">
-                        Địa chỉ
-                    </label>
-                    <div className="mt-2.5">
-                        <input type="text" name="address"
-                            defaultValue={customerData ? customerData.address : ''}
-                            className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset 
+                        </div>
+                        <label htmlFor="fullName" className="block text-2xl font-semibold leading-6 text-gray-900 mt-6">
+                            Địa chỉ
+                        </label>
+                        <div className="mt-2.5">
+                            <input type="text" name="address"
+                                defaultValue={customerData ? customerData.address : ''}
+                                className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset 
                                     ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 
                                     sm:text-sm sm:leading-6" />
-                    </div>
+                        </div>
 
-                </div>
+                    </div>
                     {/* End Customer Info */}
 
                     {/* Add workspace and Product */}
@@ -446,7 +444,7 @@ function RequestDetails() {
                                 {availableProducts.map(product => (
                                     <div key={product.id} className="flex gap-20 items-center">
                                         <FormControlLabel
-                                            control={<Checkbox checked={selectedProducts[product.id]?.quantity > 0}/>}
+                                            control={<Checkbox checked={selectedProducts[product.id]?.quantity > 0} />}
                                             sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }}
                                             onChange={(event) => handleProductSelect(event, product.id)}
                                         />

@@ -17,7 +17,7 @@ export default function RequestList() {
   const [selectedRowData, setSelectedRowData] = useState(null);
   const [token, setToken] = useState('');
   const [workspaceOptions, setWorkspaceOptions] = useState([]);
-  
+
 
   useEffect(() => {
     const token = Cookies.get('token');
@@ -108,45 +108,45 @@ export default function RequestList() {
     }
   };
 
- 
+
 
   return (
     <TableContainer component={Paper}>
-       
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell>ID</TableCell>
-              <TableCell align="right">Estimated Price</TableCell>
-              <TableCell align="right">Customer Name</TableCell>
-              <TableCell align="right">Request St</TableCell>
-              <TableCell align="right">View Details</TableCell>
 
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.map((row) => (
-              <TableRow
-                key={row.id}
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                onClick={() => handleClick(row.id)}
-              >
-                <TableCell component="th" scope="row">
-                  {row.id}
-                </TableCell>
-                <TableCell align="right">{row.price}</TableCell>
-                <TableCell align="right">{row.customer.full_name}</TableCell>
-                <TableCell align="right">{row.customerRequestStatus}</TableCell>
-                <TableCell align="right">
+      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell>ID</TableCell>
+            <TableCell align="right">Estimated Price</TableCell>
+            <TableCell align="right">Customer Name</TableCell>
+            <TableCell align="right">Request St</TableCell>
+            <TableCell align="right">View Details</TableCell>
+
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {rows.map((row) => (
+            <TableRow
+              key={row.id}
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              onClick={() => handleClick(row.id)}
+            >
+              <TableCell component="th" scope="row">
+                {row.id}
+              </TableCell>
+              <TableCell align="right">{row.price}</TableCell>
+              <TableCell align="right">{row.customer.full_name}</TableCell>
+              <TableCell align="right">{row.customerRequestStatus}</TableCell>
+              <TableCell align="right">
                 <button>
                   <Link to={`/staff/requestDetails/${row.id}`}>View</Link>
                 </button>
               </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+
     </TableContainer>
   );
 }
