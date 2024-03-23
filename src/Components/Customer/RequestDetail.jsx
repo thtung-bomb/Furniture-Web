@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Card, CardContent, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Button } from '@mui/material';
 import { getProductDetail } from '../../util/managerHandle';
 import { customerConfirmation, customerRejectProposal } from './http.js';
+import { formatNumber } from '../../util/helper.js';
 
 function RequestDetail({ request, closePopup }) {
 
@@ -114,7 +115,10 @@ function RequestDetail({ request, closePopup }) {
                     <h1 className='text-center text-4xl font-semibold m-9'>Hợp Đồng</h1>
                     <iframe src={request.proposal.file_path} width={700} height={300} />
                     <div className='mt-10'>
-                        <Typography variant="h4" className="mb-4 flex gap-3 text-4xl font-semibold uppercase">Giá: <h1>{request.price}</h1></Typography>
+                        <Typography variant="h4" className="mb-4 flex gap-3 text-4xl 
+                        font-semibold uppercase">Giá: <h1 className='text-indigo-950'>
+                                {formatNumber(request.price)}</h1> VND
+                        </Typography>
                     </div>
 
                     {/* Popup xác nhận có chắc chắn không */}

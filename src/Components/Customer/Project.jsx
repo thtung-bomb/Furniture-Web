@@ -454,7 +454,7 @@ function Project() {
                         </Typography>
                     </Box>
                 </Modal>
-                <div className="mt-10">
+                <div>
                     <Button variant="contained" size='large' onClick={handleSubmitRequest} endIcon={<SendIcon />}>
                         <h1 className='text-xl font-semibold'>Gửi Báo Giá </h1>
                     </Button>

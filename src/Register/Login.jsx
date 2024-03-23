@@ -98,8 +98,8 @@ function Login() {
     };
 
     return (
-        <div className='h-[40em] flex items-center justify-center formLogin'>
-            <form onSubmit={handleLogin}>
+        <div className='h-[40em] flex items-center justify-center w-screen bg-[url("../../src/assets/image/main_home.jpg")]' >
+            <form onSubmit={handleLogin} >
                 <div className='bg-[#054c73] rounded-md shadow-md w-80 p-16'>
                     <h2 className='text-white text-6xl font-bold mb-6 text-center'>Login</h2>
                     <div className='mb-4'>
