@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { getRequestByCustomer } from './http';
 import Cookies from 'js-cookie';
 import RequestDetail from './RequestDetail';
+import { formatNumber } from '../../util/helper.js';
+import { useRef } from 'react';
 
 function MainContent() {
 
@@ -12,6 +14,8 @@ function MainContent() {
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const token = Cookies.get('token');
+    const popupRef = useRef();
+
 
     useEffect(() => {
         const fetchRequests = async () => {
@@ -39,6 +43,25 @@ function MainContent() {
     const handlePageChange = (event, page) => {
         setCurrentPage(page);
     };
+
+    const handleClickOutside = (event) => {
+        if (popupRef.current && !popupRef.current.contains(event.target)) {
+            handleClosePopup();
+        }
+    };
+
+    useEffect(() => {
+        if (isPopupOpen) {
+            document.addEventListener('mousedown', handleClickOutside);
+        } else {
+            document.removeEventListener('mousedown', handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [isPopupOpen]);
+
 
     return (
         <div className='flex flex-col gap-5 border-[2px] ml-96 mb-6'>
@@ -75,7 +98,9 @@ function MainContent() {
                                     </span>
                                 </Typography>
                                 <Typography variant="h6" color="text.secondary">
-                                    <span className='text-black text-2xl'>Giá:</span> <span>{request.price}</span> <span>VND   </span>
+                                    <span className='text-black text-2xl'>
+                                        Giá:</span> <span>{formatNumber(request.price)}</span>
+                                    <span>VND</span>
                                 </Typography>
                             </CardContent>
                         </Card>
@@ -87,8 +112,9 @@ function MainContent() {
 
             {/* Display Request detail */}
             {selectedRequest && isPopupOpen && (
-                <div className="fixed top-0 left-0 w-screen h-screen bg-gray-900 bg-opacity-50 flex items-center justify-center z-50 overflow-scroll">
-                    <div className="bg-slate-100 p-10 rounded-2xl w-1/2 relative mt-12 z-50">
+                <div ref={popupRef} className="fixed top-0 left-0 w-screen h-screen bg-gray-900 bg-opacity-50 flex 
+                items-center justify-center z-50 overflow-scroll">
+                    <div className="bg-slate-100 p-10 rounded-2xl w-1/2 relative mt-auto z-50">
                         <button onClick={handleClosePopup} className='px-4 py-3 text-zinc-400 hover:text-zinc-800 
                         m-2 rounded-full font-bold absolute top-0 left-0 text-2xl'>
                             &#10005;

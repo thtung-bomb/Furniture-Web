@@ -18,3 +18,4 @@ export function hasMaxLength(value, maxLength) {
 export function isEqualsToOtherValue(value, otherValue) {
     return value === otherValue;
 }
+
