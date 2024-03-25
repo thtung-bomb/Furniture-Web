@@ -3,8 +3,9 @@ import { Card, CardContent, Typography, Table, TableBody, TableCell, TableContai
 import { getProductDetail } from '../../util/managerHandle';
 import { customerConfirmation, customerRejectProposal } from './http.js';
 import { formatNumber } from '../../util/helper.js';
+import { ToastContainer, toast } from 'react-toastify';
 
-function RequestDetail({ request, closePopup }) {
+function RequestDetail({ request }) {
 
     const [showRequestDetails, setShowRequestDetails] = useState(true);
     const [open, setOpen] = useState(false);
@@ -14,7 +15,6 @@ function RequestDetail({ request, closePopup }) {
             setShowRequestDetails(false);
         }
     }, [request?.proposal?.file_path]);
-
 
     const handleClose = () => {
         setOpen(false);
@@ -54,24 +54,18 @@ function RequestDetail({ request, closePopup }) {
         fetchProductDetails();
     }, [requestDetail]);
 
-    const getProductName = (productId) => {
-        // Get product name from productDetails
-        const product = productDetails[productId];
-        return product ? product.name : 'Loading...';
-    };
-
-    const getProductPrice = (productId) => {
-        // Get product price from productDetails
-        const product = productDetails[productId];
-        return product ? product.price : 'Loading...';
-    };
-
     const handleConfirm = async (proposalId) => {
         try {
-            await customerConfirmation(proposalId);
-            handleClose();
-            // Nếu không có lỗi, đóng dialog và thực hiện các hành động khác nếu cần
-            // Thực hiện các hành động khác sau khi xác nhận thành công
+            if (proposalId) {
+                console.log('proposalID: ', proposalId);
+                await customerConfirmation(proposalId);
+                toast.success('Bạn đã chấp nhận hợp đồng, công trình sẽ sớm thực hiện !');
+                handleClose();
+                // Nếu không có lỗi, đóng dialog và thực hiện các hành động khác nếu cần
+                // Thực hiện các hành động khác sau khi xác nhận thành công
+            } else {
+                console.error('Proposal ID không hợp lệ.');
+            }
         } catch (error) {
             console.error('Error confirming proposal:', error);
             // Xử lý lỗi nếu cần
@@ -92,6 +86,7 @@ function RequestDetail({ request, closePopup }) {
 
     return (
         <div className="p-6">
+            <ToastContainer />
             {/* Customer Information */}
             <Typography variant="h2" className="text-center">Request Detail</Typography>
             <Card className="w-full mx-auto" >
@@ -137,7 +132,7 @@ function RequestDetail({ request, closePopup }) {
                             </DialogContentText>
                         </DialogContent>
                         <DialogActions>
-                            <Button onClick={handleConfirm}>Đồng ý</Button>
+                            <Button onClick={() => handleConfirm(request.proposal.id)}>Đồng ý</Button>
                             <Button onClick={handleClose} autoFocus>Hủy</Button>
                         </DialogActions>
                     </Dialog>
@@ -202,7 +197,6 @@ function RequestDetail({ request, closePopup }) {
                         onClick={handleReject}>Từ Chối</button>
                 </div>
             )}
-
         </div>
     );
 }

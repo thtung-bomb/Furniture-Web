@@ -6,6 +6,7 @@ import { Layout, Menu, Button, theme } from 'antd';
 import RequestList from './RequestList'; // Import component RequestList
 import ProposalList from './ProposalList';
 import ApprovalList from './ApprovalList';
+import RequestDetail from '../Manager/Manager/RequestDetail';
 
 const { Header, Sider, Content } = Layout;
 
@@ -19,7 +20,13 @@ const MainStaffPage = () => {
         token: { colorBgContainer, borderRadiusLG },
     } = theme.useToken();
 
+
     useEffect(() => {
+        
+    }, [RequestDetail])
+
+    useEffect(() => {
+
         // Fetch API và lưu thông tin người dùng vào state khi component mount
         const fetchUserProfile = async () => {
             try {
@@ -102,12 +109,12 @@ const MainStaffPage = () => {
                             )}
                         </div>
                     ) : currentPage === 'RequestList' ? (
-                        <RequestList  /> // Pass function to change page to RequestDetails
+                        <RequestList /> // Pass function to change page to RequestDetails
                     ) : currentPage === 'ProposalList' ? (
                         <ProposalList />
                     ) : currentPage === 'ApprovalQuotationList' ? (
                         <ApprovalList />
-                    ): (
+                    ) : (
                         <div>Content of Proposal List or other pages...</div>
                     )}
                 </Content>

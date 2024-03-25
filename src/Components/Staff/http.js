@@ -37,9 +37,3 @@ export async function fetchAvailableProducts(workspaceName) {
         throw error;
     }
 }
-
-
-/**
- * get request by customer
- * customerToken is stored in cookie
- */

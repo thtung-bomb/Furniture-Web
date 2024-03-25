@@ -8,6 +8,7 @@ import ProposalList from "./ProposalList";
 import ProposalDetails from "./ProposalDetails";
 import ProposalPdf from "./ProposalPdf";
 import MainStaffPage from "./MainStaffPage";
+import ManageRequestDetail from "./ManageRequestDetail";
 
 function Staff() {
     return (
@@ -15,7 +16,7 @@ function Staff() {
 
             <Routes>
                 <Route path="/" element={<MainStaffPage />} />
-                <Route path="requestDetails/:id" element={<RequestDetails />} />
+                <Route path="requestDetails/:id" element={<ManageRequestDetail />} />
                 <Route path="requestList" element={<RequestList />} />
                 <Route path="proposalList" element={<ProposalList />} />
                 <Route path="proposalDetails/:id" element={<ProposalDetails />} />
