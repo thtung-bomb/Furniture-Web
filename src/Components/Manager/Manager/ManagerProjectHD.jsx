@@ -21,7 +21,7 @@ function ManagerProjectHD() {
         const fetchData = async () => {
             try {
                 //PROPOSAL_AWAITING_APPROVAL
-                const response = await getRequestOfCustomer(currentPage, 4, 'PROPOSAL_AWAITING_APPROVAL');
+                const response = await getRequestOfCustomer(currentPage, 9, 'PROPOSAL_AWAITING_APPROVAL');
                 setProjects(response); // Lưu kết quả từ API vào state
                 console.log(response);
             } catch (error) {
@@ -54,6 +54,7 @@ function ManagerProjectHD() {
 
     return (
         <div className='flex flex-col w-5/6'>
+            {/* Manager View */}
             <TableContainer component={Paper}>
                 <Table aria-label="collapsible table">
                     <TableHead>
@@ -82,6 +83,7 @@ function ManagerProjectHD() {
                     </TableBody>
                 </Table>
             </TableContainer>
+            {/* End Manager View */}
             <Pagination count={10} onChange={handlePageChange} color='secondary' />
             {selectedProject && (
 

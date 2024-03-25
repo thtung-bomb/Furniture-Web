@@ -20,30 +20,6 @@ function RequestDetail({ project, close }) {
 
     console.log(requestDetail);
 
-    useEffect(() => {
-        const fetchProductDetails = async () => {
-            const details = {};
-            for (const requested of requestDetail) {
-                try {
-                    const productDetail = await getProductDetail(requested.product);
-                    details[requested.product] = productDetail;
-                } catch (error) {
-                    console.error(`Error fetching product details for product ID ${requested.product}:`, error);
-                    // Handle the error as needed
-                    details[requested.product] = { name: 'Error', price: 'Error' };
-                }
-            }
-            setProductDetails(details);
-        };
-
-        fetchProductDetails();
-    }, [requestDetail]);
-
-    const getProductName = (productId) => {
-        // Get product name from productDetails
-        const product = productDetails[productId];
-        return product ? product.name : 'Loading...';
-    };
 
 
     const handleConfirm = async (proposalId) => {
@@ -74,10 +50,10 @@ function RequestDetail({ project, close }) {
 
     return (
 
-        <Popper open={true} transition>
+        <Popper open={true} transition className='fixed overflow-y-scroll'>
             {({ TransitionProps }) => (
                 <Fade {...TransitionProps} timeout={350}>
-                    <Box className='my-10 border-[2px] w-[100%] h-[30%] bg-white rounded-lg shadow-lg z-50 overflow-y-scroll'>
+                    <Box className='border-[2px] w-screen h-screen bg-white rounded-lg shadow-lg z-50'>
                         <button onClick={close} className='absolute text-6xl ml-72 top-1 right-4 px-5 py-3 text-cyan-800 font-semibold hover:text-sky-600'>&times;</button>
                         <div className='flex flex-col w-2/3 justify-center p-8'>
                             <h1 className='font-bold text-4xl text-cyan-800'>Customer Information</h1>
@@ -102,22 +78,39 @@ function RequestDetail({ project, close }) {
                                     {project.employeeRequestStatus === 'PROPOSAL_AWAITING_APPROVAL' ? 'WAITING APPROVAL' : ''}
                                 </span>
                             </h1>
+
                             <ToastContainer closeButton />
+
                             <Table aria-label="collapsible table" className='mt-4'>
                                 <TableHead>
                                     <TableRow>
-                                        <TableCell>Product ID</TableCell>
-                                        <TableCell>Quantity</TableCell>
                                         <TableCell>Workspace</TableCell>
+                                        <TableCell align='center'>Products</TableCell>
                                         <TableCell>Description</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
                                     {requestDetail.map((item) => (
                                         <TableRow key={item.id}>
-                                            <TableCell>{getProductName(item.product)}</TableCell>
-                                            <TableCell>{item.quantity}</TableCell>
                                             <TableCell>{item.workspaceName}</TableCell>
+                                            <TableCell>
+                                                <Table>
+                                                    <TableHead>
+                                                        <TableRow>
+                                                            <TableCell align='center'>Product Name</TableCell>
+                                                            <TableCell align='center'>Quantity</TableCell>
+                                                        </TableRow>
+                                                    </TableHead>
+                                                    <TableBody>
+                                                        {item.products.map((product) => (
+                                                            <TableRow key={item.workspace}>
+                                                                <TableCell align='center'>{product.productId}</TableCell>
+                                                                <TableCell align='center'>{product.quantity}</TableCell>
+                                                            </TableRow>
+                                                        ))}
+                                                    </TableBody>
+                                                </Table>
+                                            </TableCell>
                                             <TableCell>{item.description}</TableCell>
                                         </TableRow>
                                     ))}
@@ -125,24 +118,31 @@ function RequestDetail({ project, close }) {
                             </Table>
                         </div>
 
-                        <div className='mt-8 mx-8'>
+                        <div className='mx-8'>
                             <h1 className='text-2xl text-cyan-800 font-bold'>Proposal</h1>
-                            <p className='text-2xl text-cyan-800'><span className='font-semibold'>Code: </span>{proposal.id}</p>
-                            <p><span className='text-cyan-800'><span className='font-bold'>Status:</span> </span> <span className='text-xl text-yellow-700'>
-                                {proposal.employeeStatus}
-                            </span></p>
+                            <p className='text-2xl text-cyan-800'>
+                                <span className='font-semibold'>Code: </span>{proposal.id}</p>
+                            <p><span className='text-cyan-800'>
+                                <span className='font-bold'>Status:</span> </span> <span className='text-xl text-yellow-700'>
+                                    {proposal.employeeStatus}
+                                </span></p>
+
                             <iframe
                                 src={proposal.file_path}
                                 title="Proposal File"
-                                width="50%"
-                                height="100px"
+                                width="100%"
+                                height="500px"
+                                className='mx-auto'
                             />
+
                             <h1 className='font-bold text-6xl text-cyan-800'><span>Total: </span> {project.price}</h1>
                             <div className='text-center mb-8'>
-                                <button onClick={() => handleConfirm(proposal.id)} className='w-1/3 px-5 py-3 bg-cyan-700 text-white font-semibold text-2xl hover:bg-cyan-800 rounded-full'>
+                                <button onClick={() => handleConfirm(proposal.id)} className='w-1/3 px-5 py-3 bg-cyan-700 
+                                text-white font-semibold text-2xl hover:bg-cyan-800 rounded-full'>
                                     <span>Confirm Proposal</span>
                                 </button>
-                                <button onClick={() => handleReject(proposal.id)} className='w-1/3 px-5 py-3 bg-cyan-700 text-white font-semibold text-2xl hover:bg-cyan-800 rounded-full'>
+                                <button onClick={() => handleReject(proposal.id)} className='w-1/3 px-5 py-3 bg-cyan-700 
+                                text-white font-semibold text-2xl hover:bg-cyan-800 rounded-full'>
                                     <span>Reject Request</span>
                                 </button>
                             </div>
