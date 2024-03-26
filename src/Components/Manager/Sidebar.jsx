@@ -9,6 +9,8 @@ import {
 } from '@ant-design/icons';
 import ManagerProjectHD from './Manager/ManagerProjectHD';
 const { Header, Content, Sider } = Layout;
+import ManagerHome from '../Manager/ManagerHome.jsx';
+import ManagerContent from './ManagerContent';
 
 function Sidebar() {
 
@@ -52,7 +54,7 @@ function Sidebar() {
                         <span>Request List</span>
                     </Menu.Item>
                     <Menu.Item key="ProposalList" icon={<VideoCameraOutlined />}>
-                        <span>Proposal List</span>
+                        <span>Manager Dashboard</span>
                     </Menu.Item>
                     <Menu.Item key="ApprovalQuotationList" icon={<UploadOutlined />}>
                         <span>Approval Quotation List</span>
@@ -92,7 +94,7 @@ function Sidebar() {
                     ) : currentPage === 'RequestList' ? (
                         <ManagerProjectHD />
                     ) : currentPage === 'ProposalList' ? (
-                        <ProposalList />
+                        <ManagerContent />
                     ) : currentPage === 'ApprovalQuotationList' ? (
                         <ApprovalList />
                     ) : (
