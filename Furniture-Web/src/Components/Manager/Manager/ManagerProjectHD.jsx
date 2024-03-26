@@ -53,9 +53,9 @@ function ManagerProjectHD() {
     };
 
     return (
-        <div className='flex flex-col w-5/6'>
+        <div className='flex flex-col' style={{height: "100%", justifyContent:"space-between", alignItems:"center"}}>
             <TableContainer component={Paper}>
-                <Table aria-label="collapsible table">
+                <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
                         <TableRow>
                             <TableCell style={{ fontSize: '16px', fontWeight: 'bold', color: '#000080' }}>Project ID</TableCell>
@@ -82,7 +82,7 @@ function ManagerProjectHD() {
                     </TableBody>
                 </Table>
             </TableContainer>
-            <Pagination count={10} onChange={handlePageChange} color='secondary' />
+            <Pagination count={10}  onChange={handlePageChange} color='secondary' />
             {selectedProject && (
 
                 <RequestDetail project={selectedProject} close={() => handleClose(selectedProject.id)} />
