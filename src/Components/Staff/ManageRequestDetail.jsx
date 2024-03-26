@@ -3,6 +3,11 @@ import { useParams } from "react-router-dom";
 import ProductTable from "./ProductTable";
 import Cookies from "js-cookie";
 import Select from "react-select";
+import { toast } from "react-hot-toast";
+import { ToastContainer } from "react-toastify";
+import { HiArrowSmallLeft } from "react-icons/hi2";
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
+
 
 const ManageRequestDetail = () => {
     const [workspaces, setWorkspaces] = useState([]);
@@ -11,6 +16,10 @@ const ManageRequestDetail = () => {
     const [selectedWorkspaces, setSelectedWorkspaces] = useState({});
     const [selectedWorkspace, setSelectedWorkspace] = useState(null);
     const { id } = useParams();
+    const [isValidLength, setIsValidLength] = useState(true);
+    const [isValidWidth, setIsValidWidth] = useState(true);
+    const [isConfirmed, setIsConfirmed] = useState(false); // State để theo dõi trạng thái xác nhận
+    const navigate = useNavigate(); // Sử dụng useNavigate để lấy hàm điều hướng
 
     useEffect(() => {
         fetchWorkspaces();
@@ -117,6 +126,11 @@ const ManageRequestDetail = () => {
         const updatedRequestData = { ...requestData };
         updatedRequestData.requestDetails[workspaceIndex].length = length;
         updatedRequestData.requestDetails[workspaceIndex].workspaceName = selectedWorkspaces[updatedRequestData.requestDetails[workspaceIndex].id].label;
+
+        // Validate length
+        const isValid = !isNaN(parseFloat(length)) && parseFloat(length) > 0;
+        setIsValidLength(isValid);
+
         setRequestData(updatedRequestData);
     };
 
@@ -124,10 +138,21 @@ const ManageRequestDetail = () => {
         const updatedRequestData = { ...requestData };
         updatedRequestData.requestDetails[workspaceIndex].width = width;
         updatedRequestData.requestDetails[workspaceIndex].workspaceName = selectedWorkspaces[updatedRequestData.requestDetails[workspaceIndex].id].label;
+
+        // Validate width
+        const isValid = !isNaN(parseFloat(width)) && parseFloat(width) > 0;
+        setIsValidWidth(isValid);
+
         setRequestData(updatedRequestData);
     };
 
     const handleConfirmRequest = async () => {
+
+        if (!requestData || !requestData.customer || !requestData.customer.email) {
+            toast.error('Please enter customer email');
+            return;
+        }
+
         try {
             const token = getToken();
             console.log(requestData);
@@ -142,7 +167,30 @@ const ManageRequestDetail = () => {
             if (!response.ok) {
                 throw new Error('Failed to confirm request.');
             }
-            alert('Request confirmed successfully!');
+            toast.success('Request confirmed successfully!');
+            // Handle success response as needed
+        } catch (error) {
+            console.error('Error confirming request:', error);
+            alert('Failed to confirm request. Please try again later.');
+        }
+    };
+
+    const handleCloseRequest = async () => {
+        try {
+            const token = getToken();
+            const response = await fetch(`http://localhost:8080/api/v1/request/auth/${id}/lock`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`
+                },
+                body: JSON.stringify(requestData)
+            });
+            if (!response.ok) {
+                throw new Error('Failed to unlock');
+            }
+            console.log("Unlocked");
+            navigate('/staff');
             // Handle success response as needed
         } catch (error) {
             console.error('Error confirming request:', error);
@@ -168,6 +216,9 @@ const ManageRequestDetail = () => {
 
     return (
         <div className="container mx-auto p-4">
+            <ToastContainer />
+            <HiArrowSmallLeft className="left-60 text-6xl absolute font-semibold hover:cursor-pointer" onClick={handleCloseRequest} />
+
             <h1 className="text-3xl font-bold mb-8">Manage Request Details</h1>
 
             <div className="mt-8">
