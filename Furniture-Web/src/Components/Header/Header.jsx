@@ -37,14 +37,14 @@ function Header({ handleLogin }) {
                         <ul>
                             {/* About Us */}
                             <li className="dropdown-container">
-                                <Link to='/about-us' className="header__navbar-navPage--button">About Us</Link>
+                                <Link to='/about-us' className="header__navbar-navPage--button">Giới thiệu</Link>
                             </li>
                             {/* End About Us */}
 
                             {/* Services */}
                             <li className="dropdown-container">
                                 <a to="service" className="header__navbar-navPage--button">
-                                    Services
+                                    Các dịch vụ
                                     <span className="fa-solid fa-angle-down icon-down"></span>
                                 </a>
                                 <Dropdown />
@@ -62,7 +62,7 @@ function Header({ handleLogin }) {
 
                     {/* Quote Button */}
                     <div className="header__quote">
-                        <button className="header__quote-button" id="quoteButton" onClick={toggleLogin}>Quote</button>
+                        <button className="header__quote-button" id="quoteButton" onClick={toggleLogin}>Nhận báo giá</button>
 
                         {/* Register Form */}
                         {isLoginOpen && <Register handleLogin={handleLogin} toggleLogin={toggleLogin} />}
@@ -73,7 +73,7 @@ function Header({ handleLogin }) {
                     {/* End Quote Button */}
                     <Link to='login'>
                         <button className='bg-[#054c73] px-8 py-4 text-white rounded-full'>
-                            Login
+                            Đăng nhập
                         </button>
                     </Link>
 
@@ -86,19 +86,19 @@ function Header({ handleLogin }) {
                             {/* End Hambugur Menu */}
 
                             {/* About Us */}
-                            <Link className="b" to="/about-us">About us</Link>
+                            <Link className="b" to="/about-us">Giới thiệu</Link>
                             {/* End About Us */}
 
                             {/* Services */}
-                            <Link className="b" to="WebPage/Services/ServicePage.html">Services</Link>
+                            <Link className="b" to="WebPage/Services/ServicePage.html">Các dịch vụ</Link>
                             {/* End Services */}
 
                             {/* Blog */}
-                            <Link to='/blog' className="b" >Blogs</Link>
+                            <Link to='/blog' className="b" >Blogs nội thất</Link>
                             {/* End Blog */}
 
                             {/* Search */}
-                            <div className="menu__search-box">
+                            {/* <div className="menu__search-box">
                                 <div className="menu__search-wrap">
                                     <input
                                         type="text"
@@ -109,7 +109,7 @@ function Header({ handleLogin }) {
                                         <i className="fas fa-search menu__search-btn-icon"></i>
                                     </button>
                                 </div>
-                            </div>
+                            </div> */}
                             {/* End Search */}
                         </nav>
                     </div>

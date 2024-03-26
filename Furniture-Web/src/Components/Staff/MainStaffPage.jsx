@@ -58,16 +58,16 @@ const MainStaffPage = () => {
                     onSelect={({ key }) => handlePageChange(key)} // Gọi hàm khi lựa chọn trang trong Sidebar
                 >
                     <Menu.Item key="MainContent" icon={<UploadOutlined />}>
-                        <span>Staff Page</span>
+                        <span>Báo giá </span>
                     </Menu.Item>
                     <Menu.Item key="RequestList" icon={<UserOutlined />}>
-                        <span>Request List</span>
+                        <span>Đợi tổng hợp</span>
                     </Menu.Item>
                     <Menu.Item key="ProposalList" icon={<VideoCameraOutlined />}>
-                        <span>Proposal List</span>
+                        <span>Tạo đề xuất</span>
                     </Menu.Item>
                     <Menu.Item key="ApprovalQuotationList" icon={<UploadOutlined />}>
-                        <span>Approval Quotation List</span>
+                        <span>Đã xác nhận </span>
                     </Menu.Item>
                 </Menu>
             </Sider>
