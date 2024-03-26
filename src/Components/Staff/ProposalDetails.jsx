@@ -52,7 +52,7 @@ export default function RequestDetails() {
       const data = await response.json();
       console.log(data);
       setWorkspaceOptions(data);
-      
+
       data.forEach(workspace => {
         fetchProductsByWorkspace(workspace.workspace_name);
       });
@@ -92,7 +92,7 @@ export default function RequestDetails() {
         }
       });
       setShowForm(false);
-      navigate('/staff/proposalList'); // Redirect to proposalList
+      navigate('/staff'); // Redirect to proposalList
     } catch (error) {
       console.error('Error locking request:', error);
     }

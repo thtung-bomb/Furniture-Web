@@ -1,6 +1,7 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
+//  get product details
 export async function getProductDetail(productID) {
 
     try {
@@ -61,6 +62,7 @@ export function getRequestById(requestId) {
 
 }
 
+// Confirm proposal
 export async function confirmProposal(proposalID) {
     try {
         const response = await axios.patch(`http://localhost:8080/api/v1/request/auth/confirmProposal/${proposalID}`, {}, {
@@ -76,6 +78,8 @@ export async function confirmProposal(proposalID) {
     }
 }
 
+
+// Unlock request
 export async function unlockRequest(requestId) {
 
     try {
@@ -90,6 +94,7 @@ export async function unlockRequest(requestId) {
     }
 }
 
+// Reject proposals
 export async function rejectProposal(proposalId) {
     try {
         const response = await axios.patch(

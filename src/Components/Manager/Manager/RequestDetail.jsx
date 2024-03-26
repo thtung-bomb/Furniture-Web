@@ -9,18 +9,15 @@ import { confirmProposal, rejectProposal } from '../../../util/managerHandle.js'
 import { toast } from 'react-toastify';
 import { ToastContainer } from 'react-toastify';
 import { getProductDetail } from '../../../util/managerHandle.js';
+import axios from 'axios';
+import Cookies from 'js-cookie';
 
 function RequestDetail({ project, close }) {
     console.log(project);
     const customer = project.customer;
     const requestDetail = project.requestDetails;
     const proposal = project.proposal;
-
     const [productDetails, setProductDetails] = useState({}); // State to store product details
-
-    console.log(requestDetail);
-
-
 
     const handleConfirm = async (proposalId) => {
         try {

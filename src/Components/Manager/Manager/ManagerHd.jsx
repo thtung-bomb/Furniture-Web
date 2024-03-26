@@ -10,7 +10,7 @@ function ManagerHd() {
                 <Sidebar />
             </div>
 
-            <ManagerProjectHD />
+            {/* <ManagerProjectHD /> */}
         </div>
     )
 }

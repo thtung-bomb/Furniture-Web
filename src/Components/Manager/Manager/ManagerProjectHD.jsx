@@ -53,7 +53,7 @@ function ManagerProjectHD() {
     };
 
     return (
-        <div className='flex flex-col w-5/6'>
+        <div className='flex w-[80em] flex-col'>
             {/* Manager View */}
             <TableContainer component={Paper}>
                 <Table aria-label="collapsible table">
@@ -73,7 +73,7 @@ function ManagerProjectHD() {
                                 <TableCell style={{ fontSize: '10px', fontWeight: '500', color: '#B8860B' }}>
                                     {project.employeeRequestStatus === 'PROPOSAL_AWAITING_APPROVAL' ? 'WAITING APPROVAL' : ''}
                                 </TableCell>
-                                <TableCell style={{ fontSize: '10px', fontWeight: '500' }}>{project.price}</TableCell>
+                                <TableCell style={{ fontSize: '10px', fontWeight: '500' }}>{project.price} VND</TableCell>
                                 <TableCell style={{ fontSize: '10px', fontWeight: '600', cursor: 'pointer', color: '#483D8B', transition: 'color 0.3s' }}
                                     onMouseEnter={(e) => e.target.style.color = '#FF0000'} // Change color on hover
                                     onMouseLeave={(e) => e.target.style.color = '#483D8B'} // Revert color when not hovered
