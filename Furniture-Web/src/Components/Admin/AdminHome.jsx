@@ -281,48 +281,48 @@ function AdminHome() {
                     <h2 className="text-xl font-semibold p-4">Employee Information</h2>
                     <form onSubmit={handleSubmit} className="space-y-4 p-4">
                         <Box width="100%" sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                            <div className="grid grid-cols-1 gap-4 justify-items-center">
+                            <div className="flex flex-col gap-4 justify-items-center align-items-center">
                                 <TextField
                                     label="Email"
                                     value={selectedEmployee.email || ""}
                                     name="email"
                                     onChange={handleInputChange}
-                                    style={{ width: '600px', height: '40px' }}
+                                    style={{ width: '600px', height: '40px', margin: '15px',padding:'10px 0' }}
                                 />
                                 <TextField
                                     label="Phone"
                                     value={selectedEmployee.phone || ""}
                                     name="phone"
                                     onChange={handleInputChange}
-                                    style={{ width: '600px', height: '40px' }}
+                                    style={{ width: '600px', height: '40px' , margin: '15px',padding:'10px 0'}}
                                 />
                                 <TextField
                                     label="Full Name"
                                     value={selectedEmployee.full_name || ""}
                                     name="full_name"
                                     onChange={handleInputChange}
-                                    style={{ width: '600px', height: '40px' }}
+                                    style={{ width: '600px', height: '40px', margin: '15px',padding:'10px 0'}}
                                 />
                                 <TextField
                                     label="ID Card"
                                     value={selectedEmployee.id_card || ""}
                                     name="id_card"
                                     onChange={handleInputChange}
-                                    style={{ width: '600px', height: '40px' }}
+                                    style={{ width: '600px', height: '40px', margin: '15px' ,padding:'10px 0'}}
                                 />
                                 <TextField
                                     label="Address"
                                     value={selectedEmployee.address || ""}
                                     name="address"
                                     onChange={handleInputChange}
-                                    style={{ width: '600px', height: '40px' }}
+                                    style={{ width: '600px', height: '40px', margin: '15px',padding:'10px 0'}}
                                 />
                                 <TextField
                                     label="Username"
                                     value={selectedEmployee.username || ""}
                                     name="username"
                                     onChange={handleInputChange}
-                                    style={{ width: '600px', height: '40px' }}
+                                    style={{ width: '600px', height: '40px' , margin: '15px',padding:'10px 0'}}
                                 />
                                 <TextField
                                     label="Password"
@@ -330,9 +330,9 @@ function AdminHome() {
                                     name="password"
                                     onChange={handleInputChange}
                                     type="password"
-                                    style={{ width: '600px', height: '40px' }}
+                                    style={{ width: '600px', height: '40px' , margin: '15px',padding:'10px 0'}}
                                 />
-                                <div style={{ display: 'flex', alignItems: 'center' }}>
+                                <div style={{ display: 'flex', alignItems: 'center', margin: '15px',padding:'10px 0' }}>
                                     {roles.map(role => (
                                         <FormControlLabel
                                             key={role}

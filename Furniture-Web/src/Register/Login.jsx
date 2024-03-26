@@ -90,7 +90,7 @@ function Login() {
     }
 
     return (
-        <div className='h-[540px] flex items-center justify-center formLogin'>
+        <div className='h-[85vh] flex items-center justify-center formLogin'>
             <div className='bg-sky-950 p-6 rounded-md shadow-md w-80'>
                 <h2 className='text-white text-5xl font-semibold mb-6'>Login</h2>
                 <div className='mb-4'>
