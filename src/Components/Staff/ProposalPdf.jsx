@@ -181,25 +181,16 @@ function ProposalPdf() {
       </div>
 
       <button className='buttonAdjust' onClick={adjustProposal}>Lưu</button>
-<<<<<<< HEAD
-
-  <button className='back-button' onClick={handleBackToList}>Back to List</button>
-
-
-  {
-    lastUrl && (
-      <iframe className='pdfBox' src={lastUrl} title="PDF Viewer" width="80%" height="500px" />
-=======
 
       <button className='back-button' onClick={handleBackToList}>Quay lại</button>
 
+      {
+        lastUrl && (
+          <iframe className='pdfBox' src={lastUrl} title="PDF Viewer" width="80%" height="500px" />
+        )
+      }
 
-      {pdfUrl && (
-        <iframe className='pdfBox' src={pdfUrl} title="PDF Viewer" width="80%" height="500px" />
->>>>>>> af2cf44a4e163243a940bdea41e6bbd29ae9a98b
-    )
-  }
-    </div >
+    </div>
   );
 }
 
