@@ -32,6 +32,8 @@ function ProposalPdf() {
   const [fileName, setFileName] = useState('');
   const { id } = useParams();
 
+  const lastUrl = pdfUrl[pdfUrl.length - 1];
+
   const fileUploadRef = ref(storage, "file/");
   const token = Cookies.get('token'); // Trích xuất token từ cookie
   const navigate = useNavigate();
@@ -183,8 +185,8 @@ function ProposalPdf() {
       <button className='back-button' onClick={handleBackToList}>Back to List</button>
 
 
-      {pdfUrl && (
-        <iframe className='pdfBox' src={pdfUrl} title="PDF Viewer" width="80%" height="500px" />
+      {lastUrl && (
+        <iframe className='pdfBox' src={lastUrl} title="PDF Viewer" width="80%" height="500px" />
       )}
     </div>
   );
