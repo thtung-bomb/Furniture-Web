@@ -36,7 +36,7 @@ export default function ApprovalList() {
           'Content-Type': 'application/json'
         }
       };
-      const response = await fetch('http://localhost:8080/api/v1/request/auth/status/PROPOSAL_AWAITING_APPROVAL?page=1&pageSize=9', requestOptions);
+      const response = await fetch('http://localhost:8080/api/v1/request/auth/status/CONSTRUCTION_IN_PROGRESS?page=1&pageSize=9', requestOptions);
       const data = await response.json();
       console.log(data);
       setRows(data);
@@ -118,10 +118,10 @@ export default function ApprovalList() {
         <TableHead>
           <TableRow>
             <TableCell>ID</TableCell>
-            <TableCell align="right">Estimated Price</TableCell>
-            <TableCell align="right">Customer Name</TableCell>
-            <TableCell align="right">Request St</TableCell>
-            <TableCell align="right">View Details</TableCell>
+            <TableCell align="right">Giá sơ bộ</TableCell>
+            <TableCell align="right">Tên khách hàng</TableCell>
+            <TableCell align="right">Trạng thái</TableCell>
+            <TableCell align="right">Xem chi tiết</TableCell>
 
           </TableRow>
         </TableHead>

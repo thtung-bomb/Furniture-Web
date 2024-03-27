@@ -68,13 +68,13 @@ const MainStaffPage = () => {
                         <span>Home</span>
                     </Menu.Item>
                     <Menu.Item key="RequestList" icon={<UserOutlined />}>
-                        <span>Đợi báo giá</span>
+                        <span>Đợi xác nhận</span>
                     </Menu.Item>
                     <Menu.Item key="ProposalList" icon={<VideoCameraOutlined />}>
-                        <span>Đợi tổng hợp</span>
+                        <span>Chờ đề xuất</span>
                     </Menu.Item>
                     <Menu.Item key="ApprovalQuotationList" icon={<UploadOutlined />}>
-                        <span>Đợi xét duyệt</span>
+                        <span>Chờ phê duyệt</span>
                     </Menu.Item>
                 </Menu>
             </Sider>

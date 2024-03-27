@@ -30,7 +30,7 @@ function AdminHome() {
             {
               key: '1',
               icon: <UserOutlined />,
-              label: 'nav 1',
+              label: 'Admin',
             }
 
           ]}

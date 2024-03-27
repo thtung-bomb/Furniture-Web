@@ -22,7 +22,7 @@ function Box1() {
 
     return (
         <div className="home box bg-white h-full w-1/3 rounded-lg shadow-md p-4">
-            <h2 className="text-4xl font-bold my-8">Employee Sales Data</h2>
+            <h2 className="text-4xl font-bold my-8">Danh số bán hàng nhân viên</h2>
             <div className="flex flex-col">
                 {employeeSalesData.map((employee, index) => (
                     <div key={index} className={`flex justify-between items-center border-b border-gray-300 py-2 ${index !== employeeSalesData.length - 1 ? 'mb-4' : ''}`}>

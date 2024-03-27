@@ -7,6 +7,7 @@ import { toast } from "react-hot-toast";
 import { ToastContainer } from "react-toastify";
 import { HiArrowSmallLeft } from "react-icons/hi2";
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import './RequestDetails.css';
 
 
 const ManageRequestDetail = () => {
@@ -217,7 +218,7 @@ const ManageRequestDetail = () => {
     return (
         <div className="container mx-auto p-4">
             <ToastContainer />
-            <HiArrowSmallLeft className="left-60 text-6xl absolute font-semibold hover:cursor-pointer" onClick={handleCloseRequest} />
+            <HiArrowSmallLeft className="left-10 text-6xl absolute font-semibold hover:cursor-pointer" onClick={handleCloseRequest} />
 
             <h1 className="text-3xl font-bold mb-8">Báo cáo sơ bộ yêu cầu thi công của khách hàng</h1>
 
@@ -300,7 +301,7 @@ const ManageRequestDetail = () => {
             {requestData && requestData.requestDetails.map((requestDetail, workspaceIndex) => (
                 <div key={requestDetail.id} className="mt-8">
                     <h2 className="text-xl font-bold">Chọn khu vực thi công</h2>
-                    <Select
+                    <Select 
                         value={selectedWorkspaces[requestDetail.id] || ""}
                         onChange={(selectedOption) => handleWorkspaceChange(selectedOption, requestDetail.id)}
                         options={availableWorkspaces.map((workspace) => ({

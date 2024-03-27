@@ -92,13 +92,13 @@ function RequestDetail({ request }) {
             <Card className="w-full mx-auto" >
                 <CardContent>
                     <Typography variant="h4" className="mb-2 text-center">Thông tin khách hàng</Typography>
-                    <h1 variant="body2" className="mb-2"><span>Họ và tên:</span>
+                    <h1 variant="body2" className="mb-2"><span>Họ và tên: </span>
                         <span className='font-semibold'>{customer.full_name}</span></h1>
-                    <h1 variant="body2" className="mb-2"><span>Email:</span>
+                    <h1 variant="body2" className="mb-2"><span>Email: </span>
                         <span className='font-semibold'>{customer.email}</span></h1>
-                    <h1 variant="body2" className="mb-2"><span>Số Điện Thoại:</span>
+                    <h1 variant="body2" className="mb-2"><span>Số Điện Thoại: </span>
                         <span className='font-semibold'>{customer.phone}</span></h1>
-                    <h1 variant="body2" className="mb-2"><span>Địa chỉ:</span>
+                    <h1 variant="body2" className="mb-2"><span>Địa chỉ: </span>
                         <span className='font-semibold'>{customer.address}</span></h1>
                 </CardContent>
             </Card>
@@ -143,18 +143,18 @@ function RequestDetail({ request }) {
 
             {/* Request detail table of all infomation about request: Workspace, length, width, product, description*/}
             {showRequestDetails && (
-                <div className='mt-10'>
+                <div className='mt-10 w-full'>
                     <Typography variant="h4" className="mt-10 mb-10 text-center">Chi Tiết</Typography>
                     <TableContainer component={Card}>
                         <Table>
                             <TableHead>
                                 <TableRow>
-                                    <TableCell>REQUEST ID</TableCell>
-                                    <TableCell align="right">Workspace</TableCell>
-                                    <TableCell align="right">Length</TableCell>
-                                    <TableCell align="right">Width</TableCell>
-                                    <TableCell align="justify">Product</TableCell>
-                                    <TableCell align="right">Description</TableCell>
+                                    <TableCell>Mã thi công</TableCell>
+                                    <TableCell align="right">Khu vực thi công</TableCell>
+                                    <TableCell align="right">Chiều dài (m)</TableCell>
+                                    <TableCell align="right">Chiều rộng (m)</TableCell>
+                                    <TableCell align="justify">Sản phẩm</TableCell>
+                                    <TableCell align="right">Mô tả</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>

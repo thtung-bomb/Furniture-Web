@@ -54,22 +54,22 @@ function RequestDetail({ project, close }) {
                     <Box className='border-[2px] w-screen h-full bg-white overflow-y-scroll rounded-lg shadow-lg z-50'>
                         <button onClick={close} className='absolute text-6xl ml-72 top-1 right-4 px-5 py-3 text-cyan-800 font-semibold hover:text-sky-600'>&times;</button>
                         <div className='flex flex-col w-2/3 justify-center p-8'>
-                            <h1 className='font-bold text-4xl text-cyan-800'>Customer Information</h1>
+                            <h1 className='font-bold text-4xl text-cyan-800'>Thông tin khách hàng</h1>
                             <div className='my-1'>
-                                <label className='text-2xl font-bold text-cyan-800'>Full Name:</label>
+                                <label className='text-2xl font-bold text-cyan-800'>Họ tên: </label>
                                 <h2 className='text-xl'>{customer.full_name}</h2>
                             </div>
                             <div className='my-1'>
-                                <label className='text-2xl font-bold text-cyan-800'>Email</label>
+                                <label className='text-2xl font-bold text-cyan-800'>Email: </label>
                                 <p className='text-xl'>{customer.email}</p>
                             </div>
                             <div className='my-1'>
-                                <label className='text-2xl font-bold text-cyan-800'>Phone Number</label>
+                                <label className='text-2xl font-bold text-cyan-800'>Số điện thoại: </label>
                                 <p className='text-xl'>{customer.phone}</p>
                             </div>
                         </div>
                         <div className='mx-8'>
-                            <h1 className='font-bold text-4xl text-cyan-800'>Project</h1>
+                            <h1 className='font-bold text-4xl text-cyan-800'>Dự án: </h1>
                             <h1 className='text-2xl text-cyan-800'><span className='font-bold'>Id: </span><span>{project.id}</span></h1>
                             <h1 className='text-xl text-cyan-800'><span className='font-bold'>Trạng Thái: </span>
                                 <span className='text-yellow-700'>
@@ -82,9 +82,9 @@ function RequestDetail({ project, close }) {
                             <Table aria-label="collapsible table" className='mt-4'>
                                 <TableHead>
                                     <TableRow>
-                                        <TableCell>Workspace</TableCell>
-                                        <TableCell align='center'>Products</TableCell>
-                                        <TableCell>Description</TableCell>
+                                        <TableCell>Khu vực thi công</TableCell>
+                                        <TableCell align='center'>Sản phẩm: </TableCell>
+                                        <TableCell>Mô tả</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -95,8 +95,8 @@ function RequestDetail({ project, close }) {
                                                 <Table>
                                                     <TableHead>
                                                         <TableRow>
-                                                            <TableCell align='center'>Product Name</TableCell>
-                                                            <TableCell align='center'>Quantity</TableCell>
+                                                            <TableCell align='center'>Tên sản phẩm</TableCell>
+                                                            <TableCell align='center'>Số lượng</TableCell>
                                                         </TableRow>
                                                     </TableHead>
                                                     <TableBody>
@@ -117,7 +117,7 @@ function RequestDetail({ project, close }) {
                         </div>
 
                         <div className='mx-8'>
-                            <h1 className='text-2xl text-cyan-800 font-bold'>Proposal</h1>
+                            <h1 className='text-2xl text-cyan-800 font-bold'>Báo cáo sơ bộ</h1>
                             <p className='text-2xl text-cyan-800'>
                                 <span className='font-semibold'>Code: </span>{proposal.id}</p>
                             <p><span className='text-cyan-800'>
@@ -133,7 +133,7 @@ function RequestDetail({ project, close }) {
                                 className='mx-auto'
                             />
 
-                            <h1 className='font-bold text-6xl text-cyan-800 flex justify-end p-3.5'><span className="text-6xl">Total: </span> {project.price}</h1>
+                            <h1 className='font-bold text-6xl text-cyan-800 flex justify-end p-3.5'><span className="text-6xl">Tổng giá: </span> {project.price}</h1>
                             <div className='text-center mb-8'>
                                 <button onClick={() => handleConfirm(proposal.id)} className='w-1/3 px-5 py-3 bg-cyan-700 
                                 text-white font-semibold text-2xl hover:bg-cyan-800 rounded-full'>

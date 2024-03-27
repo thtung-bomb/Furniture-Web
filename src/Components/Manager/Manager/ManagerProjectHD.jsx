@@ -59,10 +59,10 @@ function ManagerProjectHD() {
                 <Table aria-label="collapsible table">
                     <TableHead>
                         <TableRow>
-                            <TableCell style={{ fontSize: '16px', fontWeight: 'bold', color: '#000080' }}>Project ID</TableCell>
-                            <TableCell style={{ fontSize: '16px', fontWeight: 'bold', color: '#000080' }}>Status</TableCell>
-                            <TableCell style={{ fontSize: '16px', fontWeight: 'bold', color: '#000080' }}>Price</TableCell>
-                            <TableCell style={{ fontSize: '16px', fontWeight: 'bold', color: '#000080' }}>Detail</TableCell>
+                            <TableCell style={{ fontSize: '16px', fontWeight: 'bold', color: '#000080' }}>Mã dự án</TableCell>
+                            <TableCell style={{ fontSize: '16px', fontWeight: 'bold', color: '#000080' }}>Trạng thái</TableCell>
+                            <TableCell style={{ fontSize: '16px', fontWeight: 'bold', color: '#000080' }}>Giá sơ bộ</TableCell>
+                            <TableCell style={{ fontSize: '16px', fontWeight: 'bold', color: '#000080' }}>Chi tiết</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -77,7 +77,7 @@ function ManagerProjectHD() {
                                 <TableCell style={{ fontSize: '10px', fontWeight: '600', cursor: 'pointer', color: '#483D8B', transition: 'color 0.3s' }}
                                     onMouseEnter={(e) => e.target.style.color = '#FF0000'} // Change color on hover
                                     onMouseLeave={(e) => e.target.style.color = '#483D8B'} // Revert color when not hovered
-                                    onClick={() => handleRowClick(project)}>View</TableCell>
+                                    onClick={() => handleRowClick(project)}>Xem</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>

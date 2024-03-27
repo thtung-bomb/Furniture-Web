@@ -49,7 +49,7 @@ const ProductTable = ({ products, onDeleteProduct, onEditQuantity, onEditNote, o
     };
 
     return (
-        <table className="w-full border-collapse border border-gray-300">
+        <table className="w-full border-collapse border border-gray-300 my-3">
             <thead>
                 <tr className="bg-gray-100">
                     <th className="p-2">Tên sản phẩm</th>
@@ -68,7 +68,7 @@ const ProductTable = ({ products, onDeleteProduct, onEditQuantity, onEditNote, o
                     const selectedProduct = productList.find(item => item.id === product.productId);
                     const { price, description } = selectedProduct || {};
                     return (
-                        <tr key={index} style={{textAlign:"center"}}>
+                        <tr key={index} style={{textAlign:"center", lineHeight:"4rem"}}>
                             <td >
                                 <select
                                     value={productData.productId}
@@ -82,7 +82,12 @@ const ProductTable = ({ products, onDeleteProduct, onEditQuantity, onEditNote, o
                                     ))}
                                 </select>
                             </td>
-                            <td>{description}</td>
+                            <td>
+                                
+                                     {description}
+
+                               
+                            </td>
                             <td>
                                 <input
                                     type="number"
@@ -100,7 +105,7 @@ const ProductTable = ({ products, onDeleteProduct, onEditQuantity, onEditNote, o
                                 />
                             </td>
                             <td>
-                                <button onClick={() => onDeleteProduct(index)}>Xóa</button>
+                                <button onClick={() => onDeleteProduct(index)}><span className='decoration-neutral-400 font-bold'>Xóa</span></button>
                             </td>
                         </tr>
                     );
