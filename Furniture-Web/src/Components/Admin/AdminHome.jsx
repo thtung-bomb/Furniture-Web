@@ -58,7 +58,7 @@ function AdminHome() {
             borderRadius: borderRadiusLG,
           }}
         >
-    <AdminPage />
+          <AdminPage />
         </Content>
       </Layout>
     </Layout>

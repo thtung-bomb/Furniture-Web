@@ -21,7 +21,7 @@ function Box1() {
     }, []);
 
     return (
-        <div className="home box bg-white h-full w-full rounded-lg shadow-md p-4">
+        <div className="home box bg-white h-full w-1/3 rounded-lg shadow-md p-4">
             <h2 className="text-4xl font-bold my-8">Employee Sales Data</h2>
             <div className="flex flex-col">
                 {employeeSalesData.map((employee, index) => (
