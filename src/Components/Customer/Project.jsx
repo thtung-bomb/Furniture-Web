@@ -229,7 +229,7 @@ function Project() {
 
     return (
 
-        <div className='flex flex-col gap-6 border-[2px] absolute'>
+        <div className='flex flex-col gap-6 border-[2px]'>
 
             {/* Show message when success or fail to send request */}
             <ToastContainer position='top-right' />

@@ -16,11 +16,10 @@ function MainContent() {
     const token = Cookies.get('token');
     const popupRef = useRef();
 
-
     useEffect(() => {
         const fetchRequests = async () => {
             try {
-                const response = await getRequestByCustomer(currentPage, 9, token);
+                const response = await getRequestByCustomer(currentPage, 6, token);
                 setRequests(response);
                 // console.log(requests);
             } catch (error) {
@@ -62,9 +61,11 @@ function MainContent() {
         };
     }, [isPopupOpen]);
 
-
     return (
-        <div className='flex flex-col gap-5 border-[2px] ml-96 mb-6'>
+
+        <div className='flex flex-col gap-5 border-[2px]'>
+
+            {/* Button add new Request */}
             <div className="p-20 border-gray-800">
                 <div className="grid grid-cols-2 gap-4 mb-4 rounded-full">
                     <Link to='manager' className='w-[135px]'>
@@ -74,6 +75,7 @@ function MainContent() {
                     </Link>
                 </div>
             </div>
+            {/* End button add new Request */}
 
             {/* Main content display all request  */}
             <div className='grid grid-cols-3 gap-10'>

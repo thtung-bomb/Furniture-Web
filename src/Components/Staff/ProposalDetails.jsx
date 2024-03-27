@@ -1,162 +1,359 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom'; // Import useNavigate
-import TableContainer from '@mui/material/TableContainer';
-import Paper from '@mui/material/Paper';
-import Cookies from 'js-cookie';
-import './ProposalDetails.css';
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import ProductTable from "./ProductTable";
+import Cookies from "js-cookie";
+import Select from "react-select";
+import { toast } from "react-hot-toast";
+import { ToastContainer } from "react-toastify";
+import { HiArrowSmallLeft } from "react-icons/hi2";
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
-export default function RequestDetails() {
+const ProposalDetails = () => {
+  const [workspaces, setWorkspaces] = useState([]);
+  const [availableWorkspaces, setAvailableWorkspaces] = useState([]);
+  const [requestData, setRequestData] = useState(null);
+  const [selectedWorkspaces, setSelectedWorkspaces] = useState({});
+  const [selectedWorkspace, setSelectedWorkspace] = useState(null);
   const { id } = useParams();
-  const [selectedRowData, setSelectedRowData] = useState(null);
-  const [workspaceOptions, setWorkspaceOptions] = useState([]);
-  const [workspaceProducts, setWorkspaceProducts] = useState({});
-  const [showForm, setShowForm] = useState(true);
-  const token = Cookies.get('token');
-  const navigate = useNavigate(); // Use useNavigate
+  const [isValidLength, setIsValidLength] = useState(true);
+  const [isValidWidth, setIsValidWidth] = useState(true);
+  const [isConfirmed, setIsConfirmed] = useState(false); // State để theo dõi trạng thái xác nhận
+  const navigate = useNavigate(); // Sử dụng useNavigate để lấy hàm điều hướng
 
   useEffect(() => {
-    fetchRequestDetails(id);
-    fetchWorkspaceOptions();
-  }, [id]);
+    fetchWorkspaces();
+    fetchRequestData();
+  }, []);
 
-  const fetchRequestDetails = async (id) => {
+  const fetchWorkspaces = async () => {
     try {
-      const requestOptions = {
-        method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        }
-      };
-
-      const apiUrl = `http://localhost:8080/api/v1/request/auth/${id}`;
-      const response = await fetch(apiUrl, requestOptions);
+      const response = await fetch("http://localhost:8080/api/v1/workspace");
+      if (!response.ok) {
+        throw new Error("Failed to fetch workspaces.");
+      }
       const data = await response.json();
-      console.log(data);
-      setSelectedRowData(data); // Update selectedRowData with fetched data
+      setAvailableWorkspaces(data);
     } catch (error) {
-      console.error('Error fetching request details:', error);
+      console.error("Error fetching workspaces:", error);
     }
   };
 
-  const fetchWorkspaceOptions = async () => {
+  const fetchRequestData = async () => {
     try {
-      const requestOptions = {
-        method: 'GET',
+      const token = getToken();
+      const response = await fetch(`http://localhost:8080/api/v1/request/auth/${id}`, {
         headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        }
-      };
-      const response = await fetch('http://localhost:8080/api/v1/workspace', requestOptions);
-      const data = await response.json();
-      console.log(data);
-      setWorkspaceOptions(data);
-
-      data.forEach(workspace => {
-        fetchProductsByWorkspace(workspace.workspace_name);
-      });
-    } catch (error) {
-      console.error('Error fetching workspace options:', error);
-    }
-  };
-
-  const fetchProductsByWorkspace = async (workspaceName) => {
-    console.log("Fetching products for workspace:", workspaceName);
-    try {
-      const response = await fetch(`http://localhost:8080/api/v1/workspace/${workspaceName}/products`, {
-        method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
+          Authorization: `Bearer ${token}`
         }
       });
+      if (!response.ok) {
+        throw new Error("Failed to fetch request data.");
+      }
       const data = await response.json();
-      console.log("Fetched products:", data);
-      setWorkspaceProducts(prevProducts => ({
-        ...prevProducts,
-        [workspaceName]: data
-      }));
+      setRequestData(data);
     } catch (error) {
-      console.error('Error fetching products:', error);
+      console.error("Error fetching request data:", error);
     }
   };
 
-  const handleBackToList = async () => {
+  const getToken = () => {
+    return Cookies.get('token');
+  };
+
+  const addWorkspace = () => {
+    const newWorkspace = { id: "", workspaceName: "", description: '', length: 0, width: 0, products: [] };
+    setRequestData(prevData => ({
+      ...prevData,
+      requestDetails: [...prevData.requestDetails, newWorkspace]
+    }));
+  };
+
+  const addProduct = (workspaceIndex) => {
+    const updatedRequestData = { ...requestData };
+    const products = [...updatedRequestData.requestDetails[workspaceIndex].products, { productId: "", quantity: 0, description: "" }];
+    updatedRequestData.requestDetails[workspaceIndex].products = products;
+    updatedRequestData.requestDetails[workspaceIndex].workspaceName = selectedWorkspaces[updatedRequestData.requestDetails[workspaceIndex].id].label;
+    setRequestData(updatedRequestData);
+  };
+
+  const deleteWorkspace = (workspaceIndex) => {
+    const updatedRequestData = { ...requestData };
+    updatedRequestData.requestDetails.splice(workspaceIndex, 1);
+    setRequestData(updatedRequestData);
+  };
+
+  const deleteProduct = (workspaceIndex, productIndex) => {
+    const updatedRequestData = { ...requestData };
+    updatedRequestData.requestDetails[workspaceIndex].products.splice(productIndex, 1);
+    setRequestData(updatedRequestData);
+  };
+
+  const handleWorkspaceChange = (selectedOption, requestDetailId) => {
+    setSelectedWorkspaces({
+      ...selectedWorkspaces,
+      [requestDetailId]: selectedOption
+    });
+    setSelectedWorkspace(selectedOption);
+  };
+
+  const handleEditQuantity = (workspaceIndex, productIndex, newQuantity) => {
+    const updatedRequestData = { ...requestData };
+    updatedRequestData.requestDetails[workspaceIndex].products[productIndex].quantity = newQuantity;
+    setRequestData(updatedRequestData);
+  };
+
+  const handleEditNote = (workspaceIndex, productIndex, newNote) => {
+    const updatedRequestData = { ...requestData };
+    updatedRequestData.requestDetails[workspaceIndex].products[productIndex].description = newNote;
+    setRequestData(updatedRequestData);
+  };
+
+  const handleProductChange = (workspaceIndex, productIndex, productId) => {
+    const updatedRequestData = { ...requestData };
+    updatedRequestData.requestDetails[workspaceIndex].products[productIndex].productId = productId;
+    setRequestData(updatedRequestData);
+  };
+
+  const handleWorkspaceDescriptionChange = (workspaceIndex, description) => {
+    const updatedRequestData = { ...requestData };
+    updatedRequestData.requestDetails[workspaceIndex].description = description;
+    updatedRequestData.requestDetails[workspaceIndex].workspaceName = selectedWorkspaces[updatedRequestData.requestDetails[workspaceIndex].id].label;
+    setRequestData(updatedRequestData);
+  };
+
+  const handleWorkspaceLengthChange = (workspaceIndex, length) => {
+    const updatedRequestData = { ...requestData };
+    updatedRequestData.requestDetails[workspaceIndex].length = length;
+    updatedRequestData.requestDetails[workspaceIndex].workspaceName = selectedWorkspaces[updatedRequestData.requestDetails[workspaceIndex].id].label;
+
+    // Validate length
+    const isValid = !isNaN(parseFloat(length)) && parseFloat(length) > 0;
+    setIsValidLength(isValid);
+
+    setRequestData(updatedRequestData);
+  };
+
+  const handleWorkspaceWidthChange = (workspaceIndex, width) => {
+    const updatedRequestData = { ...requestData };
+    updatedRequestData.requestDetails[workspaceIndex].width = width;
+    updatedRequestData.requestDetails[workspaceIndex].workspaceName = selectedWorkspaces[updatedRequestData.requestDetails[workspaceIndex].id].label;
+
+    // Validate width
+    const isValid = !isNaN(parseFloat(width)) && parseFloat(width) > 0;
+    setIsValidWidth(isValid);
+
+    setRequestData(updatedRequestData);
+  };
+
+  const handleConfirmRequest = async () => {
+
+    if (!requestData || !requestData.customer || !requestData.customer.email) {
+      toast.error('Please enter customer email');
+      return;
+    }
+
     try {
-      await fetch(`http://localhost:8080/api/v1/request/auth/${selectedRowData.id}/lock`, {
+      const token = getToken();
+      console.log(requestData);
+      const response = await fetch(`http://localhost:8080/api/v1/request/auth/${id}/confirmRequest`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(requestData)
+      });
+      if (!response.ok) {
+        throw new Error('Failed to confirm request.');
+      }
+      toast.success('Request confirmed successfully!');
+      // Handle success response as needed
+    } catch (error) {
+      console.error('Error confirming request:', error);
+      alert('Failed to confirm request. Please try again later.');
+    }
+  };
+
+  const handleCloseRequest = async () => {
+    try {
+      const token = getToken();
+      const response = await fetch(`http://localhost:8080/api/v1/request/auth/${id}/lock`, {
         method: 'DELETE',
         headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        }
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(requestData)
       });
-      setShowForm(false);
-      navigate('/staff'); // Redirect to proposalList
+      if (!response.ok) {
+        throw new Error('Failed to unlock');
+      }
+      console.log("Unlocked");
+      navigate('/staff');
+      // Handle success response as needed
     } catch (error) {
-      console.error('Error locking request:', error);
+      console.error('Error confirming request:', error);
+      alert('Failed to confirm request. Please try again later.');
     }
   };
 
-  const renderDetailInputs = () => {
-    return selectedRowData?.requestDetails.map((detail, index) => (
-      <div className='request-details' key={index}>
-        <p className='Req-Component'>Product {index + 1} Quantity: {detail.quantity}</p>
-        <p className='Req-Component'>Product {index + 1} - Workspace: {detail.workspaceName}</p>
-        <p className='Req-Component'>Product {index + 1} Description: {detail.description}</p>
-        <p className='Req-Component'>Product {index + 1}: {workspaceProducts[detail.workspaceName]?.find(product => product.id === detail.product)?.name}</p>
-      </div>
-    ));
-  };
+  useEffect(() => {
+    if (requestData) {
+      const updatedSelectedWorkspaces = {};
+      requestData.requestDetails.forEach(detail => {
+        const workspace = availableWorkspaces.find(workspace => workspace.workspace_name === detail.workspaceName);
+        if (workspace) {
+          updatedSelectedWorkspaces[detail.id] = {
+            value: workspace.id,
+            label: workspace.workspace_name
+          };
+        }
+      });
+      setSelectedWorkspaces(updatedSelectedWorkspaces);
+    }
+  }, [requestData, availableWorkspaces]);
 
   return (
-    <TableContainer component={Paper}>
-      {showForm && selectedRowData ? (
-        <div className='CusInfo'>
+    <div className="container mx-auto p-4 pointer-events-none">
+      <ToastContainer />
+      <HiArrowSmallLeft className="left-60 text-6xl absolute font-semibold hover:cursor-pointer pointer-events-auto" onClick={handleCloseRequest} />
+
+      <h1 className="text-3xl font-bold mb-8">Manage Request Details</h1>
+
+      <div className="mt-8">
+        <h2 className="text-xl font-bold mb-2">Request Status</h2>
+        <p className="text-gray-700">Customer Request Status: {requestData && requestData.customerRequestStatus}</p>
+        <p className="text-gray-700">Employee Request Status: {requestData && requestData.employeeRequestStatus}</p>
+      </div>
+
+      <div className="mt-8">
+        <h2 className="text-xl font-bold mb-2">Customer Information</h2>
+        <div className="grid grid-cols-2 gap-4">
           <div>
-            <div className='cusInfo-mainInformation'>
-              <p className='CusInfo-Detail ID'>ID: {selectedRowData.id}</p>
-              <p className='CusInfo-Detail Es'>Estimated Price: {selectedRowData.price}</p>
-              <h3 className='CusInfo-Detail Info'>CUSTOMER'S INFORMATION</h3>
-              <p className='CusInfo-Detail'>
-                <label>Full Name:</label>
-                <span>{selectedRowData.customer?.full_name || ''}</span>
-              </p>
-              <p className='CusInfo-Detail'>
-                <label>Phone:</label>
-                <span>{selectedRowData.customer?.phone || ''}</span>
-              </p>
-              <p className='CusInfo-Detail'>
-                <label>Email:</label>
-                <span>{selectedRowData.customer?.email || ''}</span>
-              </p>
-              <p className='CusInfo-Detail'>
-                <label>ID Card:</label>
-                <span>{selectedRowData.customer?.id_card || ''}</span>
-              </p>
-              <p className='CusInfo-Detail'>
-                <label>Note:</label>
-                <span>{selectedRowData.customer?.note || ''}</span>
-              </p>
-              <p className='CusInfo-Detail'>
-                <label>Address:</label>
-                <span>{selectedRowData.customer?.address || ''}</span>
-              </p>
-            </div>
-            <h2 className='request-box'>Request details</h2>
-            <div className="details-Box">
-              {renderDetailInputs()}
-            </div>
+            <label className="block text-gray-700">Email:</label>
+            <input
+              type="text"
+              value={requestData && requestData.customer.email ? requestData.customer.email : ''}
+              onChange={(e) => setRequestData(prevData => ({ ...prevData, customer: { ...prevData.customer, email: e.target.value } }))}
+              placeholder="Email"
+              className="border border-gray-300 rounded px-4 py-2 mt-2 w-full focus:outline-none focus:border-blue-500"
+            />
           </div>
-          <div className="button">
-            <div className="Main-button">
-              <button className='back-button' onClick={handleBackToList}>Back to List</button>
-            </div>
+          <div>
+            <label className="block text-gray-700">Phone:</label>
+            <input
+              type="text"
+              value={requestData && requestData.customer.phone ? requestData.customer.phone : ''}
+              onChange={(e) => setRequestData(prevData => ({ ...prevData, customer: { ...prevData.customer, phone: e.target.value } }))}
+              placeholder="Phone"
+              className="border border-gray-300 rounded px-4 py-2 mt-2 w-full focus:outline-none focus:border-blue-500"
+            />
+          </div>
+          <div>
+            <label className="block text-gray-700">Full Name:</label>
+            <input
+              type="text"
+              value={requestData && requestData.customer.full_name ? requestData.customer.full_name : ''}
+              onChange={(e) => setRequestData(prevData => ({ ...prevData, customer: { ...prevData.customer, full_name: e.target.value } }))}
+              placeholder="Full Name"
+              className="border border-gray-300 rounded px-4 py-2 mt-2 w-full focus:outline-none focus:border-blue-500"
+            />
+          </div>
+          <div>
+            <label className="block text-gray-700">ID Card:</label>
+            <input
+              type="text"
+              value={requestData && requestData.customer.id_card ? requestData.customer.id_card : ''}
+              onChange={(e) => setRequestData(prevData => ({ ...prevData, customer: { ...prevData.customer, id_card: e.target.value } }))}
+              placeholder="ID Card"
+              className="border border-gray-300 rounded px-4 py-2 mt-2 w-full focus:outline-none focus:border-blue-500"
+            />
+          </div>
+          <div>
+            <label className="block text-gray-700">Address:</label>
+            <input
+              type="text"
+              value={requestData && requestData.customer.address ? requestData.customer.address : ''}
+              onChange={(e) => setRequestData(prevData => ({ ...prevData, customer: { ...prevData.customer, address: e.target.value } }))}
+              placeholder="Address"
+              className="border border-gray-300 rounded px-4 py-2 mt-2 w-full focus:outline-none focus:border-blue-500"
+            />
+          </div>
+          <div>
+            <label className="block text-gray-700">Note:</label>
+            <input
+              type="text"
+              value={requestData && requestData.customer.note ? requestData.customer.note : ''}
+              onChange={(e) => setRequestData(prevData => ({ ...prevData, customer: { ...prevData.customer, note: e.target.value } }))}
+              placeholder="Note"
+              className="border border-gray-300 rounded px-4 py-2 mt-2 w-full focus:outline-none focus:border-blue-500"
+            />
           </div>
         </div>
-      ) : (
-        <p>There are no request details to display</p>
-      )}
-    </TableContainer>
+      </div>
+
+      {requestData && requestData.requestDetails.map((requestDetail, workspaceIndex) => (
+        <div key={requestDetail.id} className="mt-8">
+          <h2 className="text-xl font-bold">{requestDetail.workspaceName}</h2>
+          <Select
+            value={selectedWorkspaces[requestDetail.id] || ""}
+            onChange={(selectedOption) => handleWorkspaceChange(selectedOption, requestDetail.id)}
+            options={availableWorkspaces.map((workspace) => ({
+              value: workspace.id,
+              label: workspace.workspace_name,
+              workspace_name: workspace.workspace_name // Additional custom data
+            }))}
+            placeholder="Select Workspace"
+            className="w-1/2 mr-2 border border-gray-300 rounded px-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500"
+            getOptionLabel={(option) => option.label}
+            getOptionValue={(option) => option.value}
+          />
+
+          <div className="mt-4">
+            <label className="block text-gray-700">Description:</label>
+            <input
+              type="text"
+              value={requestDetail.description}
+              onChange={(e) => handleWorkspaceDescriptionChange(workspaceIndex, e.target.value)}
+              placeholder="Workspace Description"
+              className="border border-gray-300 rounded px-4 py-2 mt-2 w-full focus:outline-none focus:border-blue-500"
+            />
+          </div>
+          <div className="mt-4">
+            <label className="block text-gray-700">Length:</label>
+            <input
+              type="number"
+              value={requestDetail.length}
+              onChange={(e) => handleWorkspaceLengthChange(workspaceIndex, e.target.value)}
+              placeholder="Workspace Length"
+              className="border border-gray-300 rounded px-4 py-2 mt-2 w-full focus:outline-none focus:border-blue-500"
+            />
+          </div>
+          <div className="mt-4">
+            <label className="block text-gray-700">Width:</label>
+            <input
+              type="number"
+              value={requestDetail.width}
+              onChange={(e) => handleWorkspaceWidthChange(workspaceIndex, e.target.value)}
+              placeholder="Workspace Width"
+              className="border border-gray-300 rounded px-4 py-2 mt-2 w-full focus:outline-none focus:border-blue-500"
+            />
+          </div>
+
+          <ProductTable
+            products={requestDetail.products}
+            onDeleteProduct={(productIndex) => deleteProduct(workspaceIndex, productIndex)}
+            onEditQuantity={(productIndex, newQuantity) => handleEditQuantity(workspaceIndex, productIndex, newQuantity)}
+            onEditNote={(productIndex, newNote) => handleEditNote(workspaceIndex, productIndex, newNote)}
+            onAddProduct={() => addProduct(workspaceIndex)}
+            selectedWorkspace={selectedWorkspaces[requestDetail.id] ? selectedWorkspaces[requestDetail.id].label : ""}
+            handleProductChange={(productIndex, productId) => handleProductChange(workspaceIndex, productIndex, productId)}
+          />
+        </div>
+      ))}
+
+    </div>
   );
-}
+};
+
+export default ProposalDetails
