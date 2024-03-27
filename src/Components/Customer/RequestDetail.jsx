@@ -170,7 +170,7 @@ function RequestDetail({ request }) {
                                                     <TableBody>
                                                         {requested.products.map((product, index) => (
                                                             <TableRow key={index}>
-                                                                <TableCell>{product.productId}</TableCell>
+                                                                <TableCell>{product.productName}</TableCell>
                                                                 <TableCell>{product.quantity}</TableCell>
                                                             </TableRow>
                                                         ))}

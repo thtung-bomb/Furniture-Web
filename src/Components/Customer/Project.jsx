@@ -344,6 +344,7 @@ function Project() {
                         <input
                             type="number"
                             value={requestDetail.length}
+                            min={0}
                             onChange={(e) => handleWorkspaceLengthChange(workspaceIndex, e.target.value)}
                             placeholder="Workspace Length"
                             className="border border-gray-300 rounded px-4 py-2 mt-2 w-full focus:outline-none focus:border-blue-500"
@@ -354,6 +355,7 @@ function Project() {
                         <input
                             type="number"
                             value={requestDetail.width}
+                            min={0}
                             onChange={(e) => handleWorkspaceWidthChange(workspaceIndex, e.target.value)}
                             placeholder="Workspace Width"
                             className="border border-gray-300 rounded px-4 py-2 mt-2 w-full focus:outline-none focus:border-blue-500"

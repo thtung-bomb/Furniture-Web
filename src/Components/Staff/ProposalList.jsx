@@ -50,11 +50,19 @@ export default function ProposalList() {
         <TableHead>
           <TableRow>
             <TableCell>ID</TableCell>
+<<<<<<< HEAD
             <TableCell align="right">Giá dự thảo</TableCell>
             <TableCell align="right">Tên khách hàng</TableCell>
             <TableCell align="right">Trạng thái báo giá</TableCell>
             <TableCell align="right">Xem chi tiết</TableCell>
             <TableCell align="right">Tải lên file báo giá </TableCell>
+=======
+            <TableCell align="right">Estimated Price</TableCell>
+            <TableCell align="right">Customer Name</TableCell>
+            <TableCell align="right">Request Status</TableCell>
+            <TableCell align="right">View Details</TableCell>
+            <TableCell align="right">Upload PDF</TableCell>
+>>>>>>> 0a115736835bc63399a2e44a413393c0068de4e0
 
           </TableRow>
         </TableHead>
@@ -70,9 +78,10 @@ export default function ProposalList() {
               <TableCell align="right">{row.price}</TableCell>
               <TableCell align="right">{row.customer?.full_name}</TableCell>
               <TableCell align="right">{row.customerRequestStatus}</TableCell>
-              
+
               <TableCell align="right">
                 <button>
+<<<<<<< HEAD
                   <Link to={`/staff/proposalDetails/${row.id}`}>Xem</Link>
               </button>
               </TableCell>
@@ -80,14 +89,23 @@ export default function ProposalList() {
                 <button>
                   <Link to={`/staff/proposalPdf/${row.id}`}>Cập nhật</Link>
               </button>
+=======
+                  <Link to={`/staff/proposalDetails/${row.id}`}>View</Link>
+                </button>
               </TableCell>
-              
+              <TableCell align="right">
+                <button>
+                  <Link to={`/staff/proposalPdf/${row.id}`}>Upload Proposal</Link>
+                </button>
+>>>>>>> 0a115736835bc63399a2e44a413393c0068de4e0
+              </TableCell>
+
             </TableRow>
           ))}
         </TableBody>
       </Table>
-       
+
     </TableContainer>
- 
+
   )
 }
