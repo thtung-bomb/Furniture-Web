@@ -27,16 +27,16 @@ function Sidebar() {
 
     const ProposalList = () => {
         // Implement ProposalList component or route here
-        return <div>Proposal List</div>;
+        return <div>Danh sách báo cáo đã được tổng hợp sơ bộ</div>;
     };
 
     const ApprovalList = () => {
         // Implement ApprovalList component or route here
-        return <div>Approval Quotation List</div>;
+        return <div>Báo giá chính thức</div>;
     };
 
     return (
-        <Layout className='h-[600px]'>
+        <Layout className='h-full'>
             <Sider trigger={null} collapsible collapsed={collapsed} style={{ background: '#FFFFFF', color: '#000000' }} >
                 <div className="demo-logo-vertical" />
                 <Menu
@@ -46,16 +46,16 @@ function Sidebar() {
                     onSelect={({ key }) => handlePageChange(key)} // Call function when selecting a page in the Sidebar
                 >
                     <Menu.Item key="MainContent" icon={<UploadOutlined />}>
-                        <span>Customer Page</span>
+                        <span>Trang khách hàng</span>
                     </Menu.Item>
                     <Menu.Item key="RequestList" icon={<UserOutlined />}>
-                        <span>Request List</span>
+                        <span>Danh sách báo giá</span>
                     </Menu.Item>
                     <Menu.Item key="ProposalList" icon={<VideoCameraOutlined />}>
-                        <span>Manager Dashboard</span>
+                        <span> Dashboard</span>
                     </Menu.Item>
                     <Menu.Item key="ApprovalQuotationList" icon={<UploadOutlined />}>
-                        <span>Approval Quotation List</span>
+                        <span>Danh sách đã tổng duyệt</span>
                     </Menu.Item>
                 </Menu>
             </Sider>
@@ -84,7 +84,7 @@ function Sidebar() {
                     {currentPage === 'MainContent' ? (
                         <div>
                             {userInfo ? (
-                                <div className='w-screen'>Welcome to Customer Page, {userInfo.fullName}</div>
+                                <div className='w-screen'>Xin chào, {userInfo.fullName}</div>
                             ) : (
                                 <div>Loading...</div>
                             )}
@@ -96,7 +96,7 @@ function Sidebar() {
                     ) : currentPage === 'ApprovalQuotationList' ? (
                         <ApprovalList />
                     ) : (
-                        <div>Content of Proposal List or other pages...</div>
+                        <div>404 không tìm thấy trang...</div>
                     )}
                 </Content>
             </Layout>

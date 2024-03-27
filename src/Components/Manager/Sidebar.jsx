@@ -36,7 +36,7 @@ function Sidebar() {
 
 
     return (
-        <Layout className='h-[600px]'>
+        <Layout className='h-screen'>
             <Sider trigger={null} collapsible collapsed={collapsed} style={{ background: '#FFFFFF', color: '#000000' }} >
                 <div className="demo-logo-vertical" />
                 <Menu
@@ -76,7 +76,8 @@ function Sidebar() {
                     style={{
                         margin: '24px 16px',
                         padding: 24,
-                        minHeight: 280,
+                        minHeight: 400,
+                        height: "100%",
                         background: colorBgContainer,
                         borderRadius: borderRadiusLG,
                     }}

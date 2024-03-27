@@ -63,7 +63,7 @@ function MainContent() {
 
     return (
 
-        <div className='flex flex-col gap-5 border-[2px]'>
+        <div className='flex flex-col gap-5 border-[2px] h-full'>
 
             {/* Button add new Request */}
             <div className="p-20 border-gray-800">
@@ -71,7 +71,7 @@ function MainContent() {
                     <Link to='manager' className='w-[135px]'>
                         <button className='bg-cyan-600 px-6 py-4 text-xl text-white rounded-3xl 
                         font-medium text-center hover:bg-cyan-700 hover:shadow-xl w-fit
-                        duration-300 ease-in-out'>Add New Request</button>
+                        duration-300 ease-in-out'>Tạo báo giá mới</button>
                     </Link>
                 </div>
             </div>
@@ -84,7 +84,7 @@ function MainContent() {
                         onClick={() => handleRequestClick(request)}>
                         {/* Card display card {id, status, price} */}
                         <Card sx={{ maxWidth: 400 }} className='bg-gray-900'>
-                            <CardContent className='flex flex-col gap-6 px-5'>
+                            <CardContent className='flex flex-col gap-6 px-5 '>
                                 <Typography gutterBottom variant="h5" component="div">
                                     {request.id}
                                 </Typography>
@@ -114,7 +114,7 @@ function MainContent() {
             {selectedRequest && isPopupOpen && (
                 <div ref={popupRef} className="fixed top-0 left-0 w-screen h-screen bg-gray-900 bg-opacity-50 flex 
                 items-center justify-center z-50 overflow-scroll">
-                    <div className="bg-slate-100 p-10 rounded-2xl w-1/2 relative mt-auto z-50">
+                    <div className="bg-slate-100 p-10 rounded-2xl w-1/2 relative m-auto z-50">
                         <button onClick={handleClosePopup} className='px-4 py-3 text-zinc-400 hover:text-zinc-800 
                         m-2 rounded-full font-bold absolute top-0 left-0 text-2xl'>
                             &#10005;
@@ -127,7 +127,7 @@ function MainContent() {
             {/* End Display Requset detail */}
 
             <div className='flex justify-content: flex-end 
-            mt-auto justify-center my-48'> {/* Positions pagination at bottom, right-aligned */}
+            mb-auto justify-center my-48'> {/* Positions pagination at bottom, right-aligned */}
                 <Pagination count={20} onChange={handlePageChange}
                     color="standard" size="large" /> {/* Increases font size to 1.25rem */}
             </div>

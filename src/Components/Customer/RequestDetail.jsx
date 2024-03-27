@@ -88,7 +88,7 @@ function RequestDetail({ request }) {
         <div className="p-6">
             <ToastContainer />
             {/* Customer Information */}
-            <Typography variant="h2" className="text-center">Request Detail</Typography>
+            <Typography variant="h2" className="text-center">Chi tiết bảng báo giá</Typography>
             <Card className="w-full mx-auto" >
                 <CardContent>
                     <Typography variant="h4" className="mb-2 text-center">Thông tin khách hàng</Typography>

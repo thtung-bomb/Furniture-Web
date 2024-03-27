@@ -268,10 +268,10 @@ function Project() {
             <ToastContainer />
             <HiArrowSmallLeft className="left-60 text-6xl absolute font-semibold hover:cursor-pointer" onClick={handleCloseRequest} />
 
-            <h1 className="text-3xl font-bold mb-8">Manage Request Details</h1>
+            <h1 className="text-3xl font-bold mb-8">Quản lí báo giá</h1>
 
             <div className="mt-8">
-                <h2 className="text-xl font-bold mb-2">Customer Information</h2>
+                <h2 className="text-xl font-bold mb-2">Thông tin khách hàng</h2>
                 <div className="grid grid-cols-2 gap-4">
                     <div>
                         <label className="block text-gray-700">Email:</label>
@@ -284,7 +284,7 @@ function Project() {
                         />
                     </div>
                     <div>
-                        <label className="block text-gray-700">Phone:</label>
+                        <label className="block text-gray-700">Số điện thoại:</label>
                         <input
                             type="text"
                             value={getCustomerInfo().phone}
@@ -294,7 +294,7 @@ function Project() {
                         />
                     </div>
                     <div>
-                        <label className="block text-gray-700">Full Name:</label>
+                        <label className="block text-gray-700">Họ tên:</label>
                         <input
                             type="text"
                             value={getCustomerInfo().fullName}
@@ -307,7 +307,7 @@ function Project() {
             </div>
 
             <button onClick={addWorkspace} className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-4">
-                Add Workspace
+                Thêm khu vực thi công
             </button>
 
             {requestData && requestData.requestDetails.map((requestDetail, workspaceIndex) => (
@@ -327,10 +327,10 @@ function Project() {
                         getOptionValue={(option) => option.value}
                     />
                     <button onClick={() => deleteWorkspace(workspaceIndex)} className="text-red-500 hover:text-red-700 font-bold">
-                        Delete Workspace
+                        Xóa khu vực
                     </button>
                     <div className="mt-4">
-                        <label className="block text-gray-700">Description:</label>
+                        <label className="block text-gray-700">Mô tả:</label>
                         <input
                             type="text"
                             value={requestDetail.description}
@@ -340,7 +340,7 @@ function Project() {
                         />
                     </div>
                     <div className="mt-4">
-                        <label className="block text-gray-700">Length:</label>
+                        <label className="block text-gray-700">Chiều dài (m):</label>
                         <input
                             type="number"
                             value={requestDetail.length}
@@ -351,7 +351,7 @@ function Project() {
                         />
                     </div>
                     <div className="mt-4">
-                        <label className="block text-gray-700">Width:</label>
+                        <label className="block text-gray-700">Chiều rộng (m):</label>
                         <input
                             type="number"
                             value={requestDetail.width}

@@ -20,11 +20,11 @@ function AdminHome() {
 
   return (
     <Layout>
-      <Sider trigger={null} collapsible collapsed={collapsed}>
+      <Sider trigger={null} collapsible collapsed={collapsed} style={{ background: '#FFFFFF', color: '#000000' }} >
         <div className="demo-logo-vertical" />
         <Menu
-          theme="dark"
-          mode="inline"
+          theme="light"
+          mode="vertical"
           defaultSelectedKeys={['1']}
           items={[
             {
