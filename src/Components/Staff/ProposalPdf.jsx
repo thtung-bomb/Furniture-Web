@@ -155,7 +155,6 @@ function ProposalPdf() {
 
   return (
     <div className='proposalBox'>
-<<<<<<< HEAD
         <div className="fileUploadBox">
             <input type="file" onChange={(event) => { setFileUpload(event.target.files[0]) }} />
             <button className='buttonUpload' onClick={uploadFile}>Tải File</button>
@@ -184,36 +183,6 @@ function ProposalPdf() {
       <button className='back-button' onClick={handleBackToList}>Quay lại</button>
     
       
-=======
-      <div className="fileUploadBox">
-        <input type="file" onChange={(event) => { setFileUpload(event.target.files[0]) }} />
-        <button className='buttonUpload' onClick={uploadFile}>Upload File</button>
-
-      </div>
-      <div className="mainConttentBox">
-        <label htmlFor="fileNameInput">File Name:</label>
-        <input id="fileNameInput" className='fileNameInput'
-          type="text"
-          value={fileName}
-          onChange={(event) => setFileName(event.target.value)}
-          placeholder="Enter File Name"
-        />
-        <label htmlFor="priceInput">Standard Price:</label>
-        <input id="priceInput" className='priceInput'
-          type="number"
-          value={price}
-          onChange={(event) => setPrice(event.target.value)}
-          placeholder="Enter Price"
-        />
-
-      </div>
-
-      <button className='buttonAdjust' onClick={adjustProposal}>Lưu</button>
-
-      <button className='back-button' onClick={handleBackToList}>Back to List</button>
-
-
->>>>>>> 0a115736835bc63399a2e44a413393c0068de4e0
       {pdfUrl && (
         <iframe className='pdfBox' src={pdfUrl} title="PDF Viewer" width="80%" height="500px" />
       )}
