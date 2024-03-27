@@ -32,6 +32,8 @@ function ProposalPdf() {
   const [fileName, setFileName] = useState('');
   const { id } = useParams();
 
+  const lastUrl = pdfUrl[pdfUrl.length - 1];
+
   const fileUploadRef = ref(storage, "file/");
   const token = Cookies.get('token'); // Trích xuất token từ cookie
   const navigate = useNavigate();
@@ -155,37 +157,39 @@ function ProposalPdf() {
 
   return (
     <div className='proposalBox'>
-        <div className="fileUploadBox">
-            <input type="file" onChange={(event) => { setFileUpload(event.target.files[0]) }} />
-            <button className='buttonUpload' onClick={uploadFile}>Tải File</button>
+      <div className="fileUploadBox">
+        <input type="file" onChange={(event) => { setFileUpload(event.target.files[0]) }} />
+        <button className='buttonUpload' onClick={uploadFile}>Tải File</button>
 
-        </div>
-        <div className="mainConttentBox">
+      </div>
+      <div className="mainConttentBox">
         <label htmlFor="fileNameInput">Tên file:</label>
-            <input id="fileNameInput" className='fileNameInput'
-                type="text"
-                value={fileName}
-                onChange={(event) => setFileName(event.target.value)}
-                placeholder="Enter File Name"
-            />
-            <label htmlFor="priceInput">Giá dự thảo:</label>
-            <input id="priceInput" className='priceInput'
-                type="number"
-                value={price}
-                onChange={(event) => setPrice(event.target.value)}
-                placeholder="Enter Price"
-            />
+        <input id="fileNameInput" className='fileNameInput'
+          type="text"
+          value={fileName}
+          onChange={(event) => setFileName(event.target.value)}
+          placeholder="Enter File Name"
+        />
+        <label htmlFor="priceInput">Giá dự thảo:</label>
+        <input id="priceInput" className='priceInput'
+          type="number"
+          value={price}
+          onChange={(event) => setPrice(event.target.value)}
+          placeholder="Enter Price"
+        />
 
-        </div>
-    
+      </div>
+
       <button className='buttonAdjust' onClick={adjustProposal}>Lưu</button>
-      
+
       <button className='back-button' onClick={handleBackToList}>Quay lại</button>
-    
-      
-      {pdfUrl && (
-        <iframe className='pdfBox' src={pdfUrl} title="PDF Viewer" width="80%" height="500px" />
-      )}
+
+      {
+        lastUrl && (
+          <iframe className='pdfBox' src={lastUrl} title="PDF Viewer" width="80%" height="500px" />
+        )
+      }
+
     </div>
   );
 }
