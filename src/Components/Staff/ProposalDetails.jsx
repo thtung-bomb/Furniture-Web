@@ -7,6 +7,7 @@ import { toast } from "react-hot-toast";
 import { ToastContainer } from "react-toastify";
 import { HiArrowSmallLeft } from "react-icons/hi2";
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import './ProposalDetails.css'
 
 const ProposalDetails = () => {
   const [workspaces, setWorkspaces] = useState([]);

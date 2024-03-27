@@ -61,7 +61,7 @@ function ProposalPdf() {
         }
       });
     //   setShowForm(false);
-      navigate('/staff/proposalList'); // Redirect to proposalList
+      navigate('/staff'); // Redirect to proposalList
     } catch (error) {
       console.error('Error locking request:', error);
     }
