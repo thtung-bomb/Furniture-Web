@@ -185,10 +185,10 @@ function ProposalPdf() {
       <button className='back-button' onClick={handleBackToList}>Quay lại</button>
 
       {
-        lastUrl && (
-          <iframe className='pdfBox' src={lastUrl} title="PDF Viewer" width="80%" height="500px" />
-        )
-      }
+  pdfUrl && pdfUrl.length > 0 && (
+    <iframe className='pdfBox' src={pdfUrl[pdfUrl.length - 1]} title="PDF Viewer" width="80%" height="500px" />
+  )
+}
 
     </div>
   );
