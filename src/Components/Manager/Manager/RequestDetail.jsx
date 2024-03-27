@@ -48,10 +48,10 @@ function RequestDetail({ project, close }) {
     console.log(proposal.file_path);
     return (
 
-        <Popper open={true} transition className='fixed '>
+        <Popper open={true} transition className='fixed h-full'>
             {({ TransitionProps }) => (
                 <Fade {...TransitionProps} timeout={350}>
-                    <Box className='border-[2px] w-screen h-5/6 bg-white overflow-y-scroll rounded-lg shadow-lg z-50'>
+                    <Box className='border-[2px] w-screen h-full bg-white overflow-y-scroll rounded-lg shadow-lg z-50'>
                         <button onClick={close} className='absolute text-6xl ml-72 top-1 right-4 px-5 py-3 text-cyan-800 font-semibold hover:text-sky-600'>&times;</button>
                         <div className='flex flex-col w-2/3 justify-center p-8'>
                             <h1 className='font-bold text-4xl text-cyan-800'>Customer Information</h1>
@@ -129,11 +129,11 @@ function RequestDetail({ project, close }) {
                                 src={proposal.file_path}
                                 title="Proposal File"
                                 width="100%"
-                                height="500px"
+                                height="800px"
                                 className='mx-auto'
                             />
 
-                            <h1 className='font-bold text-6xl text-cyan-800'><span>Total: </span> {project.price}</h1>
+                            <h1 className='font-bold text-6xl text-cyan-800 flex justify-end p-3.5'><span className="text-6xl">Total: </span> {project.price}</h1>
                             <div className='text-center mb-8'>
                                 <button onClick={() => handleConfirm(proposal.id)} className='w-1/3 px-5 py-3 bg-cyan-700 
                                 text-white font-semibold text-2xl hover:bg-cyan-800 rounded-full'>

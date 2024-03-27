@@ -53,7 +53,7 @@ function ManagerProjectHD() {
     };
 
     return (
-        <div className='flex w-full flex-col h-full justify-between items-center'>
+        <div className='flex w-full flex-col h-full justify-between items-center overflow-auto'>
             {/* Manager View */}
             <TableContainer component={Paper}>
                 <Table aria-label="collapsible table">
