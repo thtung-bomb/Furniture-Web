@@ -121,18 +121,18 @@ function ProposalPdf() {
     <div className='proposalBox'>
         <div className="fileUploadBox">
             <input type="file" onChange={(event) => { setFileUpload(event.target.files[0]) }} />
-            <button className='buttonUpload' onClick={uploadFile}>Upload File</button>
+            <button className='buttonUpload' onClick={uploadFile}>Tải File</button>
 
         </div>
         <div className="mainConttentBox">
-        <label htmlFor="fileNameInput">File Name:</label>
+        <label htmlFor="fileNameInput">Tên file:</label>
             <input id="fileNameInput" className='fileNameInput'
                 type="text"
                 value={fileName}
                 onChange={(event) => setFileName(event.target.value)}
                 placeholder="Enter File Name"
             />
-            <label htmlFor="priceInput">Standard Price:</label>
+            <label htmlFor="priceInput">Giá dự thảo:</label>
             <input id="priceInput" className='priceInput'
                 type="number"
                 value={price}
@@ -142,9 +142,9 @@ function ProposalPdf() {
 
         </div>
     
-      <button className='buttonAdjust' onClick={adjustProposal}>Save</button>
+      <button className='buttonAdjust' onClick={adjustProposal}>Lưu</button>
       
-      <button className='back-button' onClick={handleBackToList}>Back to List</button>
+      <button className='back-button' onClick={handleBackToList}>Quay lại</button>
     
       
       {pdfUrl && (

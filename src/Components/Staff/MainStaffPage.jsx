@@ -56,25 +56,25 @@ const MainStaffPage = () => {
 
     return (
         <Layout>
-            <Sider trigger={null} collapsible collapsed={collapsed}>
+            <Sider trigger={null} collapsible collapsed={collapsed} style={{ background: '#FFFFFF', color: '#000000' }}>
                 <div className="demo-logo-vertical" />
                 <Menu
-                    theme="dark"
-                    mode="inline"
+                    theme="light"
+                    mode="vertical"
                     defaultSelectedKeys={['1']}
                     onSelect={({ key }) => handlePageChange(key)} // Gọi hàm khi lựa chọn trang trong Sidebar
                 >
                     <Menu.Item key="MainContent" icon={<UploadOutlined />}>
-                        <span>Staff Page</span>
+                        <span>Home</span>
                     </Menu.Item>
                     <Menu.Item key="RequestList" icon={<UserOutlined />}>
-                        <span>Request List</span>
+                        <span>Đợi báo giá</span>
                     </Menu.Item>
                     <Menu.Item key="ProposalList" icon={<VideoCameraOutlined />}>
-                        <span>Proposal List</span>
+                        <span>Đợi tổng hợp</span>
                     </Menu.Item>
                     <Menu.Item key="ApprovalQuotationList" icon={<UploadOutlined />}>
-                        <span>Approval Quotation List</span>
+                        <span>Đợi xét duyệt</span>
                     </Menu.Item>
                 </Menu>
             </Sider>
@@ -103,7 +103,7 @@ const MainStaffPage = () => {
                     {currentPage === 'MainContent' ? (
                         <div>
                             {userInfo ? (
-                                <div>Welcome to Staff Page, {userInfo.fullName}</div>
+                                <div>Xin chào, {userInfo.fullName}</div>
                             ) : (
                                 <div>Loading...</div>
                             )}
@@ -115,7 +115,7 @@ const MainStaffPage = () => {
                     ) : currentPage === 'ApprovalQuotationList' ? (
                         <ApprovalList />
                     ) : (
-                        <div>Content of Proposal List or other pages...</div>
+                        <div>Trang không tồn tại...</div>
                     )}
                 </Content>
             </Layout>

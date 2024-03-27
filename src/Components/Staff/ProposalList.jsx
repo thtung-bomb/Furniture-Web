@@ -50,11 +50,11 @@ export default function ProposalList() {
         <TableHead>
           <TableRow>
             <TableCell>ID</TableCell>
-            <TableCell align="right">Estimated Price</TableCell>
-            <TableCell align="right">Customer Name</TableCell>
-            <TableCell align="right">Request Status</TableCell>
-            <TableCell align="right">View Details</TableCell>
-            <TableCell align="right">Upload PDF </TableCell>
+            <TableCell align="right">Giá dự thảo</TableCell>
+            <TableCell align="right">Tên khách hàng</TableCell>
+            <TableCell align="right">Trạng thái báo giá</TableCell>
+            <TableCell align="right">Xem chi tiết</TableCell>
+            <TableCell align="right">Tải lên file báo giá </TableCell>
 
           </TableRow>
         </TableHead>
@@ -73,12 +73,12 @@ export default function ProposalList() {
               
               <TableCell align="right">
                 <button>
-                  <Link to={`/staff/proposalDetails/${row.id}`}>View</Link>
+                  <Link to={`/staff/proposalDetails/${row.id}`}>Xem</Link>
               </button>
               </TableCell>
               <TableCell align="right">
                 <button>
-                  <Link to={`/staff/proposalPdf/${row.id}`}>Upload Proposal</Link>
+                  <Link to={`/staff/proposalPdf/${row.id}`}>Cập nhật</Link>
               </button>
               </TableCell>
               

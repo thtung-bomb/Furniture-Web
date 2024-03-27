@@ -219,16 +219,16 @@ const ManageRequestDetail = () => {
             <ToastContainer />
             <HiArrowSmallLeft className="left-60 text-6xl absolute font-semibold hover:cursor-pointer" onClick={handleCloseRequest} />
 
-            <h1 className="text-3xl font-bold mb-8">Manage Request Details</h1>
+            <h1 className="text-3xl font-bold mb-8">Báo cáo sơ bộ yêu cầu thi công của khách hàng</h1>
 
             <div className="mt-8">
-                <h2 className="text-xl font-bold mb-2">Request Status</h2>
-                <p className="text-gray-700">Customer Request Status: {requestData && requestData.customerRequestStatus}</p>
-                <p className="text-gray-700">Employee Request Status: {requestData && requestData.employeeRequestStatus}</p>
+                <h2 className="text-xl font-bold mb-2">Trạng thái báo giá</h2>
+                <p className="text-gray-700">Trạng thái đơn hàng phía khách hàng: {requestData && requestData.customerRequestStatus}</p>
+                <p className="text-gray-700">Trạng thái thực của báo cáo:  {requestData && requestData.employeeRequestStatus}</p>
             </div>
 
             <div className="mt-8">
-                <h2 className="text-xl font-bold mb-2">Customer Information</h2>
+                <h2 className="text-xl font-bold mb-2">Thông tin khách hàng</h2>
                 <div className="grid grid-cols-2 gap-4">
                     <div>
                         <label className="block text-gray-700">Email:</label>
@@ -241,7 +241,7 @@ const ManageRequestDetail = () => {
                         />
                     </div>
                     <div>
-                        <label className="block text-gray-700">Phone:</label>
+                        <label className="block text-gray-700">Số điện thoại:</label>
                         <input
                             type="text"
                             value={requestData && requestData.customer.phone ? requestData.customer.phone : ''}
@@ -251,7 +251,7 @@ const ManageRequestDetail = () => {
                         />
                     </div>
                     <div>
-                        <label className="block text-gray-700">Full Name:</label>
+                        <label className="block text-gray-700">Họ tên:</label>
                         <input
                             type="text"
                             value={requestData && requestData.customer.full_name ? requestData.customer.full_name : ''}
@@ -261,7 +261,7 @@ const ManageRequestDetail = () => {
                         />
                     </div>
                     <div>
-                        <label className="block text-gray-700">ID Card:</label>
+                        <label className="block text-gray-700">Căn cước công dân:</label>
                         <input
                             type="text"
                             value={requestData && requestData.customer.id_card ? requestData.customer.id_card : ''}
@@ -271,7 +271,7 @@ const ManageRequestDetail = () => {
                         />
                     </div>
                     <div>
-                        <label className="block text-gray-700">Address:</label>
+                        <label className="block text-gray-700">Địa chỉ:</label>
                         <input
                             type="text"
                             value={requestData && requestData.customer.address ? requestData.customer.address : ''}
@@ -281,7 +281,7 @@ const ManageRequestDetail = () => {
                         />
                     </div>
                     <div>
-                        <label className="block text-gray-700">Note:</label>
+                        <label className="block text-gray-700">Ghi chú:</label>
                         <input
                             type="text"
                             value={requestData && requestData.customer.note ? requestData.customer.note : ''}
@@ -294,12 +294,12 @@ const ManageRequestDetail = () => {
             </div>
 
             <button onClick={addWorkspace} className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-4">
-                Add Workspace
+                Thêm khu vực thi công
             </button>
 
             {requestData && requestData.requestDetails.map((requestDetail, workspaceIndex) => (
                 <div key={requestDetail.id} className="mt-8">
-                    <h2 className="text-xl font-bold">{requestDetail.workspaceName}</h2>
+                    <h2 className="text-xl font-bold">Chọn khu vực thi công</h2>
                     <Select
                         value={selectedWorkspaces[requestDetail.id] || ""}
                         onChange={(selectedOption) => handleWorkspaceChange(selectedOption, requestDetail.id)}
@@ -314,10 +314,10 @@ const ManageRequestDetail = () => {
                         getOptionValue={(option) => option.value}
                     />
                     <button onClick={() => deleteWorkspace(workspaceIndex)} className="text-red-500 hover:text-red-700 font-bold">
-                        Delete Workspace
+                        Xóa khu vực thi công
                     </button>
                     <div className="mt-4">
-                        <label className="block text-gray-700">Description:</label>
+                        <label className="block text-gray-700">Mô tả:</label>
                         <input
                             type="text"
                             value={requestDetail.description}
@@ -327,7 +327,7 @@ const ManageRequestDetail = () => {
                         />
                     </div>
                     <div className="mt-4">
-                        <label className="block text-gray-700">Length:</label>
+                        <label className="block text-gray-700">Chiều dài (m):</label>
                         <input
                             type="number"
                             value={requestDetail.length}
@@ -337,7 +337,7 @@ const ManageRequestDetail = () => {
                         />
                     </div>
                     <div className="mt-4">
-                        <label className="block text-gray-700">Width:</label>
+                        <label className="block text-gray-700">Chiều rộng (m):</label>
                         <input
                             type="number"
                             value={requestDetail.width}
@@ -359,7 +359,7 @@ const ManageRequestDetail = () => {
                 </div>
             ))}
             <button onClick={handleConfirmRequest} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">
-                Confirm Request
+                Xác nhận báo giá
             </button>
         </div>
     );
