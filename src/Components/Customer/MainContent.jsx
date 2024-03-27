@@ -17,6 +17,7 @@ function MainContent() {
     const popupRef = useRef();
 
     useEffect(() => {
+
         const fetchRequests = async () => {
             try {
                 const response = await getRequestByCustomer(currentPage, 6, token);

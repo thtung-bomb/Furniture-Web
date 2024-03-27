@@ -9,7 +9,7 @@ import {
 } from '@ant-design/icons';
 const { Header, Content, Sider } = Layout;
 import MainContent from './MainContent.jsx';
-
+import QuotationHistory from './QuotationHistory.jsx';
 
 function Sidebar() {
 
@@ -57,6 +57,9 @@ function Sidebar() {
                     <Menu.Item key="ApprovalQuotationList" icon={<UploadOutlined />}>
                         <span>Approval Quotation List</span>
                     </Menu.Item>
+                    <Menu.Item key="History" icon={<UploadOutlined />}>
+                        <span>Lịch Sử</span>
+                    </Menu.Item>
                 </Menu>
             </Sider>
             <Layout>
@@ -95,6 +98,8 @@ function Sidebar() {
                         <div>Proposal List</div>
                     ) : currentPage === 'ApprovalQuotationList' ? (
                         <ApprovalList />
+                    ) : currentPage === 'History' ? (
+                        <QuotationHistory />
                     ) : (
                         <div>Content of Proposal List or other pages...</div>
                     )}
