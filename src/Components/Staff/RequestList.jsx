@@ -117,10 +117,10 @@ export default function RequestList() {
         <TableHead>
           <TableRow>
             <TableCell>ID</TableCell>
-            <TableCell align="right">Estimated Price</TableCell>
-            <TableCell align="right">Customer Name</TableCell>
-            <TableCell align="right">Request St</TableCell>
-            <TableCell align="right">View Details</TableCell>
+            <TableCell align="right">Giá dự kiến</TableCell>
+            <TableCell align="right">Tên khách hàng</TableCell>
+            <TableCell align="right">Trạng thái báo giá</TableCell>
+            <TableCell align="right">Xem thông tin</TableCell>
 
           </TableRow>
         </TableHead>
@@ -139,7 +139,7 @@ export default function RequestList() {
               <TableCell align="right">{row.customerRequestStatus}</TableCell>
               <TableCell align="right">
                 <button>
-                  <Link to={`/staff/requestDetails/${row.id}`}>View</Link>
+                  <Link to={`/staff/requestDetails/${row.id}`}>Xem</Link>
                 </button>
               </TableCell>
             </TableRow>

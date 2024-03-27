@@ -18,6 +18,7 @@ function RequestDetail({ project, close }) {
     const requestDetail = project.requestDetails;
     const proposal = project.proposal;
     const [productDetails, setProductDetails] = useState({}); // State to store product details
+    console.log(proposal);
 
     const handleConfirm = async (proposalId) => {
         try {
@@ -33,7 +34,7 @@ function RequestDetail({ project, close }) {
         }
         // console.log("Clicked");
     };
-
+    
     const handleReject = async (proposalId) => {
         try {
             await rejectProposal(proposalId);
@@ -44,13 +45,13 @@ function RequestDetail({ project, close }) {
             toast.error('Failed to reject proposal. Please try again later.');
         }
     };
-
+    console.log(proposal.file_path);
     return (
 
-        <Popper open={true} transition className='fixed overflow-y-scroll'>
+        <Popper open={true} transition className='fixed '>
             {({ TransitionProps }) => (
                 <Fade {...TransitionProps} timeout={350}>
-                    <Box className='border-[2px] w-screen h-screen bg-white rounded-lg shadow-lg z-50'>
+                    <Box className='border-[2px] w-screen h-5/6 bg-white overflow-y-scroll rounded-lg shadow-lg z-50'>
                         <button onClick={close} className='absolute text-6xl ml-72 top-1 right-4 px-5 py-3 text-cyan-800 font-semibold hover:text-sky-600'>&times;</button>
                         <div className='flex flex-col w-2/3 justify-center p-8'>
                             <h1 className='font-bold text-4xl text-cyan-800'>Customer Information</h1>

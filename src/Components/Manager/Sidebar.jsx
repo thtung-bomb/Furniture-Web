@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Layout, Menu, Button } from 'antd';
+import ApprovalList from '../Staff/ApprovalList.jsx';
 import {
     MenuUnfoldOutlined,
     MenuFoldOutlined,
@@ -31,10 +32,7 @@ function Sidebar() {
         return <div>Proposal List</div>;
     };
 
-    const ApprovalList = () => {
-        // Implement ApprovalList component or route here
-        return <div>Approval Quotation List</div>;
-    };
+   
 
 
     return (

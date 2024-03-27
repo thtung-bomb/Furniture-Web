@@ -101,7 +101,7 @@ function Login() {
         <div className='h-[60em] flex items-center justify-center w-screen bg-[url("../../src/assets/image/main_home.jpg")]' >
             <form onSubmit={handleLogin} >
                 <div className='bg-[#054c73] rounded-md shadow-md w-80 p-16'>
-                    <h2 className='text-white text-6xl font-bold mb-6 text-center'>Login</h2>
+                    <h2 className='text-white text-6xl font-bold mb-6 text-center'>Đăng nhập</h2>
                     <div className='mb-4'>
                         <label className='text-white block mb-1'>Email</label>
                         <input type="text" value={username} onChange={(e) => setUsername(e.target.value)}

@@ -1,7 +1,7 @@
 import { display } from "@mui/system";
 import React, { useState, useEffect } from "react";
 
-const ProductTable = ({ products, onDeleteProduct, onEditQuantity, onEditNote, onAddProduct, selectedWorkspace }) => {
+const ProductTableNonEdit = ({ products, onDeleteProduct, onEditQuantity, onEditNote, onAddProduct, selectedWorkspace }) => {
     const [productDetails, setProductDetails] = useState([]);
     const [productList, setProductList] = useState([]);
 
@@ -58,7 +58,7 @@ const ProductTable = ({ products, onDeleteProduct, onEditQuantity, onEditNote, o
                     <th className="p-2">Giá(vnd)</th>
                     <th className="p-2">Tổng cộng</th>
                     <th className="p-2">Ghi chú</th>
-                    <th className="p-2">Actions</th>
+                    {/* <th className="p-2">Actions</th> */}
                 </tr>
             </thead>
             <tbody>
@@ -99,20 +99,20 @@ const ProductTable = ({ products, onDeleteProduct, onEditQuantity, onEditNote, o
                                     onChange={(event) => handleNoteChange(index, event)}
                                 />
                             </td>
-                            <td>
+                            {/* <td>
                                 <button onClick={() => onDeleteProduct(index)}>Xóa</button>
-                            </td>
+                            </td> */}
                         </tr>
                     );
                 })}
-                <tr>
+                {/* <tr>
                     <td colSpan="7">
                         <button onClick={onAddProduct}>Thêm sản phẩm</button>
                     </td>
-                </tr>
+                </tr> */}
             </tbody>
         </table>
     );
 };
 
-export default ProductTable;
+export default ProductTableNonEdit;
