@@ -94,9 +94,7 @@ function MainContent() {
                                             request.customerRequestStatus === 'CONSTRUCTION_REJECTED' ? 'text-red-600' :
                                                 'text-yellow-600'
                                         }`}>
-                                        {request.customerRequestStatus === 'CONSTRUCTION_IN_PROGRESS' ? 'Đang xử lý' :
-                                            request.customerRequestStatus === 'REQUESTED' ? 'Đã gửi báo giá' :
-                                                request.customerRequestStatus}
+                                        {request.customerRequestStatusDescription}
                                     </span>
                                 </Typography>
                                 <Typography variant="h6" color="text.secondary">

@@ -71,7 +71,7 @@ function ManagerProjectHD() {
                                 key={project.id}>
                                 <TableCell style={{ fontSize: '10px', fontWeight: '500' }}> {project.id}</TableCell>
                                 <TableCell style={{ fontSize: '10px', fontWeight: '500', color: '#B8860B' }}>
-                                    {project.employeeRequestStatus === 'PROPOSAL_AWAITING_APPROVAL' ? 'WAITING APPROVAL' : ''}
+                                    {project.employeeRequestStatusDescription}
                                 </TableCell>
                                 <TableCell style={{ fontSize: '10px', fontWeight: '500' }}>{project.price} VND</TableCell>
                                 <TableCell style={{ fontSize: '10px', fontWeight: '600', cursor: 'pointer', color: '#483D8B', transition: 'color 0.3s' }}

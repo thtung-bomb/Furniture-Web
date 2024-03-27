@@ -8,6 +8,7 @@ import { useParams } from 'react-router-dom'; // Import useParams để trích x
 import { useNavigate } from 'react-router-dom';
 
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import axios from 'axios';
 
 
 
@@ -51,6 +52,7 @@ function ProposalPdf() {
         console.error("Error uploading file:", error);
       });
   };
+
   const handleBackToList = async () => {
     try {
       await fetch(`http://localhost:8080/api/v1/request/auth/${id}/lock`, {
@@ -60,93 +62,127 @@ function ProposalPdf() {
           'Content-Type': 'application/json'
         }
       });
-    //   setShowForm(false);
+      //   setShowForm(false);
       navigate('/staff'); // Redirect to proposalList
     } catch (error) {
       console.error('Error locking request:', error);
     }
   };
+
   const listAllFiles = () => {
     listAll(fileUploadRef)
       .then((response) => {
+        const urls = []; // Tạo một mảng để tích lũy các URL
         response.items.forEach((item) => {
           getDownloadURL(item)
             .then((url) => {
-              setPdfUrl(url);
+              urls.push(url); // Thêm URL vào mảng
             })
             .catch((error) => {
               console.error("Error getting download URL:", error);
             });
         });
+        // Sau khi tất cả các URL đã được thu thập, gán mảng URL cho pdfUrl
+        setPdfUrl(urls);
+        console.log("url: ", urls);
       })
       .catch((error) => {
         console.error("Error listing files:", error);
       });
   };
 
-  const adjustProposal = () => {
-    if (!pdfUrl) {
+
+  const adjustProposal = async () => {
+    if (!pdfUrl || pdfUrl.length === 0) {
       alert("No PDF uploaded yet");
       return;
     }
 
-    const requestBody = {
-        filename: fileName, // Use fileName state for file name
-        filePath: pdfUrl,
-        price: price
-      };
+    const lastPdfUrl = pdfUrl[pdfUrl.length - 1];
+    console.log('id: ', id);
+    console.log("last link", lastPdfUrl);
 
-    fetch(`http://localhost:8080/api/v1/request/auth/${id}/uploadProposal`, {
-      method: 'PATCH',
+    const parsedPrice = parseFloat(price);
+
+
+    const requestBody = {
+      file_name: fileName, // Use fileName state for file name
+      file_path: lastPdfUrl,
+      price: parsedPrice
+    };
+
+    console.log("request body", requestBody);
+
+    await axios.patch(`http://localhost:8080/api/v1/request/auth/${id}/uploadProposal`, requestBody, {
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}` // Thêm token vào tiêu đề
-      },
-      body: JSON.stringify(requestBody)
-    })
-    .then(response => {
-      if (response.ok) {
-        alert("Proposal adjusted successfully");
-        navigate('/staff/proposalList'); 
-      } else {
-        throw new Error('Failed to adjust proposal');
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
       }
     })
-    .catch(error => {
-      console.error('Error adjusting proposal:', error);
-    });
+      .then(response => {
+        if (response.ok) {
+          alert("Proposal adjusted successfully");
+          navigate('/staff/proposalList');
+        } else {
+          throw new Error('Failed to adjust proposal');
+        }
+      })
+      .catch(error => {
+        console.error('Error adjusting proposal:', error);
+      });
+
+
+    // fetch(`http://localhost:8080/api/v1/request/auth/${id}/uploadProposal`, {
+    //   method: 'PATCH',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     'Authorization': `Bearer ${token}` // Thêm token vào tiêu đề
+    //   },
+    //   body: JSON.stringify(requestBody)
+    // })
+    //   .then(response => {
+    //     if (response.ok) {
+    //       alert("Proposal adjusted successfully");
+    //       navigate('/staff/proposalList');
+    //     } else {
+    //       throw new Error('Failed to adjust proposal');
+    //     }
+    //   })
+    //   .catch(error => {
+    //     console.error('Error adjusting proposal:', error);
+    //   });
   };
 
   return (
     <div className='proposalBox'>
-        <div className="fileUploadBox">
-            <input type="file" onChange={(event) => { setFileUpload(event.target.files[0]) }} />
-            <button className='buttonUpload' onClick={uploadFile}>Upload File</button>
+      <div className="fileUploadBox">
+        <input type="file" onChange={(event) => { setFileUpload(event.target.files[0]) }} />
+        <button className='buttonUpload' onClick={uploadFile}>Upload File</button>
 
-        </div>
-        <div className="mainConttentBox">
+      </div>
+      <div className="mainConttentBox">
         <label htmlFor="fileNameInput">File Name:</label>
-            <input id="fileNameInput" className='fileNameInput'
-                type="text"
-                value={fileName}
-                onChange={(event) => setFileName(event.target.value)}
-                placeholder="Enter File Name"
-            />
-            <label htmlFor="priceInput">Standard Price:</label>
-            <input id="priceInput" className='priceInput'
-                type="number"
-                value={price}
-                onChange={(event) => setPrice(event.target.value)}
-                placeholder="Enter Price"
-            />
+        <input id="fileNameInput" className='fileNameInput'
+          type="text"
+          value={fileName}
+          onChange={(event) => setFileName(event.target.value)}
+          placeholder="Enter File Name"
+        />
+        <label htmlFor="priceInput">Standard Price:</label>
+        <input id="priceInput" className='priceInput'
+          type="number"
+          value={price}
+          onChange={(event) => setPrice(event.target.value)}
+          placeholder="Enter Price"
+        />
 
-        </div>
-    
-      <button className='buttonAdjust' onClick={adjustProposal}>Save</button>
-      
+      </div>
+
+      <button className='buttonAdjust' onClick={adjustProposal}>Lưu</button>
+
       <button className='back-button' onClick={handleBackToList}>Back to List</button>
-    
-      
+
+
       {pdfUrl && (
         <iframe className='pdfBox' src={pdfUrl} title="PDF Viewer" width="80%" height="500px" />
       )}

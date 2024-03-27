@@ -69,10 +69,10 @@ function RequestDetail({ project, close }) {
                         </div>
                         <div className='mx-8'>
                             <h1 className='font-bold text-4xl text-cyan-800'>Project</h1>
-                            <h1 className='text-2xl text-cyan-800'><span className='font-bold'>Project Id: </span><span>{project.id}</span></h1>
-                            <h1 className='text-xl text-cyan-800'><span className='font-bold'>Status: </span>
+                            <h1 className='text-2xl text-cyan-800'><span className='font-bold'>Id: </span><span>{project.id}</span></h1>
+                            <h1 className='text-xl text-cyan-800'><span className='font-bold'>Trạng Thái: </span>
                                 <span className='text-yellow-700'>
-                                    {project.employeeRequestStatus === 'PROPOSAL_AWAITING_APPROVAL' ? 'WAITING APPROVAL' : ''}
+                                    {project.employeeRequestStatusDescription}
                                 </span>
                             </h1>
 
@@ -101,7 +101,7 @@ function RequestDetail({ project, close }) {
                                                     <TableBody>
                                                         {item.products.map((product) => (
                                                             <TableRow key={item.workspace}>
-                                                                <TableCell align='center'>{product.productId}</TableCell>
+                                                                <TableCell align='center'>{product.productName}</TableCell>
                                                                 <TableCell align='center'>{product.quantity}</TableCell>
                                                             </TableRow>
                                                         ))}
@@ -120,8 +120,8 @@ function RequestDetail({ project, close }) {
                             <p className='text-2xl text-cyan-800'>
                                 <span className='font-semibold'>Code: </span>{proposal.id}</p>
                             <p><span className='text-cyan-800'>
-                                <span className='font-bold'>Status:</span> </span> <span className='text-xl text-yellow-700'>
-                                    {proposal.employeeStatus}
+                                <span className='font-bold'>Trạng thái:</span> </span> <span className='text-xl text-yellow-700'>
+                                    {proposal.employeeStatusDescription}
                                 </span></p>
 
                             <iframe
@@ -136,11 +136,11 @@ function RequestDetail({ project, close }) {
                             <div className='text-center mb-8'>
                                 <button onClick={() => handleConfirm(proposal.id)} className='w-1/3 px-5 py-3 bg-cyan-700 
                                 text-white font-semibold text-2xl hover:bg-cyan-800 rounded-full'>
-                                    <span>Confirm Proposal</span>
+                                    <span>Đồng ý</span>
                                 </button>
                                 <button onClick={() => handleReject(proposal.id)} className='w-1/3 px-5 py-3 bg-cyan-700 
                                 text-white font-semibold text-2xl hover:bg-cyan-800 rounded-full'>
-                                    <span>Reject Request</span>
+                                    <span>Từ chối</span>
                                 </button>
                             </div>
                         </div>
