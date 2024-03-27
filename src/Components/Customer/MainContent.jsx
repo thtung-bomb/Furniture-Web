@@ -66,7 +66,7 @@ function MainContent() {
         <div className='flex flex-col gap-5 border-[2px] h-full'>
 
             {/* Button add new Request */}
-            <div className="p-20 border-gray-800">
+            <div className="p-20 border-gray-800 w-full">
                 <div className="grid grid-cols-2 gap-4 mb-4 rounded-full">
                     <Link to='manager' className='w-[135px]'>
                         <button className='bg-cyan-600 px-6 py-4 text-xl text-white rounded-3xl 

@@ -264,14 +264,14 @@ function Project() {
 
     return (
 
-        <div className="container p-4 bg-white">
+        <div className="bg-white w-screen m-0 h-full overscroll-auto p-6">
             <ToastContainer />
-            <HiArrowSmallLeft className="left-60 text-6xl absolute font-semibold hover:cursor-pointer" onClick={handleCloseRequest} />
+            <HiArrowSmallLeft className=" z-10 right-14  text-6xl static font-semibold hover:cursor-pointer" onClick={handleCloseRequest} />
 
-            <h1 className="text-3xl font-bold mb-8">Quản lí báo giá</h1>
+            <h1 className="text-6xl font-bold mb-8">Quản lí báo giá</h1>
 
-            <div className="mt-8">
-                <h2 className="text-xl font-bold mb-2">Thông tin khách hàng</h2>
+            <div className="mt-8  overflow-auto">
+                <h2 className="text-4xl font-bold mb-2">Thông tin khách hàng</h2>
                 <div className="grid grid-cols-2 gap-4">
                     <div>
                         <label className="block text-gray-700">Email:</label>
