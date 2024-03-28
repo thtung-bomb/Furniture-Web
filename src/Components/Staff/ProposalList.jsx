@@ -73,12 +73,12 @@ export default function ProposalList() {
               <TableCell align="right">
                 <button>
                   <Link to={`/staff/proposalDetails/${row.id}`}>Xem</Link>
-              </button>
+                </button>
               </TableCell>
               <TableCell align="right">
                 <button>
                   <Link to={`/staff/proposalPdf/${row.id}`}>Cập nhật</Link>
-              </button>
+                </button>
               </TableCell>
 
             </TableRow>

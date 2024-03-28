@@ -1,6 +1,8 @@
 import { Autocomplete, ButtonBase, Table, TableBody, TableCell, TableHead, TableRow, TextField } from '@mui/material';
 import React, { useEffect, useState } from 'react'
 import { fetchAvailableProducts, fetchAvailableWorkspace } from './http';
+import { ToastContainer } from 'react-toastify';
+import { toast } from 'react-hot-toast';
 
 function CreateRequest() {
 
@@ -59,6 +61,7 @@ function CreateRequest() {
         // Kiểm tra xem các trường cần thiết đã được điền hay chưa
         if (!workspaceName || !lengthh || !width || !quantity || !description) {
             console.log('Vui lòng điền đầy đủ thông tin.');
+            toast.arguments('Vui lòng điền đầy đủ thông tin.');
             return;
         }
 
@@ -107,7 +110,7 @@ function CreateRequest() {
 
     return (
         <div>
-
+            <ToastContainer />
             {/* Customer Info */}
             <div className='flex flex-col gap-4'>
                 <section>
@@ -268,7 +271,7 @@ function CreateRequest() {
                             </TableRow>
                         </TableBody>
                     </Table>
-                    <button className='px-10 py-5' type='submit'>Submit Form</button>
+                    <button className='px-10 py-5' type='submit'>Xác nhận</button>
                 </form>
             </div>
         </div>

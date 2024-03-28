@@ -217,7 +217,7 @@ const ProposalDetails = () => {
   return (
     <div className="container mx-auto p-4 pointer-events-none">
       <ToastContainer />
-      <HiArrowSmallLeft className="left-60 text-6xl absolute font-semibold hover:cursor-pointer pointer-events-auto" onClick={handleCloseRequest} />
+      <HiArrowSmallLeft className="left-10 text-6xl absolute font-semibold hover:cursor-pointer pointer-events-auto" onClick={handleCloseRequest} />
 
       <h1 className="text-3xl font-bold mb-8">Báo cáo sơ bộ yêu cầu thi công của khách hàng</h1>
 

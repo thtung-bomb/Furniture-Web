@@ -9,7 +9,6 @@ import { useNavigate } from 'react-router-dom';
 
 import axios from 'axios';
 
-
 const firebaseConfig = {
   apiKey: "AIzaSyAERDdSWHvq2YAPdBmoToq8i6iNQXHd5lc",
   authDomain: "uploadingfile-b4b39.firebaseapp.com",
