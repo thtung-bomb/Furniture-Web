@@ -22,14 +22,16 @@ function Login() {
                 password: password
             });
 
+            console.log("login response", response.data);
+
             const token = response.data.token;
 
             // Lưu token vào cookie với tên là 'token' và thời gian sống là 1 ngày
             Cookies.set('token', token, { expires: 1 });
             // Điều hướng tới trang chính hoặc trang sau khi đăng nhập thành công
             // history.push('/home');
-            toast.success('Đăng nhập thành công !')
             getUserProfileAndRedirect();
+            toast.success('Đăng nhập thành công !')
             // navigate("/customer");
         } catch (error) {
             toast.error('Tài khoản hoặc mật khẩu sai !');
@@ -41,11 +43,11 @@ function Login() {
         const user = JSON.parse(localStorage.getItem('customer'));
         console.log("user info: ", user);
         const roles = user.roles;
-
+        console.log(roles);
         // Tạo một biến để lưu trữ vai trò cao nhất
         let highestRole = "";
 
-        // Lặp qua mảng roles để tìm vai trò cao nhất
+        // Lặp qua mảng roles để tìm vai trò cao nhất   
         roles.forEach(element => {
             if (element.includes("ROLE_ADMIN")) {
                 highestRole = "ROLE_ADMIN";
@@ -84,18 +86,12 @@ function Login() {
                 }
             });
             localStorage.setItem('customer', JSON.stringify(response.data));
+            console.log(localStorage.setItem('customer', JSON.stringify(response.data)));
             // console.log(localStorage.getItem('customer'));
         } catch (error) {
             // toast.info('Infor was load');
         }
     }
-
-    const handleKeyPress = (event) => {
-        console.log(event.key);
-        if (event.key === 'Enter') {
-            handleLogin();
-        }
-    };
 
     return (
         <div className='h-screen flex items-center justify-center w-screen bg-[url("../../src/assets/image/main_home.jpg")]' >

@@ -9,7 +9,7 @@ import {
 } from '@ant-design/icons';
 const { Header, Content, Sider } = Layout;
 import MainContent from './MainContent.jsx';
-
+import QuotationHistory from './QuotationHistory.jsx';
 
 function Sidebar() {
 
@@ -51,11 +51,8 @@ function Sidebar() {
                     <Menu.Item key="RequestList" icon={<UserOutlined />}>
                         <span>Danh sách báo giá</span>
                     </Menu.Item>
-                    <Menu.Item key="ProposalList" icon={<VideoCameraOutlined />}>
-                        <span> Dashboard</span>
-                    </Menu.Item>
-                    <Menu.Item key="ApprovalQuotationList" icon={<UploadOutlined />}>
-                        <span>Danh sách đã tổng duyệt</span>
+                    <Menu.Item key="History" icon={<UploadOutlined />}>
+                        <span>Lịch Sử</span>
                     </Menu.Item>
                 </Menu>
             </Sider>
@@ -84,7 +81,7 @@ function Sidebar() {
                     {currentPage === 'MainContent' ? (
                         <div>
                             {userInfo ? (
-                                <div className='w-screen'>Xin chào, {userInfo.fullName}</div>
+                                <div className='w-screen'>Xin chào, {userInfo.full_name}</div>
                             ) : (
                                 <div>Loading...</div>
                             )}
@@ -95,6 +92,8 @@ function Sidebar() {
                         <div>Proposal List</div>
                     ) : currentPage === 'ApprovalQuotationList' ? (
                         <ApprovalList />
+                    ) : currentPage === 'History' ? (
+                        <QuotationHistory />
                     ) : (
                         <div>404 không tìm thấy trang...</div>
                     )}

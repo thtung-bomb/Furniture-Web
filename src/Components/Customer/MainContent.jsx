@@ -17,6 +17,7 @@ function MainContent() {
     const popupRef = useRef();
 
     useEffect(() => {
+
         const fetchRequests = async () => {
             try {
                 const response = await getRequestByCustomer(currentPage, 6, token);
@@ -105,6 +106,7 @@ function MainContent() {
                             </CardContent>
                         </Card>
                         {/* End Card display card {id, status, price} */}
+
                     </div>
                 ))}
             </div>
@@ -114,7 +116,7 @@ function MainContent() {
             {selectedRequest && isPopupOpen && (
                 <div ref={popupRef} className="fixed top-0 left-0 w-screen h-screen bg-gray-900 bg-opacity-50 flex 
                 items-center justify-center z-50 overflow-scroll">
-                    <div className="bg-slate-100 p-10 rounded-2xl w-1/2 relative m-auto z-50 w-5/6">
+                    <div className="bg-slate-100 p-10 rounded-2xl relative m-auto z-50 w-5/6">
                         <button onClick={handleClosePopup} className='px-4 py-3 text-zinc-400 hover:text-zinc-800 
                         m-2 rounded-full font-bold absolute top-0 left-0 text-2xl'>
                             &#10005;

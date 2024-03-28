@@ -103,7 +103,7 @@ const MainStaffPage = () => {
                     {currentPage === 'MainContent' ? (
                         <div>
                             {userInfo ? (
-                                <div>Xin chào, {userInfo.fullName}</div>
+                                <div>Xin chào, {userInfo.full_name}</div>
                             ) : (
                                 <div>Loading...</div>
                             )}

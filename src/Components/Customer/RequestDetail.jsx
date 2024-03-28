@@ -132,7 +132,7 @@ function RequestDetail({ request }) {
                             </DialogContentText>
                         </DialogContent>
                         <DialogActions>
-                            <Button onClick={() => handleConfirm(request.proposal.id)}>Đồng ý</Button>
+                            <Button onClick={handleConfirm(request.proposal.id)}>Đồng ý</Button>
                             <Button onClick={handleClose} autoFocus>Hủy</Button>
                         </DialogActions>
                     </Dialog>

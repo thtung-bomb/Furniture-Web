@@ -7,10 +7,7 @@ import './ProposalPdf.css';
 import { useParams } from 'react-router-dom'; // Import useParams để trích xuất id từ URL param
 import { useNavigate } from 'react-router-dom';
 
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import axios from 'axios';
-
-
 
 const firebaseConfig = {
   apiKey: "AIzaSyAERDdSWHvq2YAPdBmoToq8i6iNQXHd5lc",
@@ -31,8 +28,7 @@ function ProposalPdf() {
   const [price, setPrice] = useState(0);
   const [fileName, setFileName] = useState('');
   const { id } = useParams();
-
-  const lastUrl = pdfUrl[pdfUrl.length - 1];
+  const [showUrl, setShowUrl] = useState('');
 
   const fileUploadRef = ref(storage, "file/");
   const token = Cookies.get('token'); // Trích xuất token từ cookie
@@ -106,6 +102,7 @@ function ProposalPdf() {
 
     const parsedPrice = parseFloat(price);
 
+    setShowUrl(lastPdfUrl);
 
     const requestBody = {
       file_name: fileName, // Use fileName state for file name
@@ -133,26 +130,6 @@ function ProposalPdf() {
         console.error('Error adjusting proposal:', error);
       });
 
-
-    // fetch(`http://localhost:8080/api/v1/request/auth/${id}/uploadProposal`, {
-    //   method: 'PATCH',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     'Authorization': `Bearer ${token}` // Thêm token vào tiêu đề
-    //   },
-    //   body: JSON.stringify(requestBody)
-    // })
-    //   .then(response => {
-    //     if (response.ok) {
-    //       alert("Proposal adjusted successfully");
-    //       navigate('/staff/proposalList');
-    //     } else {
-    //       throw new Error('Failed to adjust proposal');
-    //     }
-    //   })
-    //   .catch(error => {
-    //     console.error('Error adjusting proposal:', error);
-    //   });
   };
 
   return (
@@ -185,10 +162,10 @@ function ProposalPdf() {
       <button className='back-button' onClick={handleBackToList}>Quay lại</button>
 
       {
-  pdfUrl && pdfUrl.length > 0 && (
-    <iframe className='pdfBox' src={pdfUrl[pdfUrl.length - 1]} title="PDF Viewer" width="80%" height="500px" />
-  )
-}
+        showUrl && (
+          <iframe className='pdfBox' src={showUrl} title="PDF Viewer" width="80%" height="500px" />
+        )
+      }
 
     </div>
   );

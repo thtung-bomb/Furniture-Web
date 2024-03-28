@@ -301,7 +301,7 @@ const ManageRequestDetail = () => {
             {requestData && requestData.requestDetails.map((requestDetail, workspaceIndex) => (
                 <div key={requestDetail.id} className="mt-8">
                     <h2 className="text-xl font-bold">Chọn khu vực thi công</h2>
-                    <Select 
+                    <Select
                         value={selectedWorkspaces[requestDetail.id] || ""}
                         onChange={(selectedOption) => handleWorkspaceChange(selectedOption, requestDetail.id)}
                         options={availableWorkspaces.map((workspace) => ({

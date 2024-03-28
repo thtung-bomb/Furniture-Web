@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Layout, Menu, Button } from 'antd';
 import ApprovalList from '../Staff/ApprovalList.jsx';
 import {
@@ -21,7 +21,9 @@ function Sidebar() {
     const borderRadiusLG = '16px'; // Define your border radius here
     const userInfo = JSON.parse(localStorage.getItem('customer')); // Set your user information here
 
-    console.log("userInfo: " + userInfo);
+    useEffect(() => {
+        console.log("UserInfo: " + userInfo);
+    }, [userInfo]);
 
     const handlePageChange = (key) => {
         setCurrentPage(key);
@@ -32,7 +34,7 @@ function Sidebar() {
         return <div>Proposal List</div>;
     };
 
-   
+
 
 
     return (
@@ -85,7 +87,7 @@ function Sidebar() {
                     {currentPage === 'MainContent' ? (
                         <div>
                             {userInfo ? (
-                                <div className='w-screen'>Xin chào, {userInfo.fullName}</div>
+                                <div className='w-screen'>Xin chào, {userInfo.full_name}</div>
                             ) : (
                                 <div>Loading...</div>
                             )}
