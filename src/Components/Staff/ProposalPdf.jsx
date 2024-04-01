@@ -34,21 +34,29 @@ function ProposalPdf() {
   const token = Cookies.get('token'); // Trích xuất token từ cookie
   const navigate = useNavigate();
 
-  const uploadFile = () => {
-    if (fileUpload === null) {
-      alert("Please select a file");
-      return;
-    }
+  // const uploadFile = () => {
+  //   if (fileUpload === null) {
+  //     alert("Please select a file");
+  //     return;
+  //   }
 
-    const fileRef = ref(storage, `file/${fileUpload.name}_${uuidv4()}`);
-    uploadBytes(fileRef, fileUpload)
-      .then(() => {
-        console.log("File uploaded successfully");
-        listAllFiles();
-      })
-      .catch((error) => {
-        console.error("Error uploading file:", error);
-      });
+  //   const fileRef = ref(storage, `file/${fileUpload.name}_${uuidv4()}`);
+  //   uploadBytes(fileRef, fileUpload)
+  //     .then(() => {
+  //       console.log("File uploaded successfully");
+  //       listAllFiles();
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error uploading file:", error);
+  //     });
+  // };
+
+  const uploadFile = async () => {
+    console.log(fileUpload);
+    const storageRef = ref(storage, `file/${fileUpload.name}_${uuidv4()}`);
+    const response = await uploadBytes(storageRef, fileUpload);
+    const downloadURL = await getDownloadURL(response.ref);
+    setShowUrl(downloadURL);
   };
 
   const handleBackToList = async () => {
@@ -91,22 +99,24 @@ function ProposalPdf() {
 
 
   const adjustProposal = async () => {
-    if (!pdfUrl || pdfUrl.length === 0) {
-      alert("No PDF uploaded yet");
-      return;
-    }
+    // if (!pdfUrl || pdfUrl.length === 0) {
+    //   alert("No PDF uploaded yet");
+    //   return;
+    // }
 
-    const lastPdfUrl = pdfUrl[pdfUrl.length - 1];
-    console.log('id: ', id);
-    console.log("last link", lastPdfUrl);
+    // const lastPdfUrl = pdfUrl[pdfUrl.length - 1];
+    // console.log('id: ', id);
+    // console.log("last link", lastPdfUrl);
 
+
+    // setShowUrl(lastPdfUrl);
+
+    console.log("Show URL: ", showUrl);
     const parsedPrice = parseFloat(price);
-
-    setShowUrl(lastPdfUrl);
 
     const requestBody = {
       file_name: fileName, // Use fileName state for file name
-      file_path: lastPdfUrl,
+      file_path: showUrl,
       price: parsedPrice
     };
 
@@ -119,12 +129,8 @@ function ProposalPdf() {
       }
     })
       .then(response => {
-        if (response.ok) {
-          alert("Proposal adjusted successfully");
-          navigate('/staff/proposalList');
-        } else {
-          throw new Error('Failed to adjust proposal');
-        }
+        alert("Proposal adjusted successfully");
+        navigate('/staff/proposalList');
       })
       .catch(error => {
         console.error('Error adjusting proposal:', error);

@@ -81,7 +81,7 @@ function Sidebar() {
                     {currentPage === 'MainContent' ? (
                         <div>
                             {userInfo ? (
-                                <div className='w-screen'>Xin chào, {userInfo.full_name}</div>
+                                <div className='w-screen'>Xin chào, {userInfo.fullName}</div>
                             ) : (
                                 <div>Loading...</div>
                             )}

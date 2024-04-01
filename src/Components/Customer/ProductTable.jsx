@@ -74,7 +74,7 @@ const ProductTable = ({ products, onDeleteProduct, onEditQuantity, onEditNote, o
                                     value={productData.productId}
                                     onChange={(event) => handleProductChange(index, event)}
                                 >
-                                    <option value="">sản phẩm<meta http-equiv="X-UA-Compatible" content="ie=edge" /></option>
+                                    <option value="">sản phẩm<meta httpEquiv="X-UA-Compatible" content="ie=edge" /></option>
                                     {productList.map((detail) => (
                                         <option key={detail.id} value={detail.id}>
                                             {detail.name}
@@ -83,10 +83,7 @@ const ProductTable = ({ products, onDeleteProduct, onEditQuantity, onEditNote, o
                                 </select>
                             </td>
                             <td>
-
                                 {description}
-
-
                             </td>
                             <td>
                                 <input

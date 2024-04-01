@@ -21,9 +21,9 @@ function ManagerProjectHD() {
         const fetchData = async () => {
             try {
                 //PROPOSAL_AWAITING_APPROVAL
-                const response = await getRequestOfCustomer(currentPage, 9, 'PROPOSAL_AWAITING_APPROVAL');
+                const response = await getRequestOfCustomer(currentPage, 6, 'PROPOSAL_AWAITING_APPROVAL');
                 setProjects(response); // Lưu kết quả từ API vào state
-                console.log(response);
+                // console.log(response);
             } catch (error) {
                 console.log(error);
             }
