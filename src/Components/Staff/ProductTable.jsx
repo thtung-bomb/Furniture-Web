@@ -83,10 +83,7 @@ const ProductTable = ({ products, onDeleteProduct, onEditQuantity, onEditNote, o
                                 </select>
                             </td>
                             <td>
-
                                 {description}
-
-
                             </td>
                             <td>
                                 <input
