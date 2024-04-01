@@ -74,7 +74,7 @@ const ProductTable = ({ products, onDeleteProduct, onEditQuantity, onEditNote, o
                                     value={productData.productId}
                                     onChange={(event) => handleProductChange(index, event)}
                                 >
-                                    <option value="">sản phẩm<meta http-equiv="X-UA-Compatible" content="ie=edge" /></option>
+                                    <option value="">sản phẩm<meta httpEquiv="X-UA-Compatible" content="ie=edge" /></option>
                                     {productList.map((detail) => (
                                         <option key={detail.id} value={detail.id}>
                                             {detail.name}
@@ -83,7 +83,10 @@ const ProductTable = ({ products, onDeleteProduct, onEditQuantity, onEditNote, o
                                 </select>
                             </td>
                             <td>
+
                                 {description}
+
+
                             </td>
                             <td>
                                 <input
@@ -102,14 +105,14 @@ const ProductTable = ({ products, onDeleteProduct, onEditQuantity, onEditNote, o
                                 />
                             </td>
                             <td>
-                                <button onClick={() => onDeleteProduct(index)}><span className='decoration-neutral-400 font-bold'>Xóa</span></button>
+                                <button onClick={() => onDeleteProduct(index)}><span className='decoration-neutral-400 font-bold text-red-600'>Xóa</span></button>
                             </td>
                         </tr>
                     );
                 })}
                 <tr>
                     <td colSpan="7">
-                        <button onClick={onAddProduct}>Thêm sản phẩm</button>
+                        <button className="text-sky-600 font-bold text-2xl p-4" onClick={onAddProduct}>Thêm sản phẩm</button>
                     </td>
                 </tr>
             </tbody>

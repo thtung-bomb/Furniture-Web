@@ -14,7 +14,7 @@ import MainContent from './Components/Customer/MainContent.jsx';
 import Manager from './Components/Customer/Manager.jsx';
 import Project from './Components/Customer/Project.jsx';
 import RequestList from './Components/Staff/RequestList.jsx';
-import RequestDetails from './Components/Staff/RequestDetails.jsx';
+// import RequestDetails from './Components/Staff/RequestDetails.jsx';
 import ProposalList from './Components/Staff/ProposalList.jsx';
 import NoPage from './Components/Staff/NoPage.jsx';
 import Staff from './Components/Staff/Staff.jsx';

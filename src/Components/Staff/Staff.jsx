@@ -3,7 +3,7 @@ import React from "react";
 // import MainContent from "./MainContent";
 import { Routes, Route } from "react-router-dom";
 import RequestList from "./RequestList";
-import RequestDetails from "./RequestDetails";
+// import RequestDetails from "./RequestDetails";
 import ProposalList from "./ProposalList";
 import ProposalDetails from "./ProposalDetails";
 import ProposalPdf from "./ProposalPdf";
