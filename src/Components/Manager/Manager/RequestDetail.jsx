@@ -18,7 +18,7 @@ function RequestDetail({ project, close }) {
     const requestDetail = project.requestDetails;
     const proposal = project.proposal;
     const [productDetails, setProductDetails] = useState({}); // State to store product details
-    console.log(proposal);
+    console.log("Proposal Detail: ", proposal);
 
     const handleConfirm = async (proposalId) => {
         try {
@@ -34,7 +34,7 @@ function RequestDetail({ project, close }) {
         }
         // console.log("Clicked");
     };
-    
+
     const handleReject = async (proposalId) => {
         try {
             await rejectProposal(proposalId);
@@ -133,7 +133,7 @@ function RequestDetail({ project, close }) {
                                 className='mx-auto'
                             />
 
-                            <h1 className='font-bold text-6xl text-cyan-800 flex justify-end p-3.5'><span className="text-6xl">Tổng giá: </span> {project.price}</h1>
+                            <h1 className='font-bold text-6xl text-cyan-800 flex justify-end p-3.5'><span className="text-6xl">Tổng giá: </span> {proposal.price}</h1>
                             <div className='text-center mb-8'>
                                 <button onClick={() => handleConfirm(proposal.id)} className='w-1/3 px-5 py-3 bg-cyan-700 
                                 text-white font-semibold text-2xl hover:bg-cyan-800 rounded-full'>

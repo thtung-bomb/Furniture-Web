@@ -1,7 +1,8 @@
 import { display } from "@mui/system";
 import React, { useState, useEffect } from "react";
 
-const ProductTable = ({ products, onDeleteProduct, onEditQuantity, onEditNote, onAddProduct, selectedWorkspace }) => {
+const ProductTable = ({ products, onDeleteProduct, onEditQuantity, onEditNote, onAddProduct,
+    selectedWorkspace, onHeightChange, onWidthChange, onLengthChange }) => {
     const [productDetails, setProductDetails] = useState([]);
     const [productList, setProductList] = useState([]);
 
@@ -39,6 +40,21 @@ const ProductTable = ({ products, onDeleteProduct, onEditQuantity, onEditNote, o
         onEditNote(index, newNote);
     };
 
+    const handleLengthChange = (index, event) => {
+        const newLength = parseInt(event.target.value);
+        onLengthChange(index, newLength);
+    }
+
+    const handleWidthChange = (index, event) => {
+        const newWidth = parseInt(event.target.value);
+        onWidthChange(index, newWidth);
+    }
+
+    const handleHeightChange = (index, event) => {
+        const newHeight = parseInt(event.target.value);
+        onHeightChange(index, newHeight);
+    }
+
     const handleProductChange = (index, event) => {
         const productId = parseInt(event.target.value);
         const updatedProducts = [...products];
@@ -55,6 +71,9 @@ const ProductTable = ({ products, onDeleteProduct, onEditQuantity, onEditNote, o
                     <th className="p-2">Tên sản phẩm</th>
                     <th className="p-2">Mô tả</th>
                     <th className="p-2">Số lượng</th>
+                    <th className="p-2">Chiều dài</th>
+                    <th className="p-2">Chiều rộng</th>
+                    <th className="p-2">Chiều cao</th>
                     <th className="p-2">Giá(vnd)</th>
                     <th className="p-2">Tổng cộng</th>
                     <th className="p-2">Ghi chú</th>
@@ -89,7 +108,32 @@ const ProductTable = ({ products, onDeleteProduct, onEditQuantity, onEditNote, o
                                 <input
                                     type="number"
                                     value={product.quantity}
+                                    min={1}
                                     onChange={(event) => handleQuantityChange(index, event)}
+                                />
+                            </td>
+                            <td>
+                                <input
+                                    type="number"
+                                    value={product.lengthh}
+                                    min={1}
+                                    onChange={(event) => handleLengthChange(index, event)}
+                                />
+                            </td>
+                            <td>
+                                <input
+                                    type="number"
+                                    value={product.width}
+                                    min={1}
+                                    onChange={(event) => handleWidthChange(index, event)}
+                                />
+                            </td>
+                            <td>
+                                <input
+                                    type="number"
+                                    value={product.height}
+                                    min={1}
+                                    onChange={(event) => handleHeightChange(index, event)}
                                 />
                             </td>
                             <td>{price || 0}</td>
