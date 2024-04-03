@@ -3,8 +3,14 @@ import './Header.css';
 import { Link } from 'react-router-dom';
 import Register from '../../Register/Register';
 import Dropdown from './Dropdown';
+import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
+
 
 function Header({ handleLogin }) {
+
+    const userInfo = JSON.parse(localStorage.getItem('customer'));
+    const navigate = useNavigate();
 
     const [isLoginOpen, setLoginOpen] = useState(false);
 
@@ -12,6 +18,35 @@ function Header({ handleLogin }) {
     const toggleLogin = () => {
         setLoginOpen(!isLoginOpen);
     };
+
+
+    const handleLogout = () => {
+        localStorage.removeItem('customer');
+        Cookies.remove('token');
+        navigate('/');
+        window.location.reload();
+    }
+
+    const renderButton = () => {
+        if (userInfo) {
+            // Nếu có thông tin userInfo, hiển thị nút Đăng xuất
+            return (
+                <button className='bg-[#054c73] px-8 py-4 text-white rounded-full' onClick={handleLogout}>
+                    Đăng xuất
+                </button>
+            );
+        } else {
+            // Ngược lại, hiển thị nút Đăng nhập
+            return (
+                <Link to='login'>
+                    <button className='bg-[#054c73] px-8 py-4 text-white rounded-full'>
+                        Đăng nhập
+                    </button>
+                </Link>
+            );
+        }
+    };
+
 
     return (
 
@@ -71,11 +106,7 @@ function Header({ handleLogin }) {
                     </div>
 
                     {/* End Quote Button */}
-                    <Link to='login'>
-                        <button className='bg-[#054c73] px-8 py-4 text-white rounded-full'>
-                            Đăng nhập 
-                        </button>
-                    </Link>
+                    {renderButton()}
 
                     {/* Header mobile screen */}
                     <div className="header__mobile-menu">
