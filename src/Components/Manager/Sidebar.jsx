@@ -20,7 +20,6 @@ function Sidebar() {
     const colorBgContainer = '#fff'; // Define your color here
     const borderRadiusLG = '16px'; // Define your border radius here
     const userInfo = JSON.parse(localStorage.getItem('customer')); // Set your user information here
-
     useEffect(() => {
         console.log("UserInfo: " + userInfo);
     }, [userInfo]);
@@ -87,7 +86,7 @@ function Sidebar() {
                     {currentPage === 'MainContent' ? (
                         <div>
                             {userInfo ? (
-                                <div className='w-screen'>Xin chào, {userInfo.full_name}</div>
+                                <div className='w-screen'>Xin chào, {userInfo.fullName}</div>
                             ) : (
                                 <div>Loading...</div>
                             )}
