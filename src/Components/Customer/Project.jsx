@@ -298,7 +298,7 @@ function Project() {
             <ToastContainer />
             <HiArrowSmallLeft className=" z-10 right-14  text-6xl static font-semibold hover:cursor-pointer" onClick={handleCloseRequest} />
 
-            <h1 className="text-6xl font-bold mb-8">Quản lí báo giá</h1>
+            <h1 className="text-6xl font-bold mb-8 text-center">Quản lí báo giá</h1>
 
             <div className="mt-8  overflow-auto">
                 <h2 className="text-4xl font-bold mb-2">Thông tin khách hàng</h2>
@@ -336,61 +336,66 @@ function Project() {
                 </div>
             </div>
 
-            <button onClick={addWorkspace} className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-4">
-                Thêm khu vực thi công
-            </button>
+
 
             {requestData && requestData.requestDetails.map((requestDetail, workspaceIndex) => (
-                <div key={requestDetail.id} className="mt-8">
-                    <h2 className="text-xl font-bold">{requestDetail.workspaceName}</h2>
-                    <Select
-                        value={selectedWorkspaces[requestDetail.id] || ""}
-                        onChange={(selectedOption) => handleWorkspaceChange(selectedOption, requestDetail.id)}
-                        options={availableWorkspaces.map((workspace) => ({
-                            value: workspace.id,
-                            label: workspace.workspace_name,
-                            workspace_name: workspace.workspace_name
-                        }))}
-                        placeholder="Chọn khu vực thi công"
-                        className="w-1/2 mr-2 border border-gray-300 rounded px-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500"
-                        getOptionLabel={(option) => option.label}
-                        getOptionValue={(option) => option.value}
-                    />
-                    <button onClick={() => deleteWorkspace(workspaceIndex)} className="text-red-500 hover:text-red-700 font-bold">
-                        Xóa khu vực
+                <div key={requestDetail.id} className="mt-8  border-green-500 border-2 p-20">
+                    <div className="grid grid-cols-2 gap-4 ">
+                        <div className="mt-4">
+                            <h2 className="text-3xl font-bold m-3">Chọn khu vựa thi công</h2>
+                            <Select
+                                value={selectedWorkspaces[requestDetail.id] || ""}
+                                onChange={(selectedOption) => handleWorkspaceChange(selectedOption, requestDetail.id)}
+                                options={availableWorkspaces.map((workspace) => ({
+                                    value: workspace.id,
+                                    label: workspace.workspace_name,
+                                    workspace_name: workspace.workspace_name
+                                }))}
+                                placeholder="Chọn khu vực thi công"
+                                className="w-full mr-2 border border-gray-300 rounded px-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500"
+                                getOptionLabel={(option) => option.label}
+                                getOptionValue={(option) => option.value}
+                            />
+                        </div>
+
+                        
+                        <div className="mt-4">
+                            <label className="block text-gray-700">Mô tả:</label>
+                            <input
+                                type="text"
+                                value={requestDetail.description}
+                                onChange={(e) => handleWorkspaceDescriptionChange(workspaceIndex, e.target.value)}
+                                placeholder="Workspace Description"
+                                className="h-3/5 border border-gray-300 rounded px-4 py-2 mt-2 w-full focus:outline-none focus:border-blue-500"
+                            />
+                        </div>
+                        <div className="mt-4">
+                            <label className="block text-gray-700">Chiều dài (m):</label>
+                            <input
+                                type="number"
+                                value={requestDetail.length}
+                                min={0}
+                                onChange={(e) => handleWorkspaceLengthChange(workspaceIndex, e.target.value)}
+                                placeholder="Workspace Length"
+                                className="border border-gray-300 rounded px-4 py-2 mt-2 w-full focus:outline-none focus:border-blue-500"
+                            />
+                        </div>
+                        <div className="mt-4">
+                            <label className="block text-gray-700">Chiều rộng (m):</label>
+                            <input
+                                type="number"
+                                value={requestDetail.width}
+                                min={0}
+                                onChange={(e) => handleWorkspaceWidthChange(workspaceIndex, e.target.value)}
+                                placeholder="Workspace Width"
+                                className="border border-gray-300 rounded px-4 py-2 mt-2 w-full focus:outline-none focus:border-blue-500"
+                            />
+                        </div>
+
+                    </div>
+                    <button onClick={() => deleteWorkspace(workspaceIndex)} className="text-red-500 hover:text-red-700 text-3xl font-bold">
+                        Xóa khu vực thi công
                     </button>
-                    <div className="mt-4">
-                        <label className="block text-gray-700">Mô tả:</label>
-                        <input
-                            type="text"
-                            value={requestDetail.description}
-                            onChange={(e) => handleWorkspaceDescriptionChange(workspaceIndex, e.target.value)}
-                            placeholder="Workspace Description"
-                            className="border border-gray-300 rounded px-4 py-2 mt-2 w-full focus:outline-none focus:border-blue-500"
-                        />
-                    </div>
-                    <div className="mt-4">
-                        <label className="block text-gray-700">Chiều dài (m):</label>
-                        <input
-                            type="number"
-                            value={requestDetail.length}
-                            min={0}
-                            onChange={(e) => handleWorkspaceLengthChange(workspaceIndex, e.target.value)}
-                            placeholder="Workspace Length"
-                            className="border border-gray-300 rounded px-4 py-2 mt-2 w-full focus:outline-none focus:border-blue-500"
-                        />
-                    </div>
-                    <div className="mt-4">
-                        <label className="block text-gray-700">Chiều rộng (m):</label>
-                        <input
-                            type="number"
-                            value={requestDetail.width}
-                            min={0}
-                            onChange={(e) => handleWorkspaceWidthChange(workspaceIndex, e.target.value)}
-                            placeholder="Workspace Width"
-                            className="border border-gray-300 rounded px-4 py-2 mt-2 w-full focus:outline-none focus:border-blue-500"
-                        />
-                    </div>
 
                     <ProductTable
                         products={requestDetail.products}
@@ -403,9 +408,13 @@ function Project() {
                     />
                 </div>
             ))}
-            <button onClick={handleConfirmRequest} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">
-                Confirm Request
+            <button onClick={addWorkspace} className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-4">
+                Thêm khu vực thi công
             </button>
+            <button onClick={handleConfirmRequest} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">
+                Xác nhận báo giá
+            </button>
+
         </div>
 
     );

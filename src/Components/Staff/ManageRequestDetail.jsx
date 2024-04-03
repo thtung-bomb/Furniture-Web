@@ -7,7 +7,7 @@ import { toast } from "react-hot-toast";
 import { ToastContainer } from "react-toastify";
 import { HiArrowSmallLeft } from "react-icons/hi2";
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
-// import './RequestDetails.css';
+import './ManageRequest.css';
 
 
 const ManageRequestDetail = () => {
@@ -317,7 +317,7 @@ const ManageRequestDetail = () => {
 
                     <div className="grid grid-cols-2 gap-4 ">
                         <div className="mt-4">
-                            <h2 className="text-4xl font-bold mb-4">Chọn khu vực thi công</h2>
+                            <h2 className="text-3xl font-bold m-3">Chọn khu vực thi công</h2>
                             <Select
                                 value={selectedWorkspaces[requestDetail.id] || ""}
                                 onChange={(selectedOption) => handleWorkspaceChange(selectedOption, requestDetail.id)}

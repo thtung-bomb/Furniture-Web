@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Layout, Menu, Button } from 'antd';
 import ApprovalList from '../Staff/ApprovalList.jsx';
+import ManageProduct from './ManageProduct.jsx';
 import {
     MenuUnfoldOutlined,
     MenuFoldOutlined,
@@ -38,7 +39,7 @@ function Sidebar() {
 
 
     return (
-        <Layout className='h-screen'>
+        <Layout className='h-screen '>
             <Sider trigger={null} collapsible collapsed={collapsed} style={{ background: '#FFFFFF', color: '#000000' }} >
                 <div className="demo-logo-vertical" />
                 <Menu
@@ -59,9 +60,12 @@ function Sidebar() {
                     <Menu.Item key="ApprovalQuotationList" icon={<UploadOutlined />}>
                         <span>Đã phê duyệt</span>
                     </Menu.Item>
+                    <Menu.Item key="ManageProduct">
+                        <span>Quản lí sản phẩm</span>
+                    </Menu.Item>
                 </Menu>
             </Sider>
-            <Layout>
+            <Layout >
                 <Header style={{ padding: 0, background: colorBgContainer }}>
                     <Button
                         type="text"
@@ -74,7 +78,7 @@ function Sidebar() {
                         }}
                     />
                 </Header>
-                <Content
+                <Content className ='h-5/6 overflow-auto'
                     style={{
                         margin: '24px 16px',
                         padding: 24,
@@ -98,6 +102,8 @@ function Sidebar() {
                         <ManagerContent />
                     ) : currentPage === 'ApprovalQuotationList' ? (
                         <ApprovalList />
+                    ) : currentPage === 'ManageProduct' ? (
+                        <ManageProduct />
                     ) : (
                         <div>Content of Proposal List or other pages...</div>
                     )}
