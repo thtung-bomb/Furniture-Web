@@ -192,7 +192,7 @@ const ManageRequestDetail = () => {
             if (!response.ok) {
                 throw new Error('Failed to unlock');
             }
-            
+
             console.log("Unlocked");
             navigate('/staff');
             // Handle success response as needed
@@ -223,12 +223,12 @@ const ManageRequestDetail = () => {
             <ToastContainer />
             <HiArrowSmallLeft className="left-10 text-6xl absolute font-semibold hover:cursor-pointer" onClick={handleCloseRequest} />
 
-            <h1 className="text-3xl font-bold mb-8 text-6xl text-center mb-6">Chi tiết yêu cầu báo giá của khách hàng</h1>
+            <h1 className="font-bold mb-8 text-6xl text-center">Chi tiết yêu cầu báo giá của khách hàng</h1>
 
             <div className="mt-8">
                 <h2 className="text-4xl font-bold mb-2 ">Trạng thái báo giá</h2>
                 <p className="text-gray-700 text-3xl m-3">Trạng thái đơn hàng phía khách hàng:
-                    < br />
+                    <br />
                     <span className="text-lime-500 font-bold">
                         {requestData && requestData.customerRequestStatus}
                     </ span>
@@ -237,7 +237,6 @@ const ManageRequestDetail = () => {
                 <p className="text-gray-700 text-3xl m-3">Trạng thái thực của báo cáo:
                     <br />
                     <span className="text-sky-500 font-bold">
-
                         {requestData && requestData.employeeRequestStatus}
                     </span>
                 </p>
@@ -309,7 +308,7 @@ const ManageRequestDetail = () => {
                 </div>
             </div>
 
-            
+
 
             {requestData && requestData.requestDetails.map((requestDetail, workspaceIndex) => (
                 <div key={requestDetail.id} className="mt-8  border-green-500 border-2 p-20">
@@ -367,7 +366,7 @@ const ManageRequestDetail = () => {
                                 Xóa khu vực thi công
                             </button>
                         </div>
-                        
+
 
 
                     </div>

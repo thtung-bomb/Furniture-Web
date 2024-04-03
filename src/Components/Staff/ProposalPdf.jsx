@@ -108,7 +108,6 @@ function ProposalPdf() {
     // console.log('id: ', id);
     // console.log("last link", lastPdfUrl);
 
-
     // setShowUrl(lastPdfUrl);
 
     console.log("Show URL: ", showUrl);

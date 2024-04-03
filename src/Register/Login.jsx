@@ -64,15 +64,19 @@ function Login() {
         switch (highestRole) {
             case "ROLE_ADMIN":
                 navigate("/admin");
+                window.location.reload();
                 break;
             case "ROLE_MANAGER":
                 navigate("/manager");
+                window.location.reload();
                 break;
             case "ROLE_STAFF":
                 navigate("/staff");
+                window.location.reload();
                 break;
             case "ROLE_CUSTOMER":
                 navigate("/customer");
+                window.location.reload();
                 break;
         }
     }
