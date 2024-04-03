@@ -153,7 +153,7 @@ function RequestDetail({ request }) {
                                     <TableCell align="right">Khu vực thi công</TableCell>
                                     <TableCell align="right">Chiều dài (m)</TableCell>
                                     <TableCell align="right">Chiều rộng (m)</TableCell>
-                                    <TableCell align="justify">Sản phẩm</TableCell>
+                                    <TableCell align="center">Sản phẩm</TableCell>
                                     <TableCell align="right">Mô tả</TableCell>
                                 </TableRow>
                             </TableHead>
@@ -168,10 +168,14 @@ function RequestDetail({ request }) {
                                             <TableCell>
                                                 <Table>
                                                     <TableBody>
+                                                        <TableRow>
+                                                            <TableCell align='center'>Tên sản phẩm</TableCell>
+                                                            <TableCell align='center'>Số lượng</TableCell>
+                                                        </TableRow>
                                                         {requested.products.map((product, index) => (
                                                             <TableRow key={index}>
-                                                                <TableCell>{product.productName}</TableCell>
-                                                                <TableCell>{product.quantity}</TableCell>
+                                                                <TableCell align='center'>{product.productName}</TableCell>
+                                                                <TableCell align='center'>{product.quantity}</TableCell>
                                                             </TableRow>
                                                         ))}
                                                     </TableBody>

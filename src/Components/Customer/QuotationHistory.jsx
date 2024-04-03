@@ -42,6 +42,16 @@ function QuotationHistory() {
         setOpenModal(false);
     };
 
+    function formatdate(data) {
+        // Chuyển đổi ngày thành chuỗi định dạng dd/MM/yyyy
+        console.log(data);
+        let date = new Date(data);
+        let day = ("0" + date.getDate()).slice(-2);
+        let month = ("0" + (date.getMonth() + 1)).slice(-2);
+        let year = date.getFullYear();
+        return `${day}/${month}/${year}`;
+    }
+
     const fetchHistoryData = async (requestId) => {
         try {
             const customerToken = Cookies.get('token');
@@ -139,7 +149,7 @@ function QuotationHistory() {
                                             <TableCell align="right">{historyItem.
                                                 requestStatusDescription
                                             }</TableCell>
-                                            <TableCell align="right">{historyItem.dateTime}</TableCell>
+                                            <TableCell align="right">{formatdate(historyItem.dateTime)}</TableCell>
                                         </TableRow>
                                     ))
                                 ))}
@@ -152,9 +162,6 @@ function QuotationHistory() {
             <Pagination count={20} onChange={handlePageChange} color="standard" size="large" />
 
         </div>
-
-
-
     );
 }
 

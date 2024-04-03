@@ -47,6 +47,7 @@ export async function fetchAvailableProducts(workspaceName) {
  */
 export async function getRequestByCustomer(pageNumber, pageSize, customerToken) {
     try {
+        // /api/v1/request/auth/customer?page=<pageInt>&pageSize=<pageSize>
         const response = await axios.get(`http://localhost:8080/api/v1/request/auth/customer?page=${pageNumber}&pageSize=${pageSize}`, {
             headers: {
                 'Authorization': 'Bearer ' + customerToken,

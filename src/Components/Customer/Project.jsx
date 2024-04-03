@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom"; // Import useNavigate
-import ProductTable from "../Staff/ProductTable.jsx";
+import ProductTable from "./ProductTable.jsx";
 import Cookies from "js-cookie";
 import Select from "react-select";
 import { toast } from "react-hot-toast";
@@ -85,34 +85,35 @@ function Project() {
         }));
     };
 
-    // const addProduct = (workspaceIndex) => {
-    //     const updatedRequestData = { ...requestData };
-    //     const products = [...updatedRequestData.requestDetails[workspaceIndex].products, { productId: "", quantity: 0, description: "" }];
-    //     updatedRequestData.requestDetails[workspaceIndex].products = products;
-    //     updatedRequestData.requestDetails[workspaceIndex].workspaceName = selectedWorkspaces[updatedRequestData.requestDetails[workspaceIndex].id].label;
-    //     setRequestData(updatedRequestData);
-    // };
-
     const addProduct = (workspaceIndex) => {
         const updatedRequestData = { ...requestData };
-        const workspaceName = updatedRequestData.requestDetails[workspaceIndex].workspaceName;
-
-        // Tìm kiếm workspace có workspaceName tương ứng trong availableWorkspaces
-        const workspace = availableWorkspaces.find(workspace => workspace.workspace_name === workspaceName);
-
-        if (workspace) {
-            // Tạo một sản phẩm mới với productId, quantity, và description mặc định
-            const newProduct = { productId: "", quantity: 0, description: "" };
-
-            // Thêm sản phẩm mới vào danh sách sản phẩm của workspace tương ứng
-            updatedRequestData.requestDetails[workspaceIndex].products.push(newProduct);
-
-            // Cập nhật requestData
-            setRequestData(updatedRequestData);
-        } else {
-            console.error(`Workspace "${workspaceName}" not found in availableWorkspaces.`);
-        }
+        const products = [...updatedRequestData.requestDetails[workspaceIndex].products, { productId: "", quantity: 0, length: 0, width: 0, height: 0, description: "" }];
+        updatedRequestData.requestDetails[workspaceIndex].products = products;
+        updatedRequestData.requestDetails[workspaceIndex].workspaceName = selectedWorkspaces[updatedRequestData.requestDetails[workspaceIndex].id].label;
+        setRequestData(updatedRequestData);
     };
+
+    // const addProduct = (workspaceIndex) => {
+
+    //     const updatedRequestData = { ...requestData };
+    //     const workspaceName = updatedRequestData.requestDetails[workspaceIndex].workspaceName;
+
+    //     // Tìm kiếm workspace có workspaceName tương ứng trong availableWorkspaces
+    //     const workspace = availableWorkspaces.find(workspace => workspace.workspace_name === workspaceName);
+
+    //     if (workspace) {
+    //         // Tạo một sản phẩm mới với productId, quantity, và description mặc định
+    //         const newProduct = { productId: "", quantity: 0, description: "" };
+
+    //         // Thêm sản phẩm mới vào danh sách sản phẩm của workspace tương ứng
+    //         updatedRequestData.requestDetails[workspaceIndex].products.push(newProduct);
+
+    //         // Cập nhật requestData
+    //         setRequestData(updatedRequestData);
+    //     } else {
+    //         console.error(`Workspace "${workspaceName}" not found in availableWorkspaces.`);
+    //     }
+    // };
 
 
     const deleteWorkspace = (workspaceIndex) => {
@@ -147,6 +148,24 @@ function Project() {
         updatedRequestData.requestDetails[workspaceIndex].products[productIndex].description = newNote;
         setRequestData(updatedRequestData);
     };
+
+    const handleProductLengthChange = (workspaceIndex, productIndex, newLength) => {
+        const updatedRequestData = { ...requestData };
+        updatedRequestData.requestDetails[workspaceIndex].products[productIndex].length = newLength;
+        setRequestData(updatedRequestData);
+    }
+
+    const handleProductWidthChange = (workspaceIndex, productIndex, newWidth) => {
+        const updatedRequestData = { ...requestData };
+        updatedRequestData.requestDetails[workspaceIndex].products[productIndex].width = newWidth;
+        setRequestData(updatedRequestData);
+    }
+
+    const handleProductHeightChange = (workspaceIndex, productIndex, newHeight) => {
+        const updatedRequestData = { ...requestData };
+        updatedRequestData.requestDetails[workspaceIndex].products[productIndex].height = newHeight;
+        setRequestData(updatedRequestData);
+    }
 
     const handleProductChange = (workspaceIndex, productIndex, productId) => {
         const updatedRequestData = { ...requestData };
@@ -403,6 +422,9 @@ function Project() {
                         onEditQuantity={(productIndex, newQuantity) => handleEditQuantity(workspaceIndex, productIndex, newQuantity)}
                         onEditNote={(productIndex, newNote) => handleEditNote(workspaceIndex, productIndex, newNote)}
                         onAddProduct={() => addProduct(workspaceIndex)}
+                        onLengthChange={(productIndex, newLength) => handleProductLengthChange(workspaceIndex, productIndex, newLength)}
+                        onWidthChange={(productIndex, newWidth) => handleProductWidthChange(workspaceIndex, productIndex, newWidth)}
+                        onHeightChange={(productIndex, newHeight) => handleProductHeightChange(workspaceIndex, productIndex, newHeight)}
                         selectedWorkspace={selectedWorkspaces[requestDetail.id] ? selectedWorkspaces[requestDetail.id].label : ""}
                         handleProductChange={(productIndex, productId) => handleProductChange(workspaceIndex, productIndex, productId)}
                     />
