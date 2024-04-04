@@ -163,17 +163,62 @@ export default function ManageProduct() {
         setIsEditProductModalOpen(true); // Mở modal chỉnh sửa sản phẩm
     };
 
+    // const handleEditInputChange = (e) => {
+    //     const { name, value } = e.target;
+    //     const updatedProduct = { ...selectedProduct, [name]: value };
+    //     setSelectedProduct(updatedProduct);
+    //     console.log(updatedProduct); // Kiểm tra giá trị của updatedProduct sau khi cập nhật
+    // };
+
     const handleEditInputChange = (e) => {
         const { name, value } = e.target;
         const updatedProduct = { ...selectedProduct, [name]: value };
         setSelectedProduct(updatedProduct);
-        console.log(updatedProduct); // Kiểm tra giá trị của updatedProduct sau khi cập nhật
     };
-    
 
 
-    const handleUpdateProduct = async (productID) => {
+    // const handleUpdateProduct = async (productID) => {
+    //     try {
+    //         console.log(selectedProduct);
+    //         const token = getToken(); // Lấy token từ cookie
+    //         const { id, name, price, description, unit } = selectedProduct;
+    //         const priceValue = parseFloat(price); // Chuyển đổi giá trị thành số
+    //         console.log(selectedProduct);
+    //         const response = await axios.put(`http://localhost:8080/api/v1/product/update/${productID}`, { id, name, price: priceValue, description, unit }, {
+    //             headers: {
+    //                 'Authorization': `Bearer ${token}`
+    //             }
+    //         });
+
+    //         // console.log('Update Product Response:', response.data);
+    //         // Thực hiện các bước cần thiết sau khi cập nhật sản phẩm (ví dụ: làm mới dữ liệu)
+    //         if (response.status === 200) {
+    //             alert('Cập nhật sản phẩm thành công!');
+    //             // setIsEditProductModalOpen(false); // Đóng modal sau khi cập nhật
+    //             // window.location.reload();
+    //         }
+
+    //     } catch (error) {
+    //         console.error('Error:', error);
+    //     }
+    // };
+
+    const handleUpdateProduct = async (productId) => {
         try {
+<<<<<<< HEAD
+            console.log(productId);
+            console.log(`http://localhost:8080/api/v1/product/update/${productId}`);
+
+            const token = getToken();
+            const { id, name, price, description, unit } = selectedProduct;
+            const priceValue = parseFloat(price);
+            const response = await axios.put(`http://localhost:8080/api/v1/product/update/${productId}`,
+                { id, name, price: priceValue, description, unit },
+                {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+=======
             console.log(productID);
             console.log(selectedProduct);
             const token = getToken(); // Lấy token từ cookie
@@ -182,15 +227,13 @@ export default function ManageProduct() {
             const response = await axios.put(`http://localhost:8080/api/v1/product/update/${productID}`, { name, price, description }, {
                 headers: {
                     'Authorization': `Bearer ${token}`
+>>>>>>> 51eb6dc60698798907d42c021e01b02d94ec9ceb
                 }
-            });
+            );
             console.log('Update Product Response:', response.data);
-            // Thực hiện các bước cần thiết sau khi cập nhật sản phẩm (ví dụ: làm mới dữ liệu)
             alert('Cập nhật sản phẩm thành công!');
-            setIsEditProductModalOpen(false); // Đóng modal sau khi cập nhật
-            window.location.reload();
-
-
+            // setIsEditProductModalOpen(false);
+            // window.location.reload();
         } catch (error) {
             console.error('Error:', error);
         }

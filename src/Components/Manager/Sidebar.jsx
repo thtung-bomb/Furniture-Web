@@ -78,7 +78,7 @@ function Sidebar() {
                         }}
                     />
                 </Header>
-                <Content className ='h-5/6 overflow-auto'
+                <Content className='h-5/6 overflow-auto'
                     style={{
                         margin: '24px 16px',
                         padding: 24,

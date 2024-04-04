@@ -103,7 +103,7 @@ function Login() {
                 <div className='bg-[#054c73] rounded-md shadow-md w-80 p-16'>
                     <h2 className='text-white text-4xl font-bold p-3 text-center'>Đăng nhập</h2>
                     <div className='mb-4'>
-                        <label className='text-white block mb-1 text-3xl'>Email</label>
+                        <label className='text-white block mb-1 text-3xl'>Tên đăng nhập</label>
                         <input type="text" value={username} onChange={(e) => setUsername(e.target.value)}
                             className='text-2xl w-full px-3 py-2 rounded-md bg-white 
                         text-gray-800 focus:outline-none focus:ring

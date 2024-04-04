@@ -69,7 +69,7 @@ const ProductTableNonEdit = ({ products, onDeleteProduct, onEditQuantity, onEdit
                     const { price, description } = selectedProduct || {};
                     return (
                         <tr key={index} style={{ textAlign: "center" }}>
-                            <td >
+                            <td>
                                 <select
                                     value={productData.productId}
                                     onChange={(event) => handleProductChange(index, event)}
@@ -94,6 +94,13 @@ const ProductTableNonEdit = ({ products, onDeleteProduct, onEditQuantity, onEdit
                             </td>
                             <td>{price || 0}</td>
                             <td>{calculateTotal(product.quantity, price || 0)}</td>
+                            <td>
+                                <input
+                                    type="text"
+                                    value={product.description || ""}
+                                    onChange={(event) => handleNoteChange(index, event)}
+                                />
+                            </td>
                             <td>
                                 <input
                                     type="text"

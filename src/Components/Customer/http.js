@@ -119,3 +119,7 @@ export async function customerRejectProposal(proposalId) {
         throw error; // Ném lỗi để xử lý ở nơi gọi
     }
 }
+
+export const fetchProductById = async (productId) => {
+    return await axios.get(`http://localhost:8080/api/v1/product/${productId}`);
+}

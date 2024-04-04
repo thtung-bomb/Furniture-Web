@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 
 const ProductTable = ({ products, onDeleteProduct, onEditQuantity, onEditNote, onAddProduct,
     selectedWorkspace, onHeightChange, onWidthChange, onLengthChange }) => {
+
     const [productDetails, setProductDetails] = useState([]);
     const [productList, setProductList] = useState([]);
 
@@ -71,6 +72,28 @@ const ProductTable = ({ products, onDeleteProduct, onEditQuantity, onEditNote, o
         // (onDeleteProduct, onEditQuantity, onEditNote)
     };
 
+    // Kiểm tra unit của sản phẩm và hiển thị trường chiều dài, chiều rộng, chiều cao nếu cần
+    // const renderDimensionFields = (productUnit) => {
+    //     if (productUnit === 'cái') {
+    //         return (
+    //             <>
+    //                 <th className="p-2">Chiều dài</th>
+    //                 <th className="p-2">Chiều rộng</th>
+    //                 <th className="p-2">Chiều cao</th>
+    //             </>
+    //         );
+    //     }
+    //     return null;
+    // };
+
+    // useEffect(() => {
+    //     // Khi danh sách sản phẩm thay đổi, cập nhật unit của sản phẩm
+    //     if (productList.length > 0) {
+    //         const firstProductUnit = productList[0].unit;
+    //         setProductUnit(firstProductUnit);
+    //     }
+    // }, [productList]);
+
     return (
         <table className="w-full border-collapse border border-gray-300 my-3">
             <thead>
@@ -83,7 +106,7 @@ const ProductTable = ({ products, onDeleteProduct, onEditQuantity, onEditNote, o
                     <th className="p-2">Chiều cao</th>
                     <th className="p-2">Giá(vnd)</th>
                     <th className="p-2">Tổng cộng</th>
-                    <th className="p-2">Actions</th>
+                    <th className="p-2"></th>
                 </tr>
             </thead>
             <tbody>

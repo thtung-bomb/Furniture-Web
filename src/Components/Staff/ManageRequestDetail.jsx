@@ -98,6 +98,24 @@ const ManageRequestDetail = () => {
         setSelectedWorkspace(selectedOption);
     };
 
+    const handleProductLengthChange = (workspaceIndex, productIndex, newLength) => {
+        const updatedRequestData = { ...requestData };
+        updatedRequestData.requestDetails[workspaceIndex].products[productIndex].length = newLength;
+        setRequestData(updatedRequestData);
+    }
+
+    const handleProductWidthChange = (workspaceIndex, productIndex, newWidth) => {
+        const updatedRequestData = { ...requestData };
+        updatedRequestData.requestDetails[workspaceIndex].products[productIndex].width = newWidth;
+        setRequestData(updatedRequestData);
+    }
+
+    const handleProductHeightChange = (workspaceIndex, productIndex, newHeight) => {
+        const updatedRequestData = { ...requestData };
+        updatedRequestData.requestDetails[workspaceIndex].products[productIndex].height = newHeight;
+        setRequestData(updatedRequestData);
+    }
+
     const handleEditQuantity = (workspaceIndex, productIndex, newQuantity) => {
         const updatedRequestData = { ...requestData };
         updatedRequestData.requestDetails[workspaceIndex].products[productIndex].quantity = newQuantity;
@@ -380,6 +398,9 @@ const ManageRequestDetail = () => {
                         onEditQuantity={(productIndex, newQuantity) => handleEditQuantity(workspaceIndex, productIndex, newQuantity)}
                         onEditNote={(productIndex, newNote) => handleEditNote(workspaceIndex, productIndex, newNote)}
                         onAddProduct={() => addProduct(workspaceIndex)}
+                        onLengthChange={(productIndex, newLength) => handleProductLengthChange(workspaceIndex, productIndex, newLength)}
+                        onWidthChange={(productIndex, newWidth) => handleProductWidthChange(workspaceIndex, productIndex, newWidth)}
+                        onHeightChange={(productIndex, newHeight) => handleProductHeightChange(workspaceIndex, productIndex, newHeight)}
                         selectedWorkspace={selectedWorkspaces[requestDetail.id] ? selectedWorkspaces[requestDetail.id].label : ""}
                         handleProductChange={(productIndex, productId) => handleProductChange(workspaceIndex, productIndex, productId)}
                     />

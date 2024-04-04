@@ -1,7 +1,8 @@
 import { display } from "@mui/system";
 import React, { useState, useEffect } from "react";
 
-const ProductTable = ({ products, onDeleteProduct, onEditQuantity, onEditNote, onAddProduct, selectedWorkspace }) => {
+const ProductTable = ({ products, onDeleteProduct, onEditQuantity,
+    onEditNote, onAddProduct, selectedWorkspace, onHeightChange, onWidthChange, onLengthChange }) => {
     const [productDetails, setProductDetails] = useState([]);
     const [productList, setProductList] = useState([]);
 
@@ -25,8 +26,12 @@ const ProductTable = ({ products, onDeleteProduct, onEditQuantity, onEditNote, o
         }
     };
 
-    const calculateTotal = (quantity, price) => {
-        return quantity * price;
+    // const calculateTotal = (quantity, price) => {
+    //     return quantity * price;
+    // };
+
+    const calculateTotal = (quantity, length, height, price) => {
+        return Math.floor((length * height * price) + (length * height * price) * 0.1 * quantity);
     };
 
     const handleQuantityChange = (index, event) => {
@@ -38,6 +43,29 @@ const ProductTable = ({ products, onDeleteProduct, onEditQuantity, onEditNote, o
         const newNote = event.target.value;
         onEditNote(index, newNote);
     };
+
+
+
+    const handleLengthChange = (index, event) => {
+        const newLength = parseFloat(event.target.value); // Sử dụng parseFloat thay vì parseInt để chuyển đổi thành số thập phân
+        if (!isNaN(newLength)) { // Kiểm tra nếu giá trị hợp lệ
+            onLengthChange(index, newLength);
+        }
+    }
+
+    const handleWidthChange = (index, event) => {
+        const newWidth = parseFloat(event.target.value); // Sử dụng parseFloat thay vì parseInt để chuyển đổi thành số thập phân
+        if (!isNaN(newWidth)) { // Kiểm tra nếu giá trị hợp lệ
+            onWidthChange(index, newWidth);
+        }
+    }
+
+    const handleHeightChange = (index, event) => {
+        const newHeight = parseFloat(event.target.value); // Sử dụng parseFloat thay vì parseInt để chuyển đổi thành số thập phân
+        if (!isNaN(newHeight)) { // Kiểm tra nếu giá trị hợp lệ
+            onHeightChange(index, newHeight);
+        }
+    }
 
     const handleProductChange = (index, event) => {
         const productId = parseInt(event.target.value);
@@ -55,10 +83,13 @@ const ProductTable = ({ products, onDeleteProduct, onEditQuantity, onEditNote, o
                     <th className="p-2">Tên sản phẩm</th>
                     <th className="p-2">Mô tả</th>
                     <th className="p-2">Số lượng</th>
+                    <th className="p-2">Chiều dài</th>
+                    <th className="p-2">Chiều rộng</th>
+                    <th className="p-2">Chiều cao</th>
                     <th className="p-2">Giá(vnd)</th>
                     <th className="p-2">Tổng cộng</th>
                     <th className="p-2">Ghi chú</th>
-                    <th className="p-2">Actions</th>
+                    <th className="p-2"></th>
                 </tr>
             </thead>
             <tbody>
@@ -95,8 +126,29 @@ const ProductTable = ({ products, onDeleteProduct, onEditQuantity, onEditNote, o
                                     onChange={(event) => handleQuantityChange(index, event)}
                                 />
                             </td>
+                            <td>
+                                <input
+                                    type="number"
+                                    value={product.length}
+                                    onChange={(event) => handleLengthChange(index, event)}
+                                />
+                            </td>
+                            <td>
+                                <input
+                                    type="number"
+                                    value={product.width}
+                                    onChange={(event) => handleWidthChange(index, event)}
+                                />
+                            </td>
+                            <td>
+                                <input
+                                    type="number"
+                                    value={product.height}
+                                    onChange={(event) => handleHeightChange(index, event)}
+                                />
+                            </td>
                             <td>{price || 0}</td>
-                            <td>{calculateTotal(product.quantity, price || 0)}</td>
+                            <td>{calculateTotal(product.quantity, product.length, product.height, price || 0)}</td>
                             <td>
                                 <input
                                     type="text"
