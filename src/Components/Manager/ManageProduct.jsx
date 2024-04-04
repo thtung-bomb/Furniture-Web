@@ -232,7 +232,7 @@ export default function ManageProduct() {
                                         <TableCell>{product.id}</TableCell>
                                         <TableCell>{product.name}</TableCell>
                                         <TableCell>{product.description}</TableCell>
-                                        <TableCell>{product.price}</TableCell>
+                                        <TableCell>{product.price}VND</TableCell>
                                         <TableCell>
                                             <div className="flex justify-center space-x-2">
                                                 <>
@@ -361,7 +361,7 @@ export default function ManageProduct() {
                                 <TextField
                                     type="text"
                                     name="price"
-                                    value={selectedProduct.price}
+                                    value={selectedProduct.price} VND
                                     onChange={handleEditInputChange}
                                     sx={{ width: "100%", '& input': { fontSize: '16px' } }}
                                 />

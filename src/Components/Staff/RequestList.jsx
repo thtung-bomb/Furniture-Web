@@ -134,9 +134,9 @@ export default function RequestList() {
               <TableCell component="th" scope="row">
                 {row.id}
               </TableCell>
-              <TableCell align="right">{row.price}</TableCell>
+              <TableCell align="right">{row.price} VND</TableCell>
               <TableCell align="right">{row.customer.full_name}</TableCell>
-              <TableCell align="right">{row.customerRequestStatus}</TableCell>
+              <TableCell align="right">Chờ xác nhận</TableCell>
               <TableCell align="right">
                 <button>
                   <Link to={`/staff/requestDetails/${row.id}`}>Xem</Link>

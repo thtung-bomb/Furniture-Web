@@ -27,7 +27,7 @@ function Box1() {
                 {employeeSalesData.map((employee, index) => (
                     <div key={index} className={`flex justify-between items-center border-b border-gray-300 py-2 ${index !== employeeSalesData.length - 1 ? 'mb-4' : ''}`}>
                         <span className="text-2xl text-gray-900">{employee[0]}</span> {/* Tên nhân viên to hơn với text-lg và màu text-gray-900 */}
-                        <span className="text-xl text-green-500">${employee[1]}</span> {/* Doanh số to hơn với text-lg và màu text-green-500 */}
+                        <span className="text-xl text-green-500">{employee[1]} VND</span> {/* Doanh số to hơn với text-lg và màu text-green-500 */}
                     </div>
                 ))}
             </div>
