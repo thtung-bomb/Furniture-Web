@@ -10,7 +10,6 @@ import Paper from '@mui/material/Paper';
 import { getRequestOfCustomer, unlockRequest } from '../../../util/managerHandle';
 import RequestDetail from './RequestDetail';
 
-
 function ManagerProjectHD() {
 
     const [projects, setProjects] = useState([]);
@@ -36,7 +35,7 @@ function ManagerProjectHD() {
         setCurrentPage(page); // Cập nhật state currentPage khi chuyển trang
     };
 
-    console.log("Projectssss", projects);
+    console.log("Project", projects);
 
     const handleRowClick = (project) => {
         setSelectedProjects(project);

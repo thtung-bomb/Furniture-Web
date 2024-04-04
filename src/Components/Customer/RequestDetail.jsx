@@ -32,7 +32,6 @@ function RequestDetail({ request }) {
 
     const requestDetail = request.requestDetails;
     const customer = request.customer;
-    console.log("customer: ", customer);
     console.log("Request Detail", requestDetail);
 
     useEffect(() => {
@@ -119,7 +118,6 @@ function RequestDetail({ request }) {
                     {/* Popup xác nhận có chắc chắn không */}
                     <Dialog
                         open={open}
-                        onClose={handleClose}
                         aria-labelledby="alert-dialog-title"
                         aria-describedby="alert-dialog-description"
                     >
