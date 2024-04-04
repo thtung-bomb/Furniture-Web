@@ -205,7 +205,6 @@ export default function ManageProduct() {
 
     const handleUpdateProduct = async (productId) => {
         try {
-<<<<<<< HEAD
             console.log(productId);
             console.log(`http://localhost:8080/api/v1/product/update/${productId}`);
 
@@ -218,16 +217,6 @@ export default function ManageProduct() {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
-=======
-            console.log(productID);
-            console.log(selectedProduct);
-            const token = getToken(); // Lấy token từ cookie
-            const { name, price, description } = selectedProduct;
-            console.log({productID, name, price, description });
-            const response = await axios.put(`http://localhost:8080/api/v1/product/update/${productID}`, { name, price, description }, {
-                headers: {
-                    'Authorization': `Bearer ${token}`
->>>>>>> 51eb6dc60698798907d42c021e01b02d94ec9ceb
                 }
             );
             console.log('Update Product Response:', response.data);
