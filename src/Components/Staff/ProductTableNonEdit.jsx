@@ -49,7 +49,7 @@ const ProductTableNonEdit = ({ products, onDeleteProduct, onEditQuantity, onEdit
     };
 
     return (
-        <table className="w-full border-collapse border border-gray-300">
+        <table className="w-full border-collapse border border-gray-300 content-none">
             <thead>
                 <tr className="bg-gray-100">
                     <th className="p-2">Tên sản phẩm</th>
@@ -68,11 +68,12 @@ const ProductTableNonEdit = ({ products, onDeleteProduct, onEditQuantity, onEdit
                     const selectedProduct = productList.find(item => item.id === product.productId);
                     const { price, description } = selectedProduct || {};
                     return (
-                        <tr key={index} style={{textAlign:"center"}}>
+                        <tr key={index} style={{ textAlign: "center" }}>
                             <td >
                                 <select
                                     value={productData.productId}
                                     onChange={(event) => handleProductChange(index, event)}
+                                    disabled
                                 >
                                     <option value="">sản phẩm<meta http-equiv="X-UA-Compatible" content="ie=edge" /></option>
                                     {productList.map((detail) => (
@@ -88,6 +89,7 @@ const ProductTableNonEdit = ({ products, onDeleteProduct, onEditQuantity, onEdit
                                     type="number"
                                     value={product.quantity}
                                     onChange={(event) => handleQuantityChange(index, event)}
+                                    readOnly // Thêm thuộc tính readOnly
                                 />
                             </td>
                             <td>{price || 0}</td>
@@ -97,19 +99,12 @@ const ProductTableNonEdit = ({ products, onDeleteProduct, onEditQuantity, onEdit
                                     type="text"
                                     value={product.description || ""}
                                     onChange={(event) => handleNoteChange(index, event)}
+                                    readOnly // Thêm thuộc tính readOnly
                                 />
                             </td>
-                            {/* <td>
-                                <button onClick={() => onDeleteProduct(index)}>Xóa</button>
-                            </td> */}
                         </tr>
                     );
                 })}
-                {/* <tr>
-                    <td colSpan="7">
-                        <button onClick={onAddProduct}>Thêm sản phẩm</button>
-                    </td>
-                </tr> */}
             </tbody>
         </table>
     );

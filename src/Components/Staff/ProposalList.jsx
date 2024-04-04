@@ -21,6 +21,7 @@ export default function ProposalList() {
 
   useEffect(() => {
     fetchRequestDetails();
+    console.log(rows);
   }, []);
 
   const fetchRequestDetails = async () => {
@@ -68,7 +69,7 @@ export default function ProposalList() {
               </TableCell>
               <TableCell align="right">{row.price}</TableCell>
               <TableCell align="right">{row.customer?.full_name}</TableCell>
-              <TableCell align="right">{row.customerRequestStatus}</TableCell>
+              <TableCell align="right">{row.employeeRequestStatusDescription}</TableCell>
 
               <TableCell align="right">
                 <button>

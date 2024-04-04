@@ -212,7 +212,7 @@ function AdminPage() {
 
     return (
         <div className="flex">
-            
+
             <div className="flex-1 p-4">
                 <div className="mb-4">
                     <Button variant="contained" onClick={() => openModal()}>
@@ -287,42 +287,42 @@ function AdminPage() {
                                     value={selectedEmployee.email || ""}
                                     name="email"
                                     onChange={handleInputChange}
-                                    style={{ width: '600px', height: '40px', margin: '20px',padding:'10px 0' }}
+                                    style={{ width: '600px', height: '40px', margin: '20px', padding: '10px 0' }}
                                 />
                                 <TextField
                                     label="Phone"
                                     value={selectedEmployee.phone || ""}
                                     name="phone"
                                     onChange={handleInputChange}
-                                    style={{ width: '600px', height: '40px' , margin: '20px',padding:'10px 0'}}
+                                    style={{ width: '600px', height: '40px', margin: '20px', padding: '10px 0' }}
                                 />
                                 <TextField
                                     label="Full Name"
                                     value={selectedEmployee.full_name || ""}
                                     name="full_name"
                                     onChange={handleInputChange}
-                                    style={{ width: '600px', height: '40px', margin: '20px',padding:'10px 0'}}
+                                    style={{ width: '600px', height: '40px', margin: '20px', padding: '10px 0' }}
                                 />
                                 <TextField
                                     label="ID Card"
                                     value={selectedEmployee.id_card || ""}
                                     name="id_card"
                                     onChange={handleInputChange}
-                                    style={{ width: '600px', height: '40px', margin: '20px' ,padding:'10px 0'}}
+                                    style={{ width: '600px', height: '40px', margin: '20px', padding: '10px 0' }}
                                 />
                                 <TextField
                                     label="Address"
                                     value={selectedEmployee.address || ""}
                                     name="address"
                                     onChange={handleInputChange}
-                                    style={{ width: '600px', height: '40px', margin: '20px',padding:'10px 0'}}
+                                    style={{ width: '600px', height: '40px', margin: '20px', padding: '10px 0' }}
                                 />
                                 <TextField
                                     label="Username"
                                     value={selectedEmployee.username || ""}
                                     name="username"
                                     onChange={handleInputChange}
-                                    style={{ width: '600px', height: '40px' , margin: '20px',padding:'10px 0'}}
+                                    style={{ width: '600px', height: '40px', margin: '20px', padding: '10px 0' }}
                                 />
                                 <TextField
                                     label="Password"
@@ -330,9 +330,9 @@ function AdminPage() {
                                     name="password"
                                     onChange={handleInputChange}
                                     type="password"
-                                    style={{ width: '600px', height: '40px' , margin: '20px',padding:'10px 0'}}
+                                    style={{ width: '600px', height: '40px', margin: '20px', padding: '10px 0' }}
                                 />
-                                <div style={{ display: 'flex', alignItems: 'center', margin: '20px',padding:'10px 0' }}>
+                                <div style={{ display: 'flex', alignItems: 'center', margin: '20px', padding: '10px 0' }}>
                                     {roles.map(role => (
                                         <FormControlLabel
                                             key={role}
