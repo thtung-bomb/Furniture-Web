@@ -100,7 +100,7 @@ function QuotationHistory() {
                 <div className='w-full'>
                     <TableContainer component={Paper} width="100%">
                         <Table sx={{ minWidth: 1000 }} aria-label="simple table">
-                            <TableHead>
+                            <TableHead style={{backgroundColor: "#B0C4DE"}}>
                                 <TableRow>
                                     <TableCell align='center'>ID</TableCell>
                                     <TableCell align="right">Trạng Thái</TableCell>
