@@ -61,6 +61,7 @@ function RequestDetail({ request }) {
                 await customerConfirmation(proposalId);
                 toast.success('Bạn đã chấp nhận hợp đồng, công trình sẽ sớm thực hiện !');
                 handleClose();
+                window.location.reload();
                 // Thực hiện các hành động khác sau khi xác nhận thành công
             } else {
                 console.error('Proposal ID không hợp lệ.');
@@ -85,7 +86,7 @@ function RequestDetail({ request }) {
     }
 
     return (
-        <div className="p-6">
+        <div className="p-6 h-screen">
             <ToastContainer />
             {/* Customer Information */}
             <Typography variant="h2" className="text-center">Chi tiết bảng báo giá</Typography>
@@ -108,7 +109,7 @@ function RequestDetail({ request }) {
             {request.employeeRequestStatus === "MANAGER_APPROVED" && (
                 <div>
                     <h1 className='text-center text-4xl font-semibold m-9'>Hợp Đồng</h1>
-                    <iframe src={request.proposal.file_path} width={700} height={300} />
+                    <iframe src={request.proposal.file_path} width={"100%"} height={1000} />
                     <div className='mt-10'>
                         <Typography variant="h4" className="mb-4 flex gap-3 text-4xl 
                         font-semibold uppercase">Giá: <h1 className='text-indigo-950'>

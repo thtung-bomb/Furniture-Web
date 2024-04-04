@@ -77,7 +77,7 @@ function Sidebar() {
                     style={{
                         margin: '24px 16px',
                         padding: 24,
-                        minHeight: 600,
+                        minHeight: 1200,
                         background: colorBgContainer,
                         borderRadius: borderRadiusLG,
                     }}

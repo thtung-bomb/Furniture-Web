@@ -74,7 +74,7 @@ const MainStaffPage = () => {
                         <span>Chờ đề xuất</span>
                     </Menu.Item>
                     <Menu.Item key="ApprovalQuotationList" icon={<UploadOutlined />}>
-                        <span>Chờ phê duyệt</span>
+                        <span>Đã phê duyệt</span>
                     </Menu.Item>
                 </Menu>
             </Sider>

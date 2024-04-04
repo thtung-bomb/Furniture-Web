@@ -220,10 +220,10 @@ export default function ManageProduct() {
                             <TableHead style={{ backgroundColor: "#B0C4DE", fontSize: "30px" }}>
                                 <TableRow>
                                     <TableCell style={{ width: "10%" }}>ID Sản phẩm</TableCell>
-                                    <TableCell style={{ width: "25%" }}>Tên sản phẩm</TableCell>
+                                    <TableCell style={{ width: "20%" }}>Tên sản phẩm</TableCell>
                                     <TableCell style={{ width: "45%" }}>Mô tả chi tiết</TableCell>
                                     <TableCell style={{ width: "15%" }}>Giá</TableCell>
-                                    <TableCell style={{ width: "5%" }}>Cập nhật</TableCell>
+                                    <TableCell style={{ width: "10%" }}>Cập nhật</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
