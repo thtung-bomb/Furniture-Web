@@ -81,10 +81,22 @@ function Project() {
             width: 0,
             products: []
         };
-        setRequestData(prevData => ({
-            ...prevData,
-            requestDetails: [...prevData.requestDetails, newWorkspace]
-        }));
+
+        const updatedRequestData = { ...requestData };
+
+        // Thêm workspace mới vào danh sách requestDetails
+        updatedRequestData.requestDetails = [
+            newWorkspace,
+            ...updatedRequestData.requestDetails
+        ];
+
+        // Cập nhật requestData với giá trị mới
+        setRequestData(updatedRequestData);
+
+        // setRequestData(prevData => ({
+        //     ...prevData,
+        //     requestDetails: [...prevData.requestDetails, newWorkspace]
+        // }));
     };
 
     const addProduct = (workspaceIndex) => {
@@ -132,8 +144,8 @@ function Project() {
 
     const handleWorkspaceChange = (selectedOption, requestDetailId) => {
         setSelectedWorkspaces({
+            [requestDetailId]: selectedOption,
             ...selectedWorkspaces,
-            [requestDetailId]: selectedOption
         });
         console.log(selectedOption)
         setSelectedWorkspace(selectedOption);
@@ -359,7 +371,12 @@ function Project() {
                 </div>
             </div>
 
-
+            <button onClick={addWorkspace} className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-4">
+                Thêm khu vực thi công
+            </button>
+            <button onClick={handleConfirmRequest} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">
+                Xác nhận báo giá
+            </button>
 
             {requestData && requestData.requestDetails.map((requestDetail, workspaceIndex) => (
                 <div key={requestDetail.id} className="mt-8  border-green-500 border-2 p-20">
@@ -434,14 +451,6 @@ function Project() {
                     />
                 </div>
             ))}
-
-            <button onClick={addWorkspace} className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-4">
-                Thêm khu vực thi công
-            </button>
-            <button onClick={handleConfirmRequest} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">
-                Xác nhận báo giá
-            </button>
-
         </div>
 
     );
