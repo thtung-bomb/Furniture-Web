@@ -24,7 +24,7 @@ function RequestDetail({ project, close }) {
         try {
             console.log(proposalId);
             await confirmProposal(proposalId);
-            toast.success('Confirmed Proposal successfully');
+            toast.success('Đã đồng ý hợp đồng');
             close(proposalId);
             // console.log(response);
             // Optionally, you can perform further actions based on the response
@@ -32,13 +32,13 @@ function RequestDetail({ project, close }) {
             console.log(error);
             // Handle error if needed
         }
-        // console.log("Clicked");
     };
 
     const handleReject = async (proposalId) => {
         try {
+            console.log(proposalId);
             await rejectProposal(proposalId);
-            toast.success(`Proposal with Id: ${proposalId} was rejected successfully`);
+            toast.success(`Đã từ chối hợp đồng`);
             close(proposalId);
         } catch (error) {
             console.error('Error handling reject proposal:', error);

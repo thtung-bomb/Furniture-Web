@@ -10,6 +10,8 @@ function RequestDetail({ request }) {
     const [showRequestDetails, setShowRequestDetails] = useState(true);
     const [open, setOpen] = useState(false);
 
+    console.log("request in requestDetail: ", request);
+
     useEffect(() => {
         if (request?.proposal?.file_path) {
             setShowRequestDetails(false);
@@ -56,11 +58,9 @@ function RequestDetail({ request }) {
     const handleConfirm = async (proposalId) => {
         try {
             if (proposalId) {
-                console.log('proposalID: ', proposalId);
                 await customerConfirmation(proposalId);
                 toast.success('Bạn đã chấp nhận hợp đồng, công trình sẽ sớm thực hiện !');
                 handleClose();
-                // Nếu không có lỗi, đóng dialog và thực hiện các hành động khác nếu cần
                 // Thực hiện các hành động khác sau khi xác nhận thành công
             } else {
                 console.error('Proposal ID không hợp lệ.');
@@ -74,6 +74,7 @@ function RequestDetail({ request }) {
     const handleReject = async (proposalId) => {
         try {
             await customerRejectProposal(proposalId);
+            toast.success('Bạn đã từ chối hợp đồng.');
             handleClose();
             // Nếu không có lỗi, đóng dialog và thực hiện các hành động khác nếu cần
             // Thực hiện các hành động khác sau khi xác nhận thành công
@@ -114,27 +115,6 @@ function RequestDetail({ request }) {
                                 {formatNumber(request.price)}</h1> VND
                         </Typography>
                     </div>
-
-                    {/* Popup xác nhận có chắc chắn không */}
-                    <Dialog
-                        open={open}
-                        aria-labelledby="alert-dialog-title"
-                        aria-describedby="alert-dialog-description"
-                    >
-                        <DialogTitle id="alert-dialog-title" fontSize={20}>
-                            {"Xác nhận báo giá"}
-                        </DialogTitle>
-                        <DialogContent>
-                            <DialogContentText id="alert-dialog-description">
-                                <h1 className='text-2xl'>Bạn chấp nhận bản báo giá này</h1>
-                            </DialogContentText>
-                        </DialogContent>
-                        <DialogActions>
-                            <Button onClick={handleConfirm(request.proposal.id)}>Đồng ý</Button>
-                            <Button onClick={handleClose} autoFocus>Hủy</Button>
-                        </DialogActions>
-                    </Dialog>
-                    {/* Popup xác nhận có chắc chắn không */}
                 </div>
             )}
             {/* End Proposal file PDF */}
@@ -194,9 +174,9 @@ function RequestDetail({ request }) {
             {request.employeeRequestStatus === "MANAGER_APPROVED" && (
                 <div className='flex gap-6 items-center justify-center mt-9'>
                     <button className='bg-cyan-600 text-white rounded-xl px-4 py-3 font-semibold'
-                        onClick={handleOpen}>Chấp Nhận</button>
+                        onClick={() => handleConfirm(request.proposal.id)}>Chấp Nhận</button>
                     <button className='bg-cyan-600 text-white rounded-xl px-4 py-3 font-semibold'
-                        onClick={handleReject}>Từ Chối</button>
+                        onClick={() => handleReject(request.proposal.id)}>Từ Chối</button>
                 </div>
             )}
         </div>
