@@ -272,6 +272,7 @@ function Project() {
                     Authorization: `Bearer ${token}`
                 },
             });
+
             setRequestData({
                 customer: initialCustomerInfo,
                 requestDetails: [
@@ -284,6 +285,7 @@ function Project() {
                     }
                 ]
             })
+
             alert('Gửi báo giá thành công');
 
         } catch (error) {

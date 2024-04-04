@@ -138,13 +138,13 @@ function ProposalPdf() {
   };
 
   return (
-    <div className='proposalBox'>
-      <div className="fileUploadBox">
+    <div className='proposalBox m-10'>
+      <div className="fileUploadBox flex">
         <input type="file" onChange={(event) => { setFileUpload(event.target.files[0]) }} />
-        <button className='buttonUpload' onClick={uploadFile}>Tải File</button>
+        <button className='buttonUpload text-3xl'  onClick={uploadFile}>Tải File</button>
 
       </div>
-      <div className="mainConttentBox">
+      <div className="mainConttentBox text-3xl flex-start flex left-0 border-2 border-green-600">
         <label htmlFor="fileNameInput">Tên file:</label>
         <input id="fileNameInput" className='fileNameInput'
           type="text"
@@ -161,10 +161,12 @@ function ProposalPdf() {
         />
 
       </div>
+<div className="flex justify-between">
 
       <button className='buttonAdjust' onClick={adjustProposal}>Lưu</button>
 
-      <button className='back-button' onClick={handleBackToList}>Quay lại</button>
+      <button className='p-3 bg-yellow-400 text-3xl w-1/6 m-6 rounded-xl' onClick={handleBackToList}>Quay lại</button>
+</div>
 
       {
         showUrl && (

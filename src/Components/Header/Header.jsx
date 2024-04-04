@@ -31,7 +31,7 @@ function Header({ handleLogin }) {
         if (userInfo) {
             // Nếu có thông tin userInfo, hiển thị nút Đăng xuất
             return (
-                <button className='bg-[#054c73] px-8 py-4 text-white rounded-full' onClick={handleLogout}>
+                <button className='bg-[#054c73] text-2xl px-8 py-4 text-white rounded-full' onClick={handleLogout}>
                     Đăng xuất
                 </button>
             );
@@ -39,7 +39,7 @@ function Header({ handleLogin }) {
             // Ngược lại, hiển thị nút Đăng nhập
             return (
                 <Link to='login'>
-                    <button className='bg-[#054c73] px-8 py-4 text-white rounded-full'>
+                    <button className='bg-[#054c73] text-2xl px-8 py-4 text-white rounded-full'>
                         Đăng nhập
                     </button>
                 </Link>
@@ -72,15 +72,15 @@ function Header({ handleLogin }) {
                         <ul>
                             {/* About Us */}
                             <li className="dropdown-container">
-                                <Link to='/about-us' className="header__navbar-navPage--button">Giới thiệu</Link>
+                                <Link to='/about-us' className="header__navbar-navPage--button text-4xl">Giới thiệu</Link>
                             </li>
                             {/* End About Us */}
 
                             {/* Services */}
                             <li className="dropdown-container">
-                                <a to="service" className="header__navbar-navPage--button">
+                                <a to="service" className="header__navbar-navPage--button text-4xl">
                                     Dịch vụ
-                                    <span className="fa-solid fa-angle-down icon-down"></span>
+                                    <span className="fa-solid fa-angle-down icon-down text-2xl"></span>
                                 </a>
                                 <Dropdown />
                             </li>
@@ -88,7 +88,7 @@ function Header({ handleLogin }) {
 
                             {/* Blog */}
                             <li className="dropdown-container">
-                                <Link to={'/blog'} className="header__navbar-navPage--button">Blogs nội thất</Link>
+                                <Link to={'/blog'} className="header__navbar-navPage--button text-4xl">Blogs nội thất</Link>
                             </li>
                             {/* End Blog */}
                         </ul>

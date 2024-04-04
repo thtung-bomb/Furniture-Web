@@ -73,18 +73,18 @@ const ProductTable = ({ products, onDeleteProduct, onEditQuantity, onEditNote, o
     };
 
     // Kiểm tra unit của sản phẩm và hiển thị trường chiều dài, chiều rộng, chiều cao nếu cần
-    const renderDimensionFields = (productUnit) => {
-        if (productUnit === 'cái') {
-            return (
-                <>
-                    <th className="p-2">Chiều dài</th>
-                    <th className="p-2">Chiều rộng</th>
-                    <th className="p-2">Chiều cao</th>
-                </>
-            );
-        }
-        return null;
-    };
+    // const renderDimensionFields = (productUnit) => {
+    //     if (productUnit === 'cái') {
+    //         return (
+    //             <>
+    //                 <th className="p-2">Chiều dài</th>
+    //                 <th className="p-2">Chiều rộng</th>
+    //                 <th className="p-2">Chiều cao</th>
+    //             </>
+    //         );
+    //     }
+    //     return null;
+    // };
 
     // useEffect(() => {
     //     // Khi danh sách sản phẩm thay đổi, cập nhật unit của sản phẩm
@@ -106,7 +106,7 @@ const ProductTable = ({ products, onDeleteProduct, onEditQuantity, onEditNote, o
                     <th className="p-2">Chiều cao</th>
                     <th className="p-2">Giá(vnd)</th>
                     <th className="p-2">Tổng cộng</th>
-                    <th className="p-2">Actions</th>
+                    <th className="p-2"></th>
                 </tr>
             </thead>
             <tbody>

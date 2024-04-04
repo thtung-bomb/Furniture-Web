@@ -94,11 +94,11 @@ function QuotationHistory() {
     }, [historyData]);
 
     return (
-        <div>
-            <div>
-                <p>List of proposal:</p>
-                <div className=''>
-                    <TableContainer component={Paper}>
+        <div className='flex flex-col justify-between h-full items-center'>
+            <div className='w-full'>
+                <p className='text-4xl font-bold'>Danh sách báo giá</p>
+                <div className='w-full'>
+                    <TableContainer component={Paper} width="100%">
                         <Table sx={{ minWidth: 1000 }} aria-label="simple table">
                             <TableHead>
                                 <TableRow>
@@ -159,7 +159,7 @@ function QuotationHistory() {
                 </Box>
             </Modal>
 
-            <Pagination count={20} onChange={handlePageChange} color="standard" size="large" />
+            <Pagination count={20} onChange={handlePageChange} color="standard" size="large" bottom="0" />
 
         </div>
     );

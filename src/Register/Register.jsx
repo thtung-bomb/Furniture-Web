@@ -56,7 +56,7 @@ function Register({ handleLogin, toggleLogin }) {
         <div className="login-card">
             <button className="close" id='close' onClick={toggleLogin}>close</button>
             <form className="login-form" action="" onSubmit={handleSubmit}>
-                <label htmlFor="username">Username</label>
+                <label htmlFor="username">Tên đăng nhập</label>
                 <input
                     type="email"
                     id="username"
@@ -65,7 +65,7 @@ function Register({ handleLogin, toggleLogin }) {
                     onChange={(event) => handleInputChange('email', event.target.value)}
                 />
 
-                <label htmlFor="telephone">Telephone contact</label>
+                <label htmlFor="telephone">Số điện thoại</label>
                 <input
                     type="text"
                     id="telephone"
@@ -74,7 +74,7 @@ function Register({ handleLogin, toggleLogin }) {
                     onChange={(event) => handleInputChange('phone', event.target.value)}
                 />
 
-                <label htmlFor="fullName">Full Name</label>
+                <label htmlFor="fullName">Họ và tên</label>
                 <input
                     type="text"
                     id="fullName"
@@ -83,7 +83,7 @@ function Register({ handleLogin, toggleLogin }) {
                     onChange={(event) => handleInputChange('full_name', event.target.value)}
                 />
 
-                <button className="regis-button" id="registerButton">Register For Quote</button>
+                <button className="regis-button" id="registerButton">Đăng kí nhận báo giá</button>
             </form>
         </div>
     )

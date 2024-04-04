@@ -99,8 +99,8 @@ function UserInfomation() {
     };
 
     return (
-        <div className="bg-white rounded-md shadow-md max-w-6xl w-full h-full overflow-auto">
-            <h2 className="font-semibold p-4 text-center text-7xl">Thông tin tài khoản</h2>
+        <div className="flex flex-col bg-white rounded-md shadow-md max-w-6xl w-full h-full overflow-auto  m-auto">
+            <h2 className="font-semibold p-4 text-center text-7xl ">Thông tin tài khoản</h2>
             <form onSubmit={handleSubmit} className="space-y-4 p-4">
                 <div>
                     <div className="flex flex-col gap-4 justify-items-center align-items-center">

@@ -163,33 +163,66 @@ export default function ManageProduct() {
         setIsEditProductModalOpen(true); // Mở modal chỉnh sửa sản phẩm
     };
 
+    // const handleEditInputChange = (e) => {
+    //     const { name, value } = e.target;
+    //     const updatedProduct = { ...selectedProduct, [name]: value };
+    //     setSelectedProduct(updatedProduct);
+    //     console.log(updatedProduct); // Kiểm tra giá trị của updatedProduct sau khi cập nhật
+    // };
+
     const handleEditInputChange = (e) => {
         const { name, value } = e.target;
         const updatedProduct = { ...selectedProduct, [name]: value };
         setSelectedProduct(updatedProduct);
-        console.log(updatedProduct); // Kiểm tra giá trị của updatedProduct sau khi cập nhật
     };
-    
 
 
-    const handleUpdateProduct = async (productID) => {
+    // const handleUpdateProduct = async (productID) => {
+    //     try {
+    //         console.log(selectedProduct);
+    //         const token = getToken(); // Lấy token từ cookie
+    //         const { id, name, price, description, unit } = selectedProduct;
+    //         const priceValue = parseFloat(price); // Chuyển đổi giá trị thành số
+    //         console.log(selectedProduct);
+    //         const response = await axios.put(`http://localhost:8080/api/v1/product/update/${productID}`, { id, name, price: priceValue, description, unit }, {
+    //             headers: {
+    //                 'Authorization': `Bearer ${token}`
+    //             }
+    //         });
+
+    //         // console.log('Update Product Response:', response.data);
+    //         // Thực hiện các bước cần thiết sau khi cập nhật sản phẩm (ví dụ: làm mới dữ liệu)
+    //         if (response.status === 200) {
+    //             alert('Cập nhật sản phẩm thành công!');
+    //             // setIsEditProductModalOpen(false); // Đóng modal sau khi cập nhật
+    //             // window.location.reload();
+    //         }
+
+    //     } catch (error) {
+    //         console.error('Error:', error);
+    //     }
+    // };
+
+    const handleUpdateProduct = async (productId) => {
         try {
-            console.log(selectedProduct);
-            const token = getToken(); // Lấy token từ cookie
-            const { name, price, description } = selectedProduct;
-            console.log({ name, price, description });
-            const response = await axios.put(`http://localhost:8080/api/v1/product/update/${productID}`, { name, price, description }, {
-                headers: {
-                    'Authorization': `Bearer ${token}`
+            console.log(productId);
+            console.log(`http://localhost:8080/api/v1/product/update/${productId}`);
+
+            const token = getToken();
+            const { id, name, price, description, unit } = selectedProduct;
+            const priceValue = parseFloat(price);
+            const response = await axios.put(`http://localhost:8080/api/v1/product/update/${productId}`,
+                { id, name, price: priceValue, description, unit },
+                {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
                 }
-            });
+            );
             console.log('Update Product Response:', response.data);
-            // Thực hiện các bước cần thiết sau khi cập nhật sản phẩm (ví dụ: làm mới dữ liệu)
             alert('Cập nhật sản phẩm thành công!');
-            setIsEditProductModalOpen(false); // Đóng modal sau khi cập nhật
-            window.location.reload();
-
-
+            // setIsEditProductModalOpen(false);
+            // window.location.reload();
         } catch (error) {
             console.error('Error:', error);
         }
@@ -220,10 +253,10 @@ export default function ManageProduct() {
                             <TableHead style={{ backgroundColor: "#B0C4DE", fontSize: "30px" }}>
                                 <TableRow>
                                     <TableCell style={{ width: "10%" }}>ID Sản phẩm</TableCell>
-                                    <TableCell style={{ width: "25%" }}>Tên sản phẩm</TableCell>
+                                    <TableCell style={{ width: "20%" }}>Tên sản phẩm</TableCell>
                                     <TableCell style={{ width: "45%" }}>Mô tả chi tiết</TableCell>
                                     <TableCell style={{ width: "15%" }}>Giá</TableCell>
-                                    <TableCell style={{ width: "5%" }}>Cập nhật</TableCell>
+                                    <TableCell style={{ width: "10%" }}>Cập nhật</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -232,7 +265,7 @@ export default function ManageProduct() {
                                         <TableCell>{product.id}</TableCell>
                                         <TableCell>{product.name}</TableCell>
                                         <TableCell>{product.description}</TableCell>
-                                        <TableCell>{product.price}</TableCell>
+                                        <TableCell>{product.price}VND</TableCell>
                                         <TableCell>
                                             <div className="flex justify-center space-x-2">
                                                 <>
@@ -361,7 +394,7 @@ export default function ManageProduct() {
                                 <TextField
                                     type="text"
                                     name="price"
-                                    value={selectedProduct.price}
+                                    value={selectedProduct.price} VND
                                     onChange={handleEditInputChange}
                                     sx={{ width: "100%", '& input': { fontSize: '16px' } }}
                                 />

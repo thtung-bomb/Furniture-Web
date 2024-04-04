@@ -101,11 +101,11 @@ function Login() {
         <div className='h-screen flex items-center justify-center w-screen bg-[url("../../src/assets/image/main_home.jpg")]' >
             <form onSubmit={handleLogin} >
                 <div className='bg-[#054c73] rounded-md shadow-md w-80 p-16'>
-                    <h2 className='text-white text-6xl font-bold mb-6 text-center'>Đăng nhập</h2>
+                    <h2 className='text-white text-4xl font-bold p-3 text-center'>Đăng nhập</h2>
                     <div className='mb-4'>
-                        <label className='text-white block mb-1'>Email</label>
+                        <label className='text-white block mb-1 text-3xl'>Tên đăng nhập</label>
                         <input type="text" value={username} onChange={(e) => setUsername(e.target.value)}
-                            className='w-full px-3 py-2 rounded-md bg-white 
+                            className='text-2xl w-full px-3 py-2 rounded-md bg-white 
                         text-gray-800 focus:outline-none focus:ring
                          focus:ring-blue-300 hover:shadow-transparent
                          duration-300 ease-in-out' />
@@ -113,15 +113,15 @@ function Login() {
                     <div className='mb-4'>
                         <label className='text-white block text-3xl mb-1'>Mật Khẩu</label>
                         <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}
-                            className='w-full px-3 py-2 rounded-md bg-white
+                            className='text-2xl w-full px-3 py-2 rounded-md bg-white
                          text-gray-800 focus:outline-none duration-300 ease-in-out 
                          focus:ring focus:ring-blue-300' />
                     </div>
-                    <button className='bg-blue-500 text-white px-4 py-2
+                    <button className='bg-blue-500 text-white px-8 py-4 text-3xl
                 hover:bg-blue-600 transition duration-300 ease-in-out w-full mt-5 hover:shadow-2xl
                 focus:border-indigo-400 focus:ring-blue-500 rounded-lg'
                         type="submit"
-                    >Login</button>
+                    >Đăng nhập</button>
                 </div>
                 {/* {error && <ToastContainer />} */}
                 <ToastContainer position='bottom-center' />
