@@ -20,13 +20,7 @@ function Sidebar() {
     const [currentPage, setCurrentPage] = useState('MainContent');
     const colorBgContainer = '#fff'; // Define your color here
     const borderRadiusLG = '16px'; // Define your border radius here
-<<<<<<< HEAD
-    const userInfo = JSON.parse(localStorage.getItem('customer'));
-    console.log(localStorage); // Set your user information here
-
-=======
     const userInfo = JSON.parse(localStorage.getItem('customer')); // Set your user information here
->>>>>>> be0b2a494c9db53c0ab0a5f626270da2f23765d8
     useEffect(() => {
         console.log("UserInfo: " + userInfo);
     }, [userInfo]);
@@ -83,7 +77,7 @@ function Sidebar() {
                         }}
                     />
                 </Header>
-                <Content className ='h-5/6 overflow-auto'
+                <Content className='h-5/6 overflow-auto'
                     style={{
                         margin: '24px 16px',
                         padding: 24,

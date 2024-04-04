@@ -6,6 +6,7 @@ import Select from "react-select";
 import { toast } from "react-hot-toast";
 import { ToastContainer } from "react-toastify";
 import { HiArrowSmallLeft } from "react-icons/hi2";
+import { fetchProductById } from './http.js';
 import axios from "axios";
 
 const getCustomerInfo = () => {
@@ -26,6 +27,7 @@ function Project() {
 
     const [workspaces, setWorkspaces] = useState([]);
     const [availableWorkspaces, setAvailableWorkspaces] = useState([]);
+    const [productUnit, setProductUnit] = useState('');
     const [requestData, setRequestData] = useState({
         customer: initialCustomerInfo,
         requestDetails: [
@@ -377,7 +379,7 @@ function Project() {
                             />
                         </div>
 
-                        
+
                         <div className="mt-4">
                             <label className="block text-gray-700">Mô tả:</label>
                             <input
@@ -430,6 +432,7 @@ function Project() {
                     />
                 </div>
             ))}
+
             <button onClick={addWorkspace} className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-4">
                 Thêm khu vực thi công
             </button>
