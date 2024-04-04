@@ -56,7 +56,7 @@ function ManagerProjectHD() {
             {/* Manager View */}
             <TableContainer component={Paper}>
                 <Table aria-label="collapsible table">
-                    <TableHead>
+                    <TableHead style={{backgroundColor: "#B0C4DE"}}>
                         <TableRow>
                             <TableCell style={{ fontSize: '16px', fontWeight: 'bold', color: '#000080' }}>Mã dự án</TableCell>
                             <TableCell style={{ fontSize: '16px', fontWeight: 'bold', color: '#000080' }}>Trạng thái</TableCell>

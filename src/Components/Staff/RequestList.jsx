@@ -114,7 +114,7 @@ export default function RequestList() {
     <TableContainer component={Paper}>
 
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead>
+        <TableHead style={{backgroundColor: "#B0C4DE"}}>
           <TableRow>
             <TableCell>ID</TableCell>
             <TableCell align="right">Giá dự kiến</TableCell>

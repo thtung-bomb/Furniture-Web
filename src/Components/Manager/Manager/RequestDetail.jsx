@@ -80,7 +80,7 @@ function RequestDetail({ project, close }) {
                             <ToastContainer closeButton />
 
                             <Table aria-label="collapsible table" className='mt-4'>
-                                <TableHead>
+                                <TableHead style={{backgroundColor: "#B0C4DE"}}>
                                     <TableRow>
                                         <TableCell>Khu vực thi công</TableCell>
                                         <TableCell align='center'>Sản phẩm: </TableCell>
