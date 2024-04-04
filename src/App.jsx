@@ -20,7 +20,6 @@ import NoPage from './Components/Staff/NoPage.jsx';
 import Staff from './Components/Staff/Staff.jsx';
 import ManagerHd from "./Components/Manager/Manager/ManagerHd.jsx";
 import AdminHome from './Components/Admin/AdminHome.jsx';
-import CreateRequest from './Components/Customer/CreateRequest.jsx';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);

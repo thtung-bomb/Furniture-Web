@@ -10,6 +10,7 @@ import {
 const { Header, Content, Sider } = Layout;
 import MainContent from './MainContent.jsx';
 import QuotationHistory from './QuotationHistory.jsx';
+import UserInfomation from './UserInfomation.jsx';
 
 function Sidebar() {
 
@@ -54,6 +55,9 @@ function Sidebar() {
                     <Menu.Item key="History" icon={<UploadOutlined />}>
                         <span>Lịch Sử</span>
                     </Menu.Item>
+                    <Menu.Item key="Userinfomation" icon={<UserOutlined />}>
+                        <span>Quản lý tài khoản</span>
+                    </Menu.Item>
                 </Menu>
             </Sider>
             <Layout>
@@ -94,6 +98,8 @@ function Sidebar() {
                         <ApprovalList />
                     ) : currentPage === 'History' ? (
                         <QuotationHistory />
+                    ) : currentPage === 'Userinfomation' ? (
+                        <UserInfomation />
                     ) : (
                         <div>404 không tìm thấy trang...</div>
                     )}

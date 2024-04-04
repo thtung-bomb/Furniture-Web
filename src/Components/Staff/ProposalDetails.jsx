@@ -594,14 +594,14 @@ const ManageRequestDetail = () => {
         <p className="text-gray-700 text-3xl m-3">Trạng thái đơn hàng phía khách hàng:
           <br />
           <span className="text-lime-500 font-bold">
-            {requestData && requestData.customerRequestStatus}
+            {requestData && requestData.customerRequestStatusDescription}
           </ span>
 
         </p>
         <p className="text-gray-700 text-3xl m-3">Trạng thái thực của báo cáo:
           <br />
           <span className="text-sky-500 font-bold">
-            {requestData && requestData.employeeRequestStatus}
+            {requestData && requestData.employeeRequestStatusDescription}
           </span>
         </p>
       </div>

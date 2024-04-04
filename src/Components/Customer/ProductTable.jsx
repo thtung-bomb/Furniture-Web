@@ -26,8 +26,9 @@ const ProductTable = ({ products, onDeleteProduct, onEditQuantity, onEditNote, o
         }
     };
 
-    const calculateTotal = (quantity, price) => {
-        return quantity * price;
+    // Giá = ((dài * cao * đơn giá) + (dài * cao * đơn giá)* vat ) * discount
+    const calculateTotal = (quantity, length, height, price) => {
+        return Math.floor((length * height * price) + (length * height * price) * 0.1 * quantity);
     };
 
     const handleQuantityChange = (index, event) => {
@@ -41,18 +42,24 @@ const ProductTable = ({ products, onDeleteProduct, onEditQuantity, onEditNote, o
     };
 
     const handleLengthChange = (index, event) => {
-        const newLength = parseInt(event.target.value);
-        onLengthChange(index, newLength);
+        const newLength = parseFloat(event.target.value); // Sử dụng parseFloat thay vì parseInt để chuyển đổi thành số thập phân
+        if (!isNaN(newLength)) { // Kiểm tra nếu giá trị hợp lệ
+            onLengthChange(index, newLength);
+        }
     }
 
     const handleWidthChange = (index, event) => {
-        const newWidth = parseInt(event.target.value);
-        onWidthChange(index, newWidth);
+        const newWidth = parseFloat(event.target.value); // Sử dụng parseFloat thay vì parseInt để chuyển đổi thành số thập phân
+        if (!isNaN(newWidth)) { // Kiểm tra nếu giá trị hợp lệ
+            onWidthChange(index, newWidth);
+        }
     }
 
     const handleHeightChange = (index, event) => {
-        const newHeight = parseInt(event.target.value);
-        onHeightChange(index, newHeight);
+        const newHeight = parseFloat(event.target.value); // Sử dụng parseFloat thay vì parseInt để chuyển đổi thành số thập phân
+        if (!isNaN(newHeight)) { // Kiểm tra nếu giá trị hợp lệ
+            onHeightChange(index, newHeight);
+        }
     }
 
     const handleProductChange = (index, event) => {
@@ -76,7 +83,6 @@ const ProductTable = ({ products, onDeleteProduct, onEditQuantity, onEditNote, o
                     <th className="p-2">Chiều cao</th>
                     <th className="p-2">Giá(vnd)</th>
                     <th className="p-2">Tổng cộng</th>
-                    <th className="p-2">Ghi chú</th>
                     <th className="p-2">Actions</th>
                 </tr>
             </thead>
@@ -115,8 +121,7 @@ const ProductTable = ({ products, onDeleteProduct, onEditQuantity, onEditNote, o
                             <td>
                                 <input
                                     type="number"
-                                    value={product.lengthh}
-                                    min={1}
+                                    value={product.length}
                                     onChange={(event) => handleLengthChange(index, event)}
                                 />
                             </td>
@@ -124,7 +129,6 @@ const ProductTable = ({ products, onDeleteProduct, onEditQuantity, onEditNote, o
                                 <input
                                     type="number"
                                     value={product.width}
-                                    min={1}
                                     onChange={(event) => handleWidthChange(index, event)}
                                 />
                             </td>
@@ -132,19 +136,11 @@ const ProductTable = ({ products, onDeleteProduct, onEditQuantity, onEditNote, o
                                 <input
                                     type="number"
                                     value={product.height}
-                                    min={1}
                                     onChange={(event) => handleHeightChange(index, event)}
                                 />
                             </td>
                             <td>{price || 0}</td>
-                            <td>{calculateTotal(product.quantity, price || 0)}</td>
-                            <td>
-                                <input
-                                    type="text"
-                                    value={product.description || ""}
-                                    onChange={(event) => handleNoteChange(index, event)}
-                                />
-                            </td>
+                            <td>{calculateTotal(product.quantity, product.length, product.height, price || 0)}</td>
                             <td>
                                 <button onClick={() => onDeleteProduct(index)}><span className='decoration-neutral-400 font-bold'>Xóa</span></button>
                             </td>
