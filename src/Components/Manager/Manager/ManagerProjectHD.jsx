@@ -73,7 +73,7 @@ function ManagerProjectHD() {
                                 <TableCell style={{ fontSize: '10px', fontWeight: '500', color: '#B8860B' }}>
                                     {project.employeeRequestStatusDescription}
                                 </TableCell>
-                                <TableCell style={{ fontSize: '10px', fontWeight: '500' }}>{project.proposal.price} VND</TableCell>
+                                <TableCell style={{ fontSize: '10px', fontWeight: '500' }}>{project.proposal && project.proposal.price ? project.proposal.price : ''} VND</TableCell>
                                 <TableCell style={{ fontSize: '10px', fontWeight: '600', cursor: 'pointer', color: '#483D8B', transition: 'color 0.3s' }}
                                     onMouseEnter={(e) => e.target.style.color = '#FF0000'} // Change color on hover
                                     onMouseLeave={(e) => e.target.style.color = '#483D8B'} // Revert color when not hovered

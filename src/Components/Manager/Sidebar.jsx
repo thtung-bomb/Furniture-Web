@@ -20,7 +20,8 @@ function Sidebar() {
     const [currentPage, setCurrentPage] = useState('MainContent');
     const colorBgContainer = '#fff'; // Define your color here
     const borderRadiusLG = '16px'; // Define your border radius here
-    const userInfo = JSON.parse(localStorage.getItem('customer')); // Set your user information here
+    const userInfo = JSON.parse(localStorage.getItem('customer'));
+    console.log(localStorage); // Set your user information here
 
     useEffect(() => {
         console.log("UserInfo: " + userInfo);
@@ -91,7 +92,7 @@ function Sidebar() {
                     {currentPage === 'MainContent' ? (
                         <div>
                             {userInfo ? (
-                                <div className='w-screen'>Xin chào, {userInfo.full_name}</div>
+                                <div className='w-screen'>Xin chào, {userInfo.fullName}</div>
                             ) : (
                                 <div>Loading...</div>
                             )}

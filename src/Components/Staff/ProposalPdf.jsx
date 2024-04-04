@@ -129,7 +129,7 @@ function ProposalPdf() {
     })
       .then(response => {
         alert("Proposal adjusted successfully");
-        navigate('/staff/proposalList');
+        navigate('/staff');
       })
       .catch(error => {
         console.error('Error adjusting proposal:', error);
