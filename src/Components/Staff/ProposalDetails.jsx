@@ -385,6 +385,7 @@ const ManageRequestDetail = () => {
   const [isValidWidth, setIsValidWidth] = useState(true);
   const [isConfirmed, setIsConfirmed] = useState(false); // State để theo dõi trạng thái xác nhận
   const navigate = useNavigate(); // Sử dụng useNavigate để lấy hàm điều hướng
+  const [outputDirectory, setOutputDirectory] = useState("");
 
   useEffect(() => {
     fetchWorkspaces();
@@ -511,6 +512,29 @@ const ManageRequestDetail = () => {
     setRequestData(updatedRequestData);
   };
 
+  const handleGenerateExcel = async () => {
+    try {
+      const requestBody = { outputDirectory };
+      const token = getToken();
+      const response = await fetch(`http://localhost:8080/api/v1/request/auth/generateExcel/${id}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(requestBody)
+      });
+      if (!response.ok) {
+        throw new Error('Failed to generate Excel file.');
+      }
+      alert('Excel file has been created successfully!');
+    } catch (error) {
+      console.error('Error generating Excel file:', error);
+      alert('Failed to generate Excel file. Please try again later.');
+    }
+  };
+
+
   const handleConfirmRequest = async () => {
 
     if (!requestData || !requestData.customer || !requestData.customer.email) {
@@ -581,6 +605,8 @@ const ManageRequestDetail = () => {
       setSelectedWorkspaces(updatedSelectedWorkspaces);
     }
   }, [requestData, availableWorkspaces]);
+
+
 
   return (
     <div className="container mx-auto p-4 content-none">
@@ -756,6 +782,20 @@ const ManageRequestDetail = () => {
           />
         </div>
       ))}
+      <div className="container mx-auto p-4">
+        <label className="block text-gray-700">Thư mục lưu trữ:</label>
+        <input
+          type="text"
+          value={outputDirectory}
+          onChange={(e) => setOutputDirectory(e.target.value)}
+          placeholder="Nhập địa chỉ thư mục"
+          className="border border-gray-300 rounded px-4 py-2 mt-2 w-full focus:outline-none focus:border-blue-500"
+        />
+        <button onClick={handleGenerateExcel} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">
+          Xuất file excel
+        </button>
+      </div>
+
     </div>
   );
 };
